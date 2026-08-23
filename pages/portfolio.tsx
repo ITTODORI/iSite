@@ -10,8 +10,13 @@ const PortfolioPage = () => {
 
   return (
     <>
-      <div className="navbar">
-        <PillNav
+    <div>
+      <h1>Creative Technologist</h1>
+      <p>I embed with your product teams to set design direction, build the systems and raise the bar on strategy, efficiency and craft.</p>
+    </div>
+
+    <div className="navbar">
+      <PillNav
           logo="/file.svg"
           logoAlt="Company Logo"
           items={[
@@ -28,11 +33,11 @@ const PortfolioPage = () => {
             hoveredPillTextColor="#ffffff"
             pillTextColor="#000000"
             initialLoadAnimation={false}
-        />
-      </div>
+       />
+    </div>
 
-      <div className="drift">
-        <div style={{ height: 600 }}>
+    <div className="drift">
+      <div style={{ height: 600 }}>
           <DriftWall
             items={items}
             columns={5}
@@ -57,9 +62,8 @@ const PortfolioPage = () => {
             grayscale
           />
         </div>
-      </div>
+    </div>
 
-      <div>Portfolio Page</div>
     </>
   );
 };
