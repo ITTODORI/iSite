@@ -329,7 +329,7 @@ const OptionWheel = ({
           aria-selected={selectedIndex === index}
           className={`absolute top-1/2 cursor-pointer whitespace-nowrap leading-none will-change-[transform,opacity,filter] [font-size:var(--ow-font-size)] [color:color-mix(in_srgb,var(--ow-active-color)_calc(var(--ow-p,0)*100%),var(--ow-text-color))] ${
             side === 'right' ? 'right-[var(--ow-inset)] origin-right' : 'left-[var(--ow-inset)] origin-left'
-          } ${selectedIndex === index ? 'font-medium' : 'font-extralight'}`}
+          } ${selectedIndex === index ? 'font-bold' : 'font-md'}`}
           onClick={() => handleItemClick(index)}
         >
           {label}
