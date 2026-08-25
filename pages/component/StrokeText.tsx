@@ -233,7 +233,7 @@ const StrokeText = ({
         className="block w-full"
         style={{ height: `${Math.round(fontSize * 1.3)}px` }}
         viewBox={viewBox}
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio="xMinYMid meet" // xMidYmid change xMinYMid to text-align Left
         aria-hidden="true"
       >
         {fillMode === 'wipe' && box && (
