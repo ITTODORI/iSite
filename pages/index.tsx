@@ -4,8 +4,44 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, ExternalLink, Globe } from "lucide-react";
 import OptionWheel from './component/OptionWheel';
 import StrokeText from "./component/StrokeText";
+import LogoLoop from "./component/LogoLoop";
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiTailwindcss,
+  SiPhp,
+  SiPython,
+  SiLaravel,
+  SiArchlinux,
+  SiGnome,
+  SiFigma,
+  SiDavinciresolve,
+  SiBlender,
+  SiMysql,
+  SiPostgresql
+} from 'react-icons/si';
 
 const technologies = ["W", "php", "Sass", "JS", "GSAP"];
+
+// LogoLoop List
+const techLogos = [
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiReact />, title: "React Native", href: "https://reactnative.dev" },
+  { node: <SiPython />, title: "Python", href: "https://www.python.org" },
+  { node: <SiLaravel />, title: "Laravel", href: "https://laravel.com" },
+  { node: <SiPhp />, title: "PHP", href: "https://www.php.net" },
+  { node: <SiArchlinux />, title: "Arch Linux", href: "https://archlinux.org" },
+  { node: <SiGnome />, title: "GNOME", href: "https://www.gnome.org" },
+  { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
+  { node: <SiDavinciresolve />, title: "DaVinci Resolve", href: "https://www.blackmagicdesign.com/products/davinciresolve" },
+  { node: <SiBlender />, title: "Blender", href: "https://www.blender.org" },
+  { node: <SiMysql />, title: "MySQL", href: "https://www.mysql.com" },
+  { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+];
 
 // Component Ruler
 function Ruler({ count = 40 }: { count?: number }) {
@@ -52,7 +88,7 @@ function Hero() {
       </header>
 
       {/* Main Hero Content */}
-      <div className="relative z-10 grid min-h-screen w-full items-center justify-center gap-8 px-6 py-16 md:grid-cols-3 md:px-12 lg:px-20">
+      <div className="relative z-10 flex min-h-[calc(100vh-140px)] w-full items-center justify-center px-6 py-16 md:px-12 lg:px-20">
         
         {/* 01. Creative Technologist */}
         <div className="space-y-6">
@@ -94,8 +130,16 @@ function Hero() {
       </div>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-neutral-800/40 px-6 py-4 md:px-8">
-        <Ruler />
+      <footer className="relative z-10 border-t border-neutral-800/40 px-6 py-6 md:px-8 overflow-hidden">
+        <div className="w-full flex items-center justify-center">
+          <LogoLoop
+            logos={techLogos}
+            speed={40}
+            direction="left"
+            logoHeight={30}
+            gap={40}
+          />
+        </div>
       </footer>
 
     </section>
@@ -189,7 +233,7 @@ function SelectedWork() {
         </div>
 
         <div className="px-4 py-3">
-          <Ruler count={60} />
+          <Ruler count={40} />
         </div>
 
       </div>
