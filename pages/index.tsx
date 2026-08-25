@@ -89,44 +89,47 @@ function Hero() {
 
       {/* Main Hero Content */}
       <div className="relative z-10 flex min-h-[calc(100vh-140px)] w-full items-center justify-center px-6 py-16 md:px-12 lg:px-20">
-        
-        {/* 01. Creative Technologist */}
-        <div className="space-y-6">
-          <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-neutral-500">01. </p>
-            <h1 className="text-4xl uppercase leading-tight tracking-[0.12em] text-neutral-200 md:text-5xl">
-              <StrokeText text="Creative" fontSize={70}/>
-              <StrokeText text="Technologist" fillDelay={0.4} fontSize={50}/>
-            </h1>
-          </div>
-          <p className="text-md normal-case leading-relaxed tracking-normal text-neutral-300">
-            Hi there! I&apos;m <strong className="font-semibold text-white">iMen</strong>, a hybrid creator operating at the intersection of software engineering and digital media arts.
-          </p>
-        </div>
-
-        {/* Photo ASCII & Skill Based */}
-        <div className="col-span-1 flex flex-col sm:flex-row items-center justify-center md:col-span-2 md:max-w-3xl mx-auto w-full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between md:flex-row">
           
-          {/* Photo ASCII */}
-          <div className="relative aspect-square w-48 shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-950 shadow-2xl md:w-56">
-            <div className="absolute inset-0 flex items-center justify-center scale-110">
-              <Image
-                src="/photo-ascii.svg"
-                alt="Profile illustration"
-                fill
-                priority
-                sizes="(max-width: 768px) 192px, 224px"
-                className="object-contain"
-              />
+          {/* 01. Creative Technologist */}
+          <div className="w-full space-y-6 md:w-1/2">
+            <div>
+              <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-neutral-500">01. </p>
+              <h1 className="flex flex-col items-start text-left text-4xl uppercase leading-tight tracking-[0.12em] text-neutral-200 md:text-5xl">
+                <StrokeText text="Creative" fontSize={70}/>
+                <StrokeText text="Technologist" fillDelay={0.4} fontSize={50}/>
+              </h1>
             </div>
+            <p className="max-w-md text-md normal-case leading-relaxed tracking-normal text-neutral-300">
+              Hi there! I&apos;m <strong className="font-semibold text-white">iMen</strong>, a hybrid creator operating at the intersection of software engineering and digital media arts.
+            </p>
           </div>
 
-          {/* Skill Based */}
-          <div className="w-full max-w-md h-48 md:h-56 -ml-10">
-            <OptionWheel />
+          {/* Photo ASCII & Skill Based Wheel */}
+          <div className="flex w-full items-center justify-center sm:flex-row md:w-1/2">
+            
+            {/* Photo ASCII */}
+            <div className="relative aspect-square w-65 shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-950 shadow-2xl md:w-70">
+              <div className="absolute inset-0 flex items-center justify-center scale-110">
+                <Image
+                  src="/photo-ascii.svg"
+                  alt="Profile illustration"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 288px, 320px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Skill Based Wheel */}
+            <div className="h-48 w-full max-w-md md:h-56">
+              <OptionWheel />
+            </div>
+            
           </div>
+
         </div>
-
       </div>
 
       {/* Footer */}
