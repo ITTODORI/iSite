@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight, ExternalLink, Globe } from "lucide-react";
 import OptionWheel from './component/OptionWheel';
 import StrokeText from "./component/StrokeText";
 import LogoLoop from "./component/LogoLoop";
+import DepthCarousel from './component/DepthCarousel';
+
 import { 
   SiReact, 
   SiNextdotjs, 
@@ -21,6 +23,7 @@ import {
   SiMysql,
   SiPostgresql
 } from 'react-icons/si';
+import DriftWall from "./component/DriftWall";
 
 const technologies = ["W", "php", "Sass", "JS", "GSAP"];
 
@@ -41,6 +44,15 @@ const techLogos = [
   { node: <SiBlender />, title: "Blender", href: "https://www.blender.org" },
   { node: <SiMysql />, title: "MySQL", href: "https://www.mysql.com" },
   { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+];
+
+// Carousel Items
+const items = [
+  { image: 'https://picsum.photos/seed/a/800/1000', alt: 'One' },
+  { image: 'https://picsum.photos/seed/b/800/1000', alt: 'Two' },
+  { image: 'https://picsum.photos/seed/c/800/1000', alt: 'Three' },
+  { image: 'https://picsum.photos/seed/d/800/1000', alt: 'Four' },
+  { image: 'https://picsum.photos/seed/e/800/1000', alt: 'Five' }
 ];
 
 // Component Ruler
@@ -149,6 +161,44 @@ function Hero() {
   );
 }
 
+// Design Section
+function DesignSection() {
+  return (
+    <section className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
+        <div className="mb-8">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">02.</p>
+          <h2 className="text-2xl font-light uppercase tracking-[0.16em] text-neutral-200 md:text-3xl">Design</h2>
+        </div>
+        <div className="relative h-[500px] w-full">
+          <DepthCarousel
+            items={items}
+            depth={220}
+            spread={90}
+            tilt={22}
+            tiltDirection="right"
+            perspective={1400}
+            visibleCards={4}
+            falloff={0.2}
+            blur={6}
+            autoplay={false}
+            loop
+            cardWidth={300}
+            cardHeight={380}
+            radius={18}
+            tint="#05060a"
+            duration={700}
+            ease="power3.out"
+            autoplayDelay={3200}
+            showControls
+            showIndicators
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+  
 // Selected Work Component
 function SelectedWork() {
   return (
@@ -244,11 +294,22 @@ function SelectedWork() {
   );
 }
 
+
+// Section
+function Section() {
+  return (
+    <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
+    
+    </section>
+  );
+}
+
 // Main Component
 export default function Home() {
   return (
     <main className="overflow-hidden bg-[#0e0e0e] font-sans selection:bg-white selection:text-black">
       <Hero />
+      <DesignSection />
       <SelectedWork />
     </main>
   );
