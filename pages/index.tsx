@@ -1,11 +1,17 @@
 "use client";
 
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ExternalLink, Globe } from "lucide-react";
 import OptionWheel from './component/OptionWheel';
 import StrokeText from "./component/StrokeText";
+import FoldText from "./component/FoldText";
+import FadeContent from "./component/FadeContent";
 import LogoLoop from "./component/LogoLoop";
+import DriftWall from './component/DriftWall';
 import DepthCarousel from './component/DepthCarousel';
+import MorphSlider from './component/MorphSlider';
+import AccordionGallery from "./component/AccordionGallery";
 
 import { 
   SiReact, 
@@ -23,7 +29,6 @@ import {
   SiMysql,
   SiPostgresql
 } from 'react-icons/si';
-import DriftWall from "./component/DriftWall";
 
 const technologies = ["W", "php", "Sass", "JS", "GSAP"];
 
@@ -46,14 +51,52 @@ const techLogos = [
   { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
 ];
 
-// Carousel Items
-const items = [
-  { image: 'https://picsum.photos/seed/a/800/1000', alt: 'One' },
-  { image: 'https://picsum.photos/seed/b/800/1000', alt: 'Two' },
-  { image: 'https://picsum.photos/seed/c/800/1000', alt: 'Three' },
-  { image: 'https://picsum.photos/seed/d/800/1000', alt: 'Four' },
-  { image: 'https://picsum.photos/seed/e/800/1000', alt: 'Five' }
+// Drift Items
+const driftItems = [
+  { image: '/src/Certificate.png', title: 'Tile 1' },
+  { image: '/src/Clothing.png', title: 'Tile 2' },
+  { image: '/src/Packaging.png', title: 'Tile 3' },
+  { image: '/src/Social.png', title: 'Tile 4' },
+  { image: '/src/Sticker.png', title: 'Tile 5' },
+  { image: '/src/Coverbook.png', title: 'Tile 6' },
+  { image: '/src/Logotype.png', title: 'Tile 7' },
+  { image: '/src/Certificate.png', title: 'Tile 8' },
+  { image: '/src/Clothing.png', title: 'Tile 9' },
+  { image: '/src/Packaging.png', title: 'Tile 10' },
+  { image: '/src/Social.png', title: 'Tile 11' },
+  { image: '/src/Sticker.png', title: 'Tile 12' },
+  { image: '/src/Coverbook.png', title: 'Tile 13' },
+  { image: '/src/Logotype.png', title: 'Tile 14' },
 ];
+
+// Custom Hook untuk mendeteksi Scroll Masuk Viewport (agar animasi berulang saat discroll)
+function useInViewObserver(threshold = 0.2) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Set ke true saat masuk viewport, false saat keluar agar key berubah dan animasi re-trigger
+        setInView(entry.isIntersecting);
+      },
+      { threshold }
+    );
+
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [threshold]);
+
+  return { ref, inView };
+}
 
 // Component Ruler
 function Ruler({ count = 40 }: { count?: number }) {
@@ -73,19 +116,12 @@ function Ruler({ count = 40 }: { count?: number }) {
 function Hero() {
   return (
     <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
-      
-      {/* Background Grid */}
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
         {Array.from({ length: 24 }, (_, index) => (
           <div key={index} className="border-[0.5px] border-neutral-500/30" />
         ))}
       </div>
       
-      <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 text-xs text-neutral-600">
-        +
-      </div>
-
-      {/* Header */}
       <header className="relative z-10 flex items-center justify-between border-b border-neutral-800/40 px-6 py-5 text-xs uppercase tracking-[0.2em] md:px-8">
         <div className="flex items-center gap-5">
           <span className="text-sm font-bold tracking-[0.25em] text-white">iMen</span>
@@ -99,11 +135,8 @@ function Hero() {
         </div>
       </header>
 
-      {/* Main Hero Content */}
       <div className="relative z-10 flex min-h-[calc(100vh-140px)] w-full items-center justify-center px-6 py-16 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between md:flex-row">
-          
-          {/* 01. Creative Technologist */}
           <div className="w-full space-y-6 md:w-1/2">
             <div>
               <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-neutral-500">01. </p>
@@ -117,10 +150,7 @@ function Hero() {
             </p>
           </div>
 
-          {/* Photo ASCII & Skill Based Wheel */}
           <div className="flex w-full items-center justify-center sm:flex-row md:w-1/2">
-            
-            {/* Photo ASCII */}
             <div className="relative aspect-square w-65 shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-950 shadow-2xl md:w-70">
               <div className="absolute inset-0 flex items-center justify-center scale-110">
                 <Image
@@ -133,65 +163,89 @@ function Hero() {
                 />
               </div>
             </div>
-
-            {/* Skill Based Wheel */}
             <div className="h-48 w-full max-w-md md:h-56">
-              <OptionWheel />
+              <OptionWheel activeColor="#27ffb7"/>
             </div>
-            
           </div>
-
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="relative z-10 border-t border-neutral-800/40 px-6 py-6 md:px-8 overflow-hidden">
         <div className="w-full flex items-center justify-center">
-          <LogoLoop
-            logos={techLogos}
-            speed={40}
-            direction="left"
-            logoHeight={30}
-            gap={40}
-          />
+          <LogoLoop logos={techLogos} speed={40} direction="left" logoHeight={30} gap={40} />
         </div>
       </footer>
-
     </section>
   );
 }
 
 // Design Section
 function DesignSection() {
+  const { ref, inView } = useInViewObserver();
+
   return (
-    <section className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
         <div className="mb-8">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">02.</p>
-          <h2 className="text-2xl font-light uppercase tracking-[0.16em] text-neutral-200 md:text-3xl">Design</h2>
+          {inView && (
+            <FadeContent key={`design-fade-${inView}`} blur duration={1000}>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">02.</p>
+            </FadeContent>
+          )}
+          {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
+        </div>
+        <div className="relative h-[500px] w-full [&_button:has(svg)]:block">
+          <DriftWall items={driftItems} columns={5} tileWidth={200} tileHeight={132} gap={18} speed={30} grayscale />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Motion Section
+function MotionSection() {
+  const { ref, inView } = useInViewObserver();
+
+  return (
+    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
+        <div className="mb-8">
+          {inView && (
+            <FadeContent key={`motion-fade-${inView}`} blur duration={1000}>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">03.</p>
+            </FadeContent>
+          )}
+          {inView && <FoldText key={`motion-fold-${inView}`} text="Motion Effects" color="#27ffb7"/>}
         </div>
         <div className="relative h-[500px] w-full">
-          <DepthCarousel
-            items={items}
-            depth={220}
-            spread={90}
-            tilt={22}
-            tiltDirection="right"
-            perspective={1400}
-            visibleCards={4}
-            falloff={0.2}
-            blur={6}
-            autoplay={false}
-            loop
-            cardWidth={300}
-            cardHeight={380}
-            radius={18}
-            tint="#05060a"
-            duration={700}
-            ease="power3.out"
-            autoplayDelay={3200}
-            showControls
-            showIndicators
+          <MorphSlider autoplay loop showCaptions showControls showIndicators />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Software Section
+function SoftwareSection() {
+  const { ref, inView } = useInViewObserver();
+
+  return (
+    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
+        <div className="mb-8">
+          {inView && (
+            <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">05.</p>
+            </FadeContent>
+          )}
+          {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7"/>}
+        </div>
+        <div className="relative h-[500px] w-full">
+          <DepthCarousel 
+          // autoplay={true}
+          showControls={false}
+          autoplayDelay={5000}
+          loop={true}
           />
         </div>
       </div>
@@ -203,33 +257,25 @@ function DesignSection() {
 function SelectedWork() {
   return (
     <section className="relative border-t border-zinc-800/80 bg-[#0a0d0f] text-[#c3c7cb]">
-      
-      {/* Background Pattern */}
       <div className="pointer-events-none absolute inset-0 opacity-10 [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:80px_80px]" />
       
       <div className="relative mx-auto max-w-7xl">
-        
         <div className="grid border-b border-zinc-800 md:grid-cols-12">
-          
-          {/* Header Title */}
           <div className="border-b border-zinc-800 p-6 md:col-span-8 md:border-r md:p-10">
             <h2 className="text-3xl font-light uppercase tracking-[0.16em] text-zinc-100 md:text-4xl">Selected Work</h2>
             <p className="mt-2 text-sm text-zinc-500">A curated collection of web development projects</p>
           </div>
 
-          {/* Action Link */}
           <div className="flex items-center justify-start p-6 md:col-span-4 md:justify-end md:p-10">
             <a href="mailto:TIM@VANLENT.DEV?subject=Start%20a%20project" className="text-sm tracking-wider text-zinc-400 transition-colors hover:text-white">
               Start a project <span aria-hidden="true">↗</span>
             </a>
           </div>
 
-          {/* Graphic Element */}
           <div className="flex min-h-64 items-center justify-center border-t border-zinc-800 p-8 md:col-span-3 md:row-start-2 md:border-r">
             <div className="h-40 w-40 rounded-full border border-zinc-700 bg-[radial-gradient(circle_at_35%_30%,#a1a1aa,#27272a_42%,#09090b_72%)] shadow-[0_0_80px_rgba(148,163,184,.14)]" />
           </div>
 
-          {/* Project Preview & Sub-boxes */}
           <div className="border-t border-zinc-800 p-4 md:col-span-4 md:row-start-2 md:border-r">
             <div className="relative flex aspect-[16/10] items-end overflow-hidden border border-zinc-800 bg-[#d9d4c9] p-5 text-[#171717] sm:p-8">
               <div className="absolute right-8 top-8 h-24 w-24 rounded-full border border-[#171717]/20" />
@@ -244,12 +290,10 @@ function SelectedWork() {
             </div>
           </div>
 
-          {/* Vertical Preview Card */}
           <div className="flex min-h-56 items-center justify-center border-t border-zinc-800 p-4 md:col-span-2 md:row-start-2 md:border-r">
             <div className="flex aspect-[9/16] h-52 items-end border border-zinc-700 bg-[#d9d4c9] p-3 text-xs text-[#171717]">Arithma</div>
           </div>
 
-          {/* Tech Stack List */}
           <div className="grid grid-cols-5 border-t border-zinc-800 md:col-span-1 md:row-start-2 md:grid-cols-1 md:border-r">
             {technologies.map((technology) => (
               <div key={technology} className="flex items-center justify-center border-r border-zinc-800 p-3 text-xs text-zinc-500 last:border-r-0 md:border-b md:border-r-0 md:last:border-b-0">
@@ -258,28 +302,22 @@ function SelectedWork() {
             ))}
           </div>
 
-          {/* Description */}
           <div className="space-y-5 border-t border-zinc-800 p-6 text-sm leading-relaxed text-zinc-500 md:col-span-2 md:row-start-2 md:p-8">
             <p className="text-zinc-400">Modern financial services platform focused on clarity, trust, and usability.</p>
             <p>A bespoke build combining a refined visual system with performance-friendly interactions.</p>
           </div>
-
         </div>
 
-        {/* Carousel / Navigation Footer */}
         <div className="grid h-16 grid-cols-12 border-b border-zinc-800">
           <button type="button" aria-label="Previous project" className="col-span-2 flex items-center justify-center border-r border-zinc-800 transition-colors hover:bg-zinc-900 md:col-span-1">
             <ChevronLeft className="h-4 w-4" />
           </button>
-          
           <a href="#project" aria-label="Open project" className="col-span-2 flex items-center justify-center border-r border-zinc-800 transition-colors hover:bg-zinc-900 md:col-span-1">
             <ExternalLink className="h-4 w-4" />
           </a>
-          
           <span id="project" className="col-span-6 flex items-center justify-center text-xl font-light tracking-wider text-zinc-200 md:col-span-9">
             arithma
           </span>
-          
           <button type="button" aria-label="Next project" className="col-span-2 flex items-center justify-center transition-colors hover:bg-zinc-900 md:col-span-1">
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -288,18 +326,7 @@ function SelectedWork() {
         <div className="px-4 py-3">
           <Ruler count={40} />
         </div>
-
       </div>
-    </section>
-  );
-}
-
-
-// Section
-function Section() {
-  return (
-    <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
-    
     </section>
   );
 }
@@ -310,6 +337,8 @@ export default function Home() {
     <main className="overflow-hidden bg-[#0e0e0e] font-sans selection:bg-white selection:text-black">
       <Hero />
       <DesignSection />
+      <MotionSection />
+      <SoftwareSection />
       <SelectedWork />
     </main>
   );
