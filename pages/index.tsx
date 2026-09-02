@@ -7,6 +7,7 @@ import OptionWheel from './component/OptionWheel';
 import StrokeText from "./component/StrokeText";
 import FoldText from "./component/FoldText";
 import FadeContent from "./component/FadeContent";
+import TextLoop from "./component/TextLoop";
 import LogoLoop from "./component/LogoLoop";
 import DriftWall from './component/DriftWall';
 import DepthCarousel from './component/DepthCarousel';
@@ -170,11 +171,11 @@ function Hero() {
         </div>
       </div>
 
-      <footer className="relative z-10 border-t border-neutral-800/40 px-6 py-6 md:px-8 overflow-hidden">
+      {/* <footer className="relative z-10 border-t border-neutral-800/40 px-6 py-6 md:px-8 overflow-hidden">
         <div className="w-full flex items-center justify-center">
-          <LogoLoop logos={techLogos} speed={40} direction="left" logoHeight={30} gap={40} />
         </div>
-      </footer>
+      </footer> */}
+          <LogoLoop logos={techLogos} speed={40} direction="left" logoHeight={30} gap={40} />
     </section>
   );
 }
@@ -184,7 +185,7 @@ function DesignSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-10 text-neutral-400">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
         <div className="mb-8">
           {inView && (
@@ -198,6 +199,13 @@ function DesignSection() {
           <DriftWall items={driftItems} columns={5} tileWidth={200} tileHeight={132} gap={18} speed={30} grayscale />
         </div>
       </div>
+      <footer className="-mt-32 relative z-20">
+          <TextLoop text="Portfolio ✦ Dev" 
+          curviness={50}
+          ribbonColor="#27cf9a"
+          pauseOnHover={false}
+          />
+      </footer>
     </section>
   );
 }
@@ -219,6 +227,29 @@ function MotionSection() {
         </div>
         <div className="relative h-[500px] w-full">
           <MorphSlider autoplay loop showCaptions showControls showIndicators />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// 3D Animation Section
+function AnimationSection() {
+  const { ref, inView } = useInViewObserver();
+
+  return (
+    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
+        <div className="mb-8">
+          {inView && (
+            <FadeContent key={`3d-fade-${inView}`} blur duration={1000}>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">04.</p>
+            </FadeContent>
+          )}
+          {inView && <FoldText key={`3d-fold-${inView}`} text="3D Animation" color="#27ffb7"/>}
+        </div>
+        <div className="relative h-[500px] w-full">
+          <AccordionGallery autoplay loop showCaptions showControls showIndicators />
         </div>
       </div>
     </section>
@@ -338,6 +369,7 @@ export default function Home() {
       <Hero />
       <DesignSection />
       <MotionSection />
+      <AnimationSection />
       <SoftwareSection />
       <SelectedWork />
     </main>
