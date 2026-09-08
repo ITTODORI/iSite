@@ -85,7 +85,7 @@ const useImageLoader = (
 
     if (images.length === 0) {
       onLoad();
-      return;
+      return; 
     }
 
     let remainingImages = images.length;
