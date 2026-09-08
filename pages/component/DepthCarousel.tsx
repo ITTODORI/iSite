@@ -9,7 +9,16 @@ import {
 } from 'react';
 import gsap from 'gsap';
 
-export type DepthCarouselItem = string | { image: string; alt?: string };
+export type DepthCarouselItem = 
+  | string 
+  | { 
+      image?: string; 
+      video?: string; 
+      alt?: string;
+      title?: string;
+      description?: string;
+    };
+
 type TiltDirection = 'left' | 'right';
 
 export interface DepthCarouselProps {
@@ -33,7 +42,8 @@ export interface DepthCarouselProps {
   loop?: boolean;
   showControls?: boolean;
   showIndicators?: boolean;
-  onChange?: (index: number, item: { image: string; alt?: string }) => void;
+  showContent?: boolean;
+  onChange?: (index: number, item: { image?: string; video?: string; alt?: string; title?: string; description?: string }) => void;
   className?: string;
 }
 
@@ -64,16 +74,38 @@ interface DragState {
 }
 
 const DEFAULT_ITEMS: DepthCarouselItem[] = [
-  { image: 'https://picsum.photos/seed/depth1/800/1000', alt: 'Slide 1' },
-  { image: 'https://picsum.photos/seed/depth2/800/1000', alt: 'Slide 2' },
-  { image: 'https://picsum.photos/seed/depth3/800/1000', alt: 'Slide 3' },
-  { image: 'https://picsum.photos/seed/depth4/800/1000', alt: 'Slide 4' },
-  { image: 'https://picsum.photos/seed/depth5/800/1000', alt: 'Slide 5' },
-  { image: 'https://picsum.photos/seed/depth6/800/1000', alt: 'Slide 6' }
+  { 
+    video: '/src/2026-09-01_10-01-04.mp4', 
+    alt: 'One',
+    title: 'Converter Media',
+    description: 'Simply convert media files to your desired format with <br>ease and speed.'
+  },
+  { 
+    video: '/src/2026-09-01 10-51-50.mp4', 
+    alt: 'Two',
+    title: 'eCommerce',
+    description: 'Boost your online sales with our powerful eCommerce <br> solutions, designed for seamless shopping experiences.'
+  },
+  { 
+    image: 'https://picsum.photos/seed/c/800/1000', 
+    alt: 'Three',
+    title: 'Stunning Photography',
+    description: 'Koleksi gambar pilihan dengan efek kedalaman <br> ruang (depth of field) yang elegan.'
+  },
 ];
 
 const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
-const normalizeItem = (it: DepthCarouselItem) => (typeof it === 'string' ? { image: it, alt: '' } : it);
+
+const normalizeItem = (it: DepthCarouselItem) => 
+  typeof it === 'string' 
+    ? { image: it, alt: '', title: '', description: '' } 
+    : { 
+        image: it.image || '', 
+        video: it.video, 
+        alt: it.alt || '',
+        title: it.title || '',
+        description: it.description || '' 
+      };
 
 const DepthCarousel = ({
   items = DEFAULT_ITEMS,
@@ -96,6 +128,7 @@ const DepthCarousel = ({
   loop = true,
   showControls = true,
   showIndicators = true,
+  showContent = true,
   onChange,
   className = ''
 }: DepthCarouselProps) => {
@@ -104,6 +137,7 @@ const DepthCarousel = ({
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const overlayRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
@@ -181,12 +215,22 @@ const DepthCarousel = ({
     }
   }, []);
 
+  const animateContentChange = useCallback(() => {
+    if (!contentRef.current) return;
+    gsap.fromTo(
+      contentRef.current,
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+    );
+  }, []);
+
   const notify = useCallback(
     (idx: number) => {
       setActive(idx);
+      animateContentChange();
       onChangeRef.current?.(idx, data[idx]);
     },
-    [data]
+    [data, animateContentChange]
   );
 
   const tweenTo = useCallback(
@@ -361,18 +405,10 @@ const DepthCarousel = ({
         Math.max(cfgRef.current.autoplayDelay, 600)
       );
     };
-    const onEnter = () => {
-      hovered = true;
-    };
-    const onLeave = () => {
-      hovered = false;
-    };
-    const onFocusIn = () => {
-      focused = true;
-    };
-    const onFocusOut = () => {
-      focused = false;
-    };
+    const onEnter = () => { hovered = true; };
+    const onLeave = () => { hovered = false; };
+    const onFocusIn = () => { focused = true; };
+    const onFocusOut = () => { focused = false; };
     root?.addEventListener('mouseenter', onEnter);
     root?.addEventListener('mouseleave', onLeave);
     root?.addEventListener('focusin', onFocusIn);
@@ -400,10 +436,12 @@ const DepthCarousel = ({
     []
   );
 
+  const currentItem = data[active] || { title: '', description: '' };
+
   return (
     <div
       ref={rootRef}
-      className={`relative flex h-full min-h-[320px] w-full cursor-grab touch-pan-y select-none items-center justify-center outline-none [perspective-origin:50%_50%] active:cursor-grabbing focus-visible:rounded-xl focus-visible:outline-2 focus-visible:outline-white/50 focus-visible:[outline-offset:4px] ${className}`.trim()}
+      className={`relative flex h-full min-h-[420px] w-full cursor-grab touch-pan-y select-none items-center justify-between gap-[20px] outline-none [perspective-origin:50%_50%] active:cursor-grabbing focus-visible:rounded-xl focus-visible:outline-2 focus-visible:outline-white/50 focus-visible:[outline-offset:4px] ${className}`.trim()}
       style={{ perspective: `${perspective}px` }}
       role="group"
       aria-roledescription="carousel"
@@ -415,7 +453,23 @@ const DepthCarousel = ({
       onPointerCancel={onPointerEnd}
       onKeyDown={onKeyDown}
     >
-      <div className="absolute inset-0 [transform-style:preserve-3d]" ref={stageRef}>
+      {showContent && (
+        <div 
+          className="z-[3500] flex w-full max-w-lg flex-col justify-center pl-8 pr-6 lg:w-[42%] lg:pl-16 lg:pr-12 pointer-events-auto"
+        >
+          <div ref={contentRef} className="flex flex-col gap-2">
+            <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl lg:text-4xl">
+              {currentItem.title}
+            </h2>
+            <p 
+              className="text-sm leading-relaxed text-zinc-400 md:text-base"
+              dangerouslySetInnerHTML={{ __html: currentItem.description }}
+            />
+          </div>
+        </div>
+      )}
+
+      <div className="relative flex h-full w-full flex-1 items-center justify-center pr-8 lg:pr-16 [transform-style:preserve-3d]" ref={stageRef}>
         {data.map((item, i) => (
           <div
             key={i}
@@ -429,12 +483,24 @@ const DepthCarousel = ({
             aria-hidden={active !== i}
             onClick={() => onCardClick(i)}
           >
-            <img
-              className="block h-full w-full select-none object-cover [pointer-events:none] [-webkit-user-drag:none]"
-              src={item.image}
-              alt={item.alt || ''}
-              draggable={false}
-            />
+            {item.video ? (
+              <video
+                src={item.video}
+                className="block h-full w-full select-none object-cover [pointer-events:none]"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            ) : (
+              <img
+                className="block h-full w-full select-none object-cover [pointer-events:none] [-webkit-user-drag:none]"
+                src={item.image}
+                alt={item.alt || ''}
+                draggable={false}
+              />
+            )}
+
             <span
               className="pointer-events-none absolute inset-0 opacity-0 mix-blend-multiply"
               ref={el => {
