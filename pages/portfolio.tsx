@@ -36,34 +36,6 @@ const PortfolioPage = () => {
        />
     </div>
 
-    <div className="drift">
-      <div style={{ height: 600 }}>
-          <DriftWall
-            items={items}
-            columns={5}
-            tileWidth={200}
-            tileHeight={132}
-            gap={18}
-            tilt={16}
-            turn={-14}
-            perspective={1200}
-            depth={120}
-            speed={42}
-            direction="up"
-            variance={0.45}
-            parallax={0.6}
-            lift={64}
-            fade={0.6}
-            dim={0.55}
-            overlayColor="#060010"
-            radius={14}
-            roll={0}
-            pauseOnHover={false}
-            grayscale
-          />
-        </div>
-    </div>
-
     </>
   );
 };
