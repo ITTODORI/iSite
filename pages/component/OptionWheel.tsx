@@ -6,6 +6,7 @@ export interface OptionWheelProps {
   items?: string[];
   defaultSelected?: number;
   onChange?: (index: number, item: string) => void;
+  onItemClick?: (index: number, item: string) => void;
   textColor?: string;
   activeColor?: string;
   side?: Side;
@@ -53,6 +54,7 @@ const OptionWheel = ({
   items = DEFAULT_ITEMS,
   defaultSelected = 2,
   onChange,
+  onItemClick,
   textColor = '#a6a6a6',
   activeColor = '#36f17a',
   side = 'left',
@@ -79,6 +81,7 @@ const OptionWheel = ({
   const lastRef = useRef(0);
   const cfgRef = useRef<WheelConfig>({} as WheelConfig);
   const onChangeRef = useRef(onChange);
+  const onItemClickRef = useRef(onItemClick);
   const selectedRef = useRef(defaultSelected);
   const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dragRef = useRef<{ y: number; start: number; id: number } | null>(null);
@@ -92,6 +95,7 @@ const OptionWheel = ({
   const remPx = typeof window !== 'undefined' ? parseFloat(getComputedStyle(document.documentElement).fontSize) || 16 : 16;
 
   onChangeRef.current = onChange;
+  onItemClickRef.current = onItemClick;
   cfgRef.current = {
     count: items.length,
     items,
@@ -257,6 +261,9 @@ const OptionWheel = ({
         else if (d < -cfg.count / 2) d += cfg.count;
       }
       applyTarget(cur + d, true);
+
+      // Trigger the explicit click callback
+      onItemClickRef.current?.(index, cfg.items[index]);
     },
     [applyTarget]
   );
