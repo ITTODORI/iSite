@@ -70,7 +70,7 @@ const driftItems = [
   { image: '/src/Logotype.png', title: 'Tile 14' },
 ];
 
-// Custom Hook untuk mendeteksi Scroll Masuk Viewport (agar animasi berulang saat discroll)
+// Custom Hook Scroll Viewport Observer
 function useInViewObserver(threshold = 0.2) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -78,7 +78,6 @@ function useInViewObserver(threshold = 0.2) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Set ke true saat masuk viewport, false saat keluar agar key berubah dan animasi re-trigger
         setInView(entry.isIntersecting);
       },
       { threshold }
