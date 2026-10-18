@@ -114,6 +114,25 @@ function Ruler({ count = 40 }: { count?: number }) {
 
 // Hero Section
 function Hero() {
+  const wheelItems = ['Designer', 'Motion Graphic', '3D Animation', 'Software Engineer'];
+
+  const handleWheelChange = (_index: number, item: string) => {
+    const sectionIdMap: Record<string, string> = {
+      'Designer': 'designer',
+      'Motion Graphic': 'motion-graphic',
+      '3D Animation': '3d-animation',
+      'Software Engineer': 'software-engineer',
+    };
+
+    const targetId = sectionIdMap[item];
+    if (targetId) {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
@@ -139,7 +158,6 @@ function Hero() {
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between md:flex-row">
           <div className="w-full space-y-6 md:w-1/2">
             <div>
-              <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-neutral-500">01. </p>
               <h1 className="flex flex-col items-start text-left text-4xl uppercase leading-tight tracking-[0.12em] text-neutral-200 md:text-5xl">
                 <StrokeText text="Creative" fontSize={70}/>
                 <StrokeText text="Technologist" fillDelay={0.4} fontSize={50}/>
@@ -164,17 +182,17 @@ function Hero() {
               </div>
             </div>
             <div className="h-48 w-full max-w-md md:h-56">
-              <OptionWheel activeColor="#27ffb7"/>
+              <OptionWheel 
+                items={wheelItems}
+                activeColor="#27ffb7"
+                onChange={handleWheelChange}
+              />
             </div>
           </div>
         </div>
       </div>
 
-      {/* <footer className="relative z-10 border-t border-neutral-800/40 px-6 py-6 md:px-8 overflow-hidden">
-        <div className="w-full flex items-center justify-center">
-        </div>
-      </footer> */}
-          <LogoLoop logos={techLogos} speed={40} direction="left" logoHeight={30} gap={40} />
+      <LogoLoop logos={techLogos} speed={40} direction="left" logoHeight={30} gap={40} />
     </section>
   );
 }
@@ -184,7 +202,7 @@ function DesignSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-10 text-neutral-400">
+    <section id="designer" ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-10 text-neutral-400">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
         <div className="mb-8">
           {inView && (
@@ -214,7 +232,7 @@ function MotionSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+    <section id="motion-graphic" ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
         <div className="mb-8">
           {inView && (
@@ -237,7 +255,7 @@ function AnimationSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+    <section id="3d-animation" ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
         <div className="mb-8">
           {inView && (
@@ -260,7 +278,7 @@ function SoftwareSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
+    <section id="software-engineer" ref={ref} className="relative isolate flex min-h-[680px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
         <div className="mb-8">
           {inView && (
@@ -272,10 +290,9 @@ function SoftwareSection() {
         </div>
         <div className="relative h-[500px] w-full">
           <DepthCarousel 
-          // autoplay={true}
-          showControls={false}
-          autoplayDelay={5000}
-          loop={true}
+            showControls={false}
+            autoplayDelay={5000}
+            loop={true}
           />
         </div>
       </div>
