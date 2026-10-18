@@ -87,9 +87,9 @@ const DEFAULT_ITEMS: DepthCarouselItem[] = [
     description: 'Boost your online sales with our powerful eCommerce <br> solutions, designed for seamless shopping experiences.'
   },
   { 
-    image: 'https://picsum.photos/seed/c/800/1000', 
+    video: '/src/iSedekah.mp4', 
     alt: 'Three',
-    title: 'Stunning Photography',
+    title: 'Islamic Foundation',
     description: 'Koleksi gambar pilihan dengan efek kedalaman <br> ruang (depth of field) yang elegan.'
   },
 ];
