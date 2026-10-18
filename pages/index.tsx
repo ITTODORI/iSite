@@ -116,7 +116,7 @@ function Ruler({ count = 40 }: { count?: number }) {
 function Hero() {
   const wheelItems = ['Designer', 'Motion Graphic', '3D Animation', 'Software Engineer'];
 
-  const handleWheelChange = (_index: number, item: string) => {
+  const handleWheelItemClick = (_index: number, item: string) => {
     const sectionIdMap: Record<string, string> = {
       'Designer': 'designer',
       'Motion Graphic': 'motion-graphic',
@@ -126,10 +126,13 @@ function Hero() {
 
     const targetId = sectionIdMap[item];
     if (targetId) {
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Wheel centers on click first, then smoothly scrolls after a brief snap animation
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 250);
     }
   };
 
@@ -184,8 +187,9 @@ function Hero() {
             <div className="h-48 w-full max-w-md md:h-56">
               <OptionWheel 
                 items={wheelItems}
+                defaultSelected={2}
                 activeColor="#27ffb7"
-                onChange={handleWheelChange}
+                onItemClick={handleWheelItemClick}
               />
             </div>
           </div>
