@@ -33,9 +33,9 @@ export interface AccordionGalleryProps {
 const DEFAULT_ITEMS: AccordionGalleryItem[] = [
   { image: '/src/Intel.png', label: 'Cyber Monitor', link: '#' },
   { image: '/src/University.png', label: 'University', link: '#' },
-  { image: 'https://picsum.photos/id/1039/900/1200', label: 'Dance', link: '#' },
-  { image: 'https://picsum.photos/id/1043/900/1200', label: 'Harbour', link: '#' },
-  { image: 'https://picsum.photos/id/1044/900/1200', label: 'Skyline', link: '#' }
+  { image: '/src/Minimalis House.png', label: 'House', link: '#' },
+  { image: '/src/Light.png', label: 'Light', link: '#' },
+  { image: '/src/Dark.png', label: 'Skyline', link: '#' }
 ];
 
 const AccordionGallery = ({
