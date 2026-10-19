@@ -35,7 +35,7 @@ const DEFAULT_ITEMS: AccordionGalleryItem[] = [
   { image: '/src/University.png', label: 'University', link: '#' },
   { image: '/src/Minimalis House.png', label: 'House', link: '#' },
   { image: '/src/Light.png', label: 'Grave | Caffe | Forest', link: '#' },
-  { image: 'https://picsum.photos/id/1044/900/1200', label: 'Skyline', link: '#' }
+  { image: '/src/Dark.png', label: 'Live Acation', link: '#' }
 ];
 
 const AccordionGallery = ({
