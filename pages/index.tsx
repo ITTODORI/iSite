@@ -299,6 +299,19 @@ function SoftwareSection() {
             loop={true}
           />
         </div>
+        <div className="mt-8 text-center">
+          <a
+            href="https://github.com/ITTODORI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-md font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-[#27ffb7] hover:text-[#0e0e0e] hover:border-[#27ffb7] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
+          >
+            Github Profile
+          </a>
+          <p className="mt-3 text-sm text-neutral-400 max-w-md mx-auto">
+            Explore my GitHub repositories to discover a variety of projects.
+          </p>
+        </div>
       </div>
     </section>
   );
