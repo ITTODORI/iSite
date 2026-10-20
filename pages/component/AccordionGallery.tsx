@@ -9,6 +9,11 @@ export interface AccordionGalleryItem {
 }
 
 export interface AccordionGalleryProps {
+  autoPlay?: boolean;
+  loop?: boolean;
+  showControls?: boolean;
+  showCaption?: boolean;
+  showIndicators?: boolean;
   items?: AccordionGalleryItem[];
   defaultIndex?: number;
   accentColor?: string;
