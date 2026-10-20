@@ -1,4 +1,4 @@
-import PillNav from './component/Navbar';
+// import PillNav from './component/Navbar';
 import DriftWall from './component/DriftWall';
 
 const PortfolioPage = () => {
@@ -15,7 +15,7 @@ const PortfolioPage = () => {
       <p>I embed with your product teams to set design direction, build the systems and raise the bar on strategy, efficiency and craft.</p>
     </div>
 
-    <div className="navbar">
+    {/* <div className="navbar">
       <PillNav
           logo="/file.svg"
           logoAlt="Company Logo"
@@ -34,7 +34,7 @@ const PortfolioPage = () => {
             pillTextColor="#000000"
             initialLoadAnimation={false}
        />
-    </div>
+    </div> */}
 
     </>
   );
