@@ -254,7 +254,13 @@ function AnimationSection() {
           {inView && <FoldText key={`3d-fold-${inView}`} text="3D Animation" color="#27ffb7"/>}
         </div>
         <div className="relative h-[clamp(300px,60vh,500px)] w-full">
-          <AccordionGallery autoplay loop showCaptions showControls showIndicators />
+          <AccordionGallery 
+            autoPlay={true} 
+            loop={true} 
+            showCaptions={true} 
+            showControls={true} 
+            showIndicators={true} 
+          />
         </div>
       </div>
     </section>
