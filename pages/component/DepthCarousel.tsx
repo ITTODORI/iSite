@@ -283,7 +283,7 @@ const DepthCarousel = ({
     const root = rootRef.current;
     if (!root) return;
     const ro = new ResizeObserver(entries => {
-      const w = entries[0].contentRect.width;
+      const w = stageRef.current?.getBoundingClientRect().width ?? entries[0].contentRect.width;
       const cfg = cfgRef.current;
       const needed = cfg.cardWidth + Math.abs(cfg.spread) * 2 + 120;
       scaleRef.current = clamp(w / needed, 0.4, 1);
@@ -441,7 +441,7 @@ const DepthCarousel = ({
   return (
     <div
       ref={rootRef}
-      className={`relative flex h-full min-h-[420px] w-full cursor-grab touch-pan-y select-none items-center justify-between gap-[20px] outline-none [perspective-origin:50%_50%] active:cursor-grabbing focus-visible:rounded-xl focus-visible:outline-2 focus-visible:outline-white/50 focus-visible:[outline-offset:4px] ${className}`.trim()}
+      className={`relative flex h-full min-h-[380px] w-full cursor-grab touch-pan-y select-none flex-col items-center justify-center gap-[10px] outline-none [perspective-origin:50%_50%] active:cursor-grabbing focus-visible:rounded-xl focus-visible:outline-2 focus-visible:outline-white/50 focus-visible:[outline-offset:4px] md:min-h-[420px] md:flex-row md:justify-between md:gap-[20px] ${className}`.trim()}
       style={{ perspective: `${perspective}px` }}
       role="group"
       aria-roledescription="carousel"
@@ -455,21 +455,21 @@ const DepthCarousel = ({
     >
       {showContent && (
         <div 
-          className="z-[3500] flex w-full max-w-lg flex-col justify-center pl-8 pr-6 lg:w-[42%] lg:pl-16 lg:pr-12 pointer-events-auto"
+          className="pointer-events-auto order-2 z-[3500] flex w-full shrink-0 flex-col items-center justify-center px-3 py-0 text-center md:order-none md:w-[42%] md:max-w-lg md:items-start md:px-0 md:py-0 md:pl-8 md:pr-6 md:text-left lg:pl-16 lg:pr-12"
         >
-          <div ref={contentRef} className="flex flex-col gap-2">
+          <div ref={contentRef} className="flex w-full flex-col items-center gap-1 md:items-start md:gap-2">
             <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl lg:text-4xl">
               {currentItem.title}
             </h2>
             <p 
-              className="text-sm leading-relaxed text-zinc-400 md:text-base"
+              className="w-full text-sm leading-relaxed text-zinc-400 md:text-base"
               dangerouslySetInnerHTML={{ __html: currentItem.description }}
             />
           </div>
         </div>
       )}
 
-      <div className="relative flex h-full w-full flex-1 items-center justify-center pr-8 lg:pr-16 [transform-style:preserve-3d]" ref={stageRef}>
+      <div className="relative order-1 flex h-[240px] w-full flex-none items-center justify-center [transform-style:preserve-3d] md:order-none md:h-full md:min-h-0 md:flex-1 md:pr-8 lg:pr-16" ref={stageRef}>
         {data.map((item, i) => (
           <div
             key={i}
