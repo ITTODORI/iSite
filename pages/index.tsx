@@ -267,8 +267,8 @@ function SoftwareSection() {
 
   return (
     <section id="software-engineer" ref={ref} className="relative isolate flex min-h-[560px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-10 text-neutral-400 md:min-h-[680px] md:py-16">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12">
-        <div className="mb-6 md:mb-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 md:px-12">
+        <div className="order-1 mb-4 md:mb-8">
           {inView && (
             <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">05.</p>
@@ -276,14 +276,17 @@ function SoftwareSection() {
           )}
           {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7"/>}
         </div>
-        <div className="relative h-[clamp(300px,60vh,500px)] w-full">
+        <p className="order-2 mb-4 mx-auto max-w-md text-center text-sm text-neutral-400 md:order-4 md:mb-0 md:mt-3">
+          Explore the projects, tools, and experiments behind my software work on GitHub.
+        </p>
+        <div className="relative order-3 h-[clamp(400px,62vh,480px)] w-full md:order-2 md:h-[clamp(300px,60vh,500px)]">
           <DepthCarousel 
             showControls={false}
             autoplayDelay={5000}
             loop={true}
           />
         </div>
-        <div className="mt-8 text-center">
+        <div className="order-4 mt-5 text-center md:order-3 md:mt-8">
           <a
             href="https://github.com/ITTODORI"
             target="_blank"
@@ -292,15 +295,91 @@ function SoftwareSection() {
           >
             Github Profile
           </a>
-          <p className="mt-3 text-sm text-neutral-400 max-w-md mx-auto">
-            Explore my GitHub repositories to discover a variety of projects.
-          </p>
         </div>
       </div>
     </section>
   );
 }
-  
+
+
+// Selected Work Component
+// function SelectedWork() {
+//   return (
+//     <section className="relative border-t border-zinc-800/80 bg-[#0a0d0f] text-[#c3c7cb]">
+//       <div className="pointer-events-none absolute inset-0 opacity-10 [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:80px_80px]" />
+
+//       <div className="relative mx-auto max-w-7xl">
+//         <div className="grid border-b border-zinc-800 md:grid-cols-12">
+//           <div className="border-b border-zinc-800 p-6 md:col-span-8 md:border-r md:p-10">
+//             <h2 className="text-3xl font-light uppercase tracking-[0.16em] text-zinc-100 md:text-4xl">Selected Work</h2>
+//             <p className="mt-2 text-sm text-zinc-500">A curated collection of web development projects</p>
+//           </div>
+
+//           <div className="flex items-center justify-start p-6 md:col-span-4 md:justify-end md:p-10">
+//             <a href="mailto:TIM@VANLENT.DEV?subject=Start%20a%20project" className="text-sm tracking-wider text-zinc-400 transition-colors hover:text-white">
+//               Start a project <span aria-hidden="true">↗</span>
+//             </a>
+//           </div>
+
+//           <div className="flex min-h-64 items-center justify-center border-t border-zinc-800 p-8 md:col-span-3 md:row-start-2 md:border-r">
+//             <div className="h-40 w-40 rounded-full border border-zinc-700 bg-[radial-gradient(circle_at_35%_30%,#a1a1aa,#27272a_42%,#09090b_72%)] shadow-[0_0_80px_rgba(148,163,184,.14)]" />
+//           </div>
+
+//           <div className="border-t border-zinc-800 p-4 md:col-span-4 md:row-start-2 md:border-r">
+//             <div className="relative flex aspect-[16/10] items-end overflow-hidden border border-zinc-800 bg-[#d9d4c9] p-5 text-[#171717] sm:p-8">
+//               <div className="absolute right-8 top-8 h-24 w-24 rounded-full border border-[#171717]/20" />
+//               <div>
+//                 <p className="text-xs uppercase tracking-[0.3em]">Arithma</p>
+//                 <p className="mt-2 max-w-[12rem] text-2xl font-light leading-tight">Finance, made clear.</p>
+//               </div>
+//             </div>
+//             <div className="mt-3 grid grid-cols-2 gap-3">
+//               <div className="flex aspect-[16/10] items-end border border-zinc-800 bg-[#3c4345] p-3 text-xs uppercase tracking-widest text-zinc-300">System</div>
+//               <div className="flex aspect-[16/10] items-end border border-zinc-800 bg-[#1b2528] p-3 text-xs uppercase tracking-widest text-zinc-400">Motion</div>
+//             </div>
+//           </div>
+
+//           <div className="flex min-h-56 items-center justify-center border-t border-zinc-800 p-4 md:col-span-2 md:row-start-2 md:border-r">
+//             <div className="flex aspect-[9/16] h-52 items-end border border-zinc-700 bg-[#d9d4c9] p-3 text-xs text-[#171717]">Arithma</div>
+//           </div>
+
+//           <div className="grid grid-cols-5 border-t border-zinc-800 md:col-span-1 md:row-start-2 md:grid-cols-1 md:border-r">
+//             {technologies.map((technology) => (
+//               <div key={technology} className="flex items-center justify-center border-r border-zinc-800 p-3 text-xs text-zinc-500 last:border-r-0 md:border-b md:border-r-0 md:last:border-b-0">
+//                 {technology}
+//               </div>
+//             ))}
+//           </div>
+
+//           <div className="space-y-5 border-t border-zinc-800 p-6 text-sm leading-relaxed text-zinc-500 md:col-span-2 md:row-start-2 md:p-8">
+//             <p className="text-zinc-400">Modern financial services platform focused on clarity, trust, and usability.</p>
+//             <p>A bespoke build combining a refined visual system with performance-friendly interactions.</p>
+//           </div>
+//         </div>
+
+//         <div className="grid h-16 grid-cols-12 border-b border-zinc-800">
+//           <button type="button" aria-label="Previous project" className="col-span-2 flex items-center justify-center border-r border-zinc-800 transition-colors hover:bg-zinc-900 md:col-span-1">
+//             <ChevronLeft className="h-4 w-4" />
+//           </button>
+//           <a href="#project" aria-label="Open project" className="col-span-2 flex items-center justify-center border-r border-zinc-800 transition-colors hover:bg-zinc-900 md:col-span-1">
+//             <ExternalLink className="h-4 w-4" />
+//           </a>
+//           <span id="project" className="col-span-6 flex items-center justify-center text-xl font-light tracking-wider text-zinc-200 md:col-span-9">
+//             arithma
+//           </span>
+//           <button type="button" aria-label="Next project" className="col-span-2 flex items-center justify-center transition-colors hover:bg-zinc-900 md:col-span-1">
+//             <ChevronRight className="h-4 w-4" />
+//           </button>
+//         </div>
+
+//         <div className="px-4 py-3">
+//           <Ruler count={40} />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
 // Main Component
 export default function Home() {
   return (
