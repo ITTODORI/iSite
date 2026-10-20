@@ -12,7 +12,7 @@ export interface AccordionGalleryProps {
   autoPlay?: boolean;
   loop?: boolean;
   showControls?: boolean;
-  showCaption?: boolean;
+  showCaptions?: boolean;
   showIndicators?: boolean;
   items?: AccordionGalleryItem[];
   defaultIndex?: number;
