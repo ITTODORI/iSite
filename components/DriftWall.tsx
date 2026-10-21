@@ -386,7 +386,6 @@ const DriftWall = ({
         </div>
       </div>
 
-      {/* Modal Popup matching your custom template style */}
       {modalItem && (
         <div 
           className="fixed inset-0 z-[70] flex items-center justify-center p-4 backdrop-blur-md bg-black/80"
@@ -396,8 +395,8 @@ const DriftWall = ({
             className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl flex flex-col max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Overlay Header (title-close) */}
-            <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
+            {/* Bagian header dinaikkan posisinya */}
+            <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between pt-3 pb-4 px-4 bg-gradient-to-b from-black/90 via-black/50 to-transparent">
               <h3 id="modalTitle" className="text-sm font-semibold text-white drop-shadow-md truncate pr-2">
                 {modalItem.title || "Media Preview"}
               </h3>
@@ -412,11 +411,11 @@ const DriftWall = ({
               </button>
             </div>
             
-            <div id="modalContentContainer" className="w-full h-full flex items-center justify-center overflow-hidden bg-black p-4 pt-16">
+            <div id="modalContentContainer" className="w-full h-full flex items-center justify-center overflow-hidden bg-black">
               <img
                 src={modalItem.image}
                 alt={modalItem.title || ''}
-                className="max-h-[70vh] max-w-full object-contain rounded-lg"
+                className="w-full h-full object-cover min-h-[50vh]"
               />
             </div>
           </div>
