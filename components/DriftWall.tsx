@@ -1,4 +1,4 @@
-import { CSSProperties, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { CSSProperties, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, MouseEvent } from 'react';
 
 export interface DriftWallItem {
   image: string;
@@ -98,6 +98,9 @@ const DriftWall = ({
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeIdRef = useRef<string | null>(null);
   const [reduced, setReduced] = useState(false);
+  
+  // State for Modal Popup
+  const [modalItem, setModalItem] = useState<DriftWallItem | null>(null);
 
   useEffect(() => {
     setReduced(prefersReducedMotion());
@@ -211,6 +214,7 @@ const DriftWall = ({
     hoveredColRef.current = index;
     setActiveId(id);
   }, []);
+  
   const release = useCallback((): void => {
     activeIdRef.current = null;
     hoveredColRef.current = -1;
@@ -297,6 +301,15 @@ const DriftWall = ({
     'group-[.is-active]/tile:opacity-0 group-focus-visible/tile:opacity-0'
   );
 
+  const handleTileClick = (item: DriftWallItem, e: MouseEvent) => {
+    if (item.href) {
+      // If href is provided, let standard link handling or custom control take place
+      return;
+    }
+    e.preventDefault();
+    setModalItem(item);
+  };
+
   const renderTile = (item: DriftWallItem, id: string, colIndex: number) => {
     const inner = (
       <span className={innerClass}>
@@ -316,8 +329,10 @@ const DriftWall = ({
       'data-tile-id': id,
       'data-col': colIndex,
       onFocus: () => activate(id, colIndex),
-      onBlur: release
+      onBlur: release,
+      onClick: (e: MouseEvent) => handleTileClick(item, e)
     };
+
     if (item.href) {
       return (
         <a key={id} href={item.href} target="_blank" rel="noreferrer noopener" {...commonProps}>
@@ -333,45 +348,81 @@ const DriftWall = ({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={cx('relative h-full w-full overflow-hidden', className)}
-      style={cssVars}
-      onPointerMove={handlePointerMove}
-      onPointerEnter={() => {
-        wallHoveredRef.current = true;
-      }}
-      onPointerLeave={handlePointerLeaveWall}
-      role="group"
-      aria-label="Drifting wall of tiles"
-    >
+    <>
       <div
-        ref={planeRef}
-        className="absolute left-1/2 top-1/2 flex cursor-pointer flex-row [transform-style:preserve-3d] [transform-origin:50%_50%] will-change-transform"
+        ref={containerRef}
+        className={cx('relative h-full w-full overflow-hidden', className)}
+        style={cssVars}
+        onPointerMove={handlePointerMove}
+        onPointerEnter={() => {
+          wallHoveredRef.current = true;
+        }}
+        onPointerLeave={handlePointerLeaveWall}
+        role="group"
+        aria-label="Drifting wall of tiles"
       >
-        {columnItems.map((col, c) => {
-          const meta = columnMeta[c];
-          const copies = Array.from({ length: meta.copies });
-          return (
-            <div
-              className="relative w-[calc(var(--dw-tile-w)+var(--dw-gap))] [transform-style:preserve-3d]"
-              key={`col-${c}`}
-            >
+        <div
+          ref={planeRef}
+          className="absolute left-1/2 top-1/2 flex cursor-pointer flex-row [transform-style:preserve-3d] [transform-origin:50%_50%] will-change-transform"
+        >
+          {columnItems.map((col, c) => {
+            const meta = columnMeta[c];
+            const copies = Array.from({ length: meta.copies });
+            return (
               <div
-                className="flex flex-col [transform-style:preserve-3d] will-change-transform"
-                ref={el => {
-                  trackRefs.current[c] = el;
-                }}
+                className="relative w-[calc(var(--dw-tile-w)+var(--dw-gap))] [transform-style:preserve-3d]"
+                key={`col-${c}`}
               >
-                {copies.map((_, copyIndex) =>
-                  col.map((item, itemIndex) => renderTile(item, `${c}-${copyIndex}-${itemIndex}`, c))
-                )}
+                <div
+                  className="flex flex-col [transform-style:preserve-3d] will-change-transform"
+                  ref={el => {
+                    trackRefs.current[c] = el;
+                  }}
+                >
+                  {copies.map((_, copyIndex) =>
+                    col.map((item, itemIndex) => renderTile(item, `${c}-${copyIndex}-${itemIndex}`, c))
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      {/* Modal Popup */}
+      {modalItem && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-fadeIn"
+          onClick={() => setModalItem(null)}
+        >
+          <div 
+            className="relative max-w-4xl w-full max-h-[90vh] bg-[#121212] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setModalItem(null)}
+              className="absolute top-4 right-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/90"
+              aria-label="Close modal"
+            >
+              ✕
+            </button>
+            <div className="relative w-full h-full bg-black flex items-center justify-center p-4">
+              <img
+                src={modalItem.image}
+                alt={modalItem.title || ''}
+                className="max-h-[75vh] max-w-full object-contain"
+              />
+            </div>
+            {modalItem.title && (
+              <div className="p-6 bg-[#18181b]">
+                <h3 className="text-xl font-bold text-white tracking-wide">{modalItem.title}</h3>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
