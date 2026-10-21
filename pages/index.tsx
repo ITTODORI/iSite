@@ -153,6 +153,16 @@ function Hero() {
             <p className="max-w-md text-md normal-case leading-relaxed tracking-normal text-neutral-300">
               Hi there! I&apos;m <strong className="font-semibold text-white">iMen</strong>, a hybrid creator operating at the intersection of software engineering and digital media arts.
             </p>
+            <div className="order-4 mt-5 text-center md:order-3 md:mt-8">
+              <a
+                href="https://github.com/ITTODORI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-md font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-[#27ffb7] hover:text-[#0e0e0e] hover:border-[#27ffb7] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
+              >
+                Download CV
+              </a>
+            </div>
           </div>
 
           <div className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-2 xl:mx-0 xl:w-1/2 xl:max-w-none xl:justify-end">
