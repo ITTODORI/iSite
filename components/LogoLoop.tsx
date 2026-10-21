@@ -348,7 +348,6 @@ export const LogoLoop = React.memo<LogoLoopProps>(
               '[-webkit-user-drag:none] pointer-events-none',
               '[image-rendering:-webkit-optimize-contrast]',
               'motion-reduce:transition-all duration-300 ease-in-out',
-              // Filter approximation to shift standard/monochrome logos towards #27ffb7 on hover
               'group-hover/item:brightness-125 group-hover/item:sepia group-hover/item:hue-rotate-[85deg] group-hover/item:saturate-[5]',
               scaleOnHover &&
                 'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120'
