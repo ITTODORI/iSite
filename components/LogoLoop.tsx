@@ -313,12 +313,15 @@ export const LogoLoop = React.memo<LogoLoopProps>(
               className={cx(
                 'flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]',
                 isVertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]',
-                scaleOnHover && 'overflow-visible group/item'
+                'overflow-visible group/item transition-colors duration-300',
+                scaleOnHover && 'overflow-visible'
               )}
               key={key}
               role="listitem"
             >
-              {renderItem(item, key)}
+              <div className="transition-colors duration-300 hover:text-[#27ffb7]" style={{ color: 'inherit' }}>
+                {renderItem(item, key)}
+              </div>
             </li>
           );
         }
@@ -330,6 +333,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             className={cx(
               'inline-flex items-center',
               'motion-reduce:transition-none',
+              'transition-colors duration-300 ease-in-out group-hover/item:text-[#27ffb7]',
               scaleOnHover &&
                 'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120'
             )}
@@ -343,7 +347,9 @@ export const LogoLoop = React.memo<LogoLoopProps>(
               'h-[var(--logoloop-logoHeight)] w-auto block object-contain',
               '[-webkit-user-drag:none] pointer-events-none',
               '[image-rendering:-webkit-optimize-contrast]',
-              'motion-reduce:transition-none',
+              'motion-reduce:transition-all duration-300 ease-in-out',
+              // Filter approximation to shift standard/monochrome logos towards #27ffb7 on hover
+              'group-hover/item:brightness-125 group-hover/item:sepia group-hover/item:hue-rotate-[85deg] group-hover/item:saturate-[5]',
               scaleOnHover &&
                 'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120'
             )}
@@ -388,7 +394,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             className={cx(
               'flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]',
               isVertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]',
-              scaleOnHover && 'overflow-visible group/item'
+              'overflow-visible group/item'
             )}
             key={key}
             role="listitem"
