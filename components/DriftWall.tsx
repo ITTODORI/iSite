@@ -302,10 +302,7 @@ const DriftWall = ({
   );
 
   const handleTileClick = (item: DriftWallItem, e: MouseEvent) => {
-    if (item.href) {
-      // If href is provided, let standard link handling or custom control take place
-      return;
-    }
+    if (item.href) return;
     e.preventDefault();
     setModalItem(item);
   };
@@ -389,36 +386,39 @@ const DriftWall = ({
         </div>
       </div>
 
-      {/* Modal Popup */}
+      {/* Modal Popup matching your custom template style */}
       {modalItem && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-fadeIn"
+          className="fixed inset-0 z-[70] flex items-center justify-center p-4 backdrop-blur-md bg-black/80"
           onClick={() => setModalItem(null)}
         >
           <div 
-            className="relative max-w-4xl w-full max-h-[90vh] bg-[#121212] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+            className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl flex flex-col max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              type="button"
-              onClick={() => setModalItem(null)}
-              className="absolute top-4 right-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/90"
-              aria-label="Close modal"
-            >
-              ✕
-            </button>
-            <div className="relative w-full h-full bg-black flex items-center justify-center p-4">
+            {/* Overlay Header (title-close) */}
+            <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
+              <h3 id="modalTitle" className="text-sm font-semibold text-white drop-shadow-md truncate pr-2">
+                {modalItem.title || "Media Preview"}
+              </h3>
+              <button 
+                id="closeModal" 
+                type="button" 
+                onClick={() => setModalItem(null)}
+                className="text-white/80 hover:text-white transition text-lg px-2 py-1 cursor-pointer drop-shadow-md"
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div id="modalContentContainer" className="w-full h-full flex items-center justify-center overflow-hidden bg-black p-4 pt-16">
               <img
                 src={modalItem.image}
                 alt={modalItem.title || ''}
-                className="max-h-[75vh] max-w-full object-contain"
+                className="max-h-[70vh] max-w-full object-contain rounded-lg"
               />
             </div>
-            {modalItem.title && (
-              <div className="p-6 bg-[#18181b]">
-                <h3 className="text-xl font-bold text-white tracking-wide">{modalItem.title}</h3>
-              </div>
-            )}
           </div>
         </div>
       )}
