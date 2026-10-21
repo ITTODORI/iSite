@@ -318,7 +318,6 @@ function SoftwareSection() {
 }
 
 
-
 // Main Component
 export default function Home() {
   return (
