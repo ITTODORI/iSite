@@ -52,7 +52,7 @@ const DEFAULT_ITEMS = [
 
 const OptionWheel = ({
   items = DEFAULT_ITEMS,
-  defaultSelected = 1,
+  defaultSelected = 2,
   onChange,
   onItemClick,
   textColor = '#a6a6a6',
