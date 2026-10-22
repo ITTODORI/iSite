@@ -181,7 +181,7 @@ function Hero() {
             <div className="h-40 w-full max-w-sm sm:h-48 sm:min-w-0 sm:flex-1 xl:h-56 xl:max-w-md">
               <OptionWheel 
                 items={wheelItems}
-                defaultSelected={2}
+                defaultSelected={1}
                 activeColor="#27ffb7"
                 onItemClick={handleWheelItemClick}
               />
