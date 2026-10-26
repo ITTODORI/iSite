@@ -200,7 +200,7 @@ function DesignSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="designer" ref={ref} className="relative isolate flex min-h-[560px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-8 text-neutral-400 md:min-h-[680px] md:py-10">
+    <section id="designer" ref={ref} className="relative isolate flex min-h-[780px] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:min-h-[920px] md:py-20">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12">
         <div className="mb-6 md:mb-10">
           {inView && (
@@ -210,13 +210,24 @@ function DesignSection() {
           )}
           {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
         </div>
-        <div className="relative h-[clamp(300px,60vh,500px)] w-full [&_button:has(svg)]:block">
-          <DriftWall items={driftItems} columns={5} tileWidth={200} tileHeight={132} gap={18} speed={30} grayscale />
+        
+        <div className="relative h-[clamp(480px,74vh,700px)] w-full [&_button:has(svg)]:block">
+          <DriftWall 
+            items={driftItems} 
+            columns={4} 
+            tileWidth={300} 
+            tileHeight={200} 
+            gap={28} 
+            speed={25} 
+            grayscale 
+          />
         </div>
       </div>
-      <footer className="relative z-20 -mt-16 md:-mt-32">
-          <TextLoop text="Portfolio ✦ Dev" 
-          curviness={50}
+
+      <footer className="relative z-20 mt-8 md:mt-12 overflow-hidden opacity-85 scale-75 md:scale-85 origin-bottom">
+        <TextLoop 
+          text="Portfolio ✦ Dev" 
+          curviness={25}
           ribbonColor="#27cf9a"
           pauseOnHover={false}
         />
