@@ -229,6 +229,7 @@ function DesignSection() {
           text="Portfolio ✦ Dev" 
           fontSize={35}
           curviness={50}
+          ribbonWidth={40}
           ribbonColor="#27cf9a"
           pauseOnHover={false}
         />
