@@ -227,7 +227,7 @@ function DesignSection() {
       <footer className="relative z-20 mt-8 md:mt-12 overflow-hidden opacity-85 scale-75 md:scale-85 origin-bottom">
         <TextLoop 
           text="Portfolio ✦ Dev" 
-          curviness={25}
+          curviness={50}
           ribbonColor="#27cf9a"
           pauseOnHover={false}
         />
