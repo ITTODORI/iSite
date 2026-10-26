@@ -153,7 +153,7 @@ function Hero() {
             <p className="max-w-md text-md normal-case leading-relaxed tracking-normal text-neutral-300">
               Hi there! I&apos;m <strong className="font-semibold text-white">iMen</strong>, a hybrid creator operating at the intersection of software engineering and digital media arts.
             </p>
-            <div className="order-4 mt-5 text-center md:order-3 md:mt-8">
+            <div className="order-4 mt-5 text-left md:order-3 md:mt-8">
               <a
                 href="https://github.com/ITTODORI"
                 target="_blank"
@@ -200,9 +200,9 @@ function DesignSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="designer" ref={ref} className="relative isolate flex min-h-[800px] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] pt-12 pb-0 text-neutral-400 md:min-h-[920px] md:pt-16 md:pb-0">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12">
-        <div className="mb-4 md:mb-6">
+    <section id="designer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-6 text-neutral-400">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12">
+        <div className="mb-3 md:mb-4">
           {inView && (
             <FadeContent key={`design-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">02.</p>
@@ -211,25 +211,26 @@ function DesignSection() {
           {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
         </div>
         
-        <div className="relative h-[clamp(520px,78vh,720px)] w-full [&_button:has(svg)]:block">
+        <div className="relative h-[clamp(360px,56vh,540px)] w-full [&_button:has(svg)]:block">
           <DriftWall 
             items={driftItems} 
             columns={4} 
-            tileWidth={320} 
-            tileHeight={215} 
-            gap={22} 
+            tileWidth={280} 
+            tileHeight={190} 
+            gap={20} 
             speed={25} 
             grayscale 
           />
         </div>
       </div>
 
-      <footer className="relative z-20 -mt-16 md:-mt-32">
-          <TextLoop text="Portfolio ✦ Dev" 
-          curviness={50}
+      <footer className="relative z-20 overflow-hidden scale-75 md:scale-85 origin-bottom">
+        <TextLoop 
+          text="Portfolio ✦ Dev" 
+          curviness={22}
           ribbonColor="#27cf9a"
           pauseOnHover={false}
-          />
+        />
       </footer>
     </section>
   );
