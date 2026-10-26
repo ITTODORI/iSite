@@ -274,7 +274,7 @@ function AnimationSection() {
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">04.</p>
             </FadeContent>
           )}
-          {inView && <FoldText key={`3d-fold-${inView}`} text="3D Animation" color="#27ffb7"/>}
+          {inView && <FoldText key={`3d-fold-${inView}`} text="3D Animation" color="#0e0e0e"/>}
         </div>
         <div className="relative h-[clamp(380px,68vh,620px)] w-full">
           <AccordionGallery 
