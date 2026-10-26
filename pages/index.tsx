@@ -224,7 +224,7 @@ function DesignSection() {
         </div>
       </div>
 
-      <footer className="relative z-20 overflow-hidden scale-75 md:scale-85 origin-bottom">
+      <footer className="relative z-20 -mt-16 md:-mt-32">
         <TextLoop 
           text="Portfolio ✦ Dev" 
           curviness={22}
