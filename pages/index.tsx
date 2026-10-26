@@ -240,9 +240,9 @@ function MotionSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="motion-graphic" ref={ref} className="relative isolate flex min-h-[750px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:min-h-[900px] md:py-16">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12">
-        <div className="mb-6 md:mb-8">
+    <section id="motion-graphic" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12">
+      <div className="mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
+        <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`motion-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">03.</p>
@@ -250,8 +250,7 @@ function MotionSection() {
           )}
           {inView && <FoldText key={`motion-fold-${inView}`} text="Motion Effects" color="#27ffb7"/>}
         </div>
-        {/* Kontainer MorphSlider diperbesar agar tampil penuh dan jelas di desktop */}
-        <div className="relative h-[clamp(450px,72vh,680px)] w-full">
+        <div className="relative h-[clamp(380px,68vh,620px)] w-full">
           <MorphSlider autoplay loop showCaptions showControls showIndicators />
         </div>
       </div>
@@ -264,9 +263,9 @@ function AnimationSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="3d-animation" ref={ref} className="relative isolate flex min-h-[750px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:min-h-[900px] md:py-16">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12">
-        <div className="mb-6 md:mb-8">
+    <section id="3d-animation" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12">
+      <div className="mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
+        <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`3d-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">04.</p>
@@ -274,8 +273,7 @@ function AnimationSection() {
           )}
           {inView && <FoldText key={`3d-fold-${inView}`} text="3D Animation" color="#27ffb7"/>}
         </div>
-        {/* Kontainer AccordionGallery diperbesar agar proporsional dan penuh */}
-        <div className="relative h-[clamp(450px,72vh,680px)] w-full">
+        <div className="relative h-[clamp(380px,68vh,620px)] w-full">
           <AccordionGallery 
             autoPlay={true} 
             loop={true} 
@@ -294,9 +292,9 @@ function SoftwareSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="software-engineer" ref={ref} className="relative isolate flex min-h-[780px] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:min-h-[920px] md:py-16">
-      <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 md:px-12">
-        <div className="order-1 mb-4 md:mb-6">
+    <section id="software-engineer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12">
+      <div className="mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
+        <div className="order-1 mb-3 md:mb-4">
           {inView && (
             <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">05.</p>
@@ -304,18 +302,17 @@ function SoftwareSection() {
           )}
           {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7"/>}
         </div>
-        <p className="order-2 mb-4 mx-auto max-w-md text-center text-sm text-neutral-400 md:order-4 md:mb-0 md:mt-4">
+        <p className="order-2 mb-3 mx-auto max-w-md text-center text-sm text-neutral-400 md:order-4 md:mb-0 md:mt-3">
           Explore the projects, tools, and experiments behind my software work on GitHub.
         </p>
-        {/* DepthCarousel diperbesar agar tampil megah dan memenuhi section */}
-        <div className="relative order-3 h-[clamp(480px,72vh,680px)] w-full md:order-2">
+        <div className="relative order-3 h-[clamp(360px,60vh,540px)] w-full md:order-2">
           <DepthCarousel 
             showControls={false}
             autoplayDelay={5000}
             loop={true}
           />
         </div>
-        <div className="order-4 mt-5 text-center md:order-3 md:mt-6">
+        <div className="order-4 mt-4 text-center md:order-3 md:mt-5">
           <a
             href="https://github.com/ITTODORI"
             target="_blank"
