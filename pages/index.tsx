@@ -153,7 +153,7 @@ function Hero() {
             <p className="max-w-md text-md normal-case leading-relaxed tracking-normal text-neutral-300">
               Hi there! I&apos;m <strong className="font-semibold text-white">iMen</strong>, a hybrid creator operating at the intersection of software engineering and digital media arts.
             </p>
-            <div className="order-4 mt-5 text-center md:order-3 md:mt-8">
+            <div className="order-4 mt-5 text-left md:order-3 md:mt-8">
               <a
                 href="https://github.com/ITTODORI"
                 target="_blank"
