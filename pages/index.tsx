@@ -227,7 +227,7 @@ function DesignSection() {
       <footer className="relative z-20 -mt-16 md:-mt-32">
         <TextLoop 
           text="Portfolio ✦ Dev" 
-          curviness={22}
+          curviness={50}
           ribbonColor="#27cf9a"
           pauseOnHover={false}
         />
