@@ -266,12 +266,12 @@ function AnimationSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="3d-animation" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12">
+    <section id="3d-animation" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#27cf9a] px-4 py-8 text-[#0e0e0e] sm:px-6 md:px-12">
       <div className="mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
         <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`3d-fade-${inView}`} blur duration={1000}>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">04.</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-[#0e0e0e]/70">04.</p>
             </FadeContent>
           )}
           {inView && <FoldText key={`3d-fold-${inView}`} text="3D Animation" color="#0e0e0e"/>}
