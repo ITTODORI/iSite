@@ -13,6 +13,8 @@ import DriftWall from '../components/DriftWall';
 import DepthCarousel from '../components/DepthCarousel';
 import MorphSlider from '../components/MorphSlider';
 import AccordionGallery from "../components/AccordionGallery";
+import CursorGrid from "../components/CursorGrid";
+import GhostFibers from "../components/GhostFibers";
 
 import { 
   SiReact, 
@@ -260,7 +262,7 @@ function MotionSection() {
   );
 }
 
-// 3D Animation Section (Updated background and text color)
+// 3D Animation Section
 function AnimationSection() {
   const { ref, inView } = useInViewObserver();
 
@@ -294,9 +296,26 @@ function SoftwareSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="software-engineer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12">
-      <div className="mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
-        <div className="order-1 mb-3 md:mb-4">
+    <section id="software-engineer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] text-neutral-400">
+      <div className="absolute inset-0 z-0">
+        <CursorGrid
+          cellSize={60}
+          color="#27ffb7"
+          gridColor="#27ffb7"
+          highlight="area"
+          gridStyle="lines"
+          radius={140}
+          holdTime={400}
+          fadeDuration={800}
+          fillOpacity={0.06}
+          gridOpacity={0.08}
+          spotlight={0.6}
+          clickPulse
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center h-full px-4 py-8 sm:px-6 md:px-12 pointer-events-none">
+        <div className="order-1 mb-3 md:mb-4 pointer-events-auto">
           {inView && (
             <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">05.</p>
@@ -304,17 +323,17 @@ function SoftwareSection() {
           )}
           {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7"/>}
         </div>
-        <p className="order-2 mb-3 mx-auto max-w-md text-center text-sm text-neutral-400 md:order-4 md:mb-0 md:mt-3">
+        <p className="order-2 mb-3 mx-auto max-w-md text-center text-sm text-neutral-400 md:order-4 md:mb-0 md:mt-3 pointer-events-auto">
           Explore the projects, tools, and experiments behind my software work on GitHub.
         </p>
-        <div className="relative order-3 h-[clamp(360px,60vh,540px)] w-full md:order-2">
+        <div className="relative order-3 h-[clamp(360px,60vh,540px)] w-full md:order-2 pointer-events-auto">
           <DepthCarousel 
             showControls={false}
             autoplayDelay={5000}
             loop={true}
           />
         </div>
-        <div className="order-4 mt-4 text-center md:order-3 md:mt-5">
+        <div className="order-4 mt-4 text-center md:order-3 md:mt-5 pointer-events-auto">
           <a
             href="https://github.com/ITTODORI"
             target="_blank"
