@@ -100,6 +100,7 @@ function useInViewObserver(threshold = 0.2) {
 
 // Hero Section
 function Hero() {
+  const [isHovered, setIsHovered] = useState(false);
   const wheelItems = ['Designer', 'Motion Graphic', '3D Animation', 'Software Engineer'];
 
   const handleWheelItemClick = (_index: number, item: string) => {
@@ -122,48 +123,35 @@ function Hero() {
   };
 
   return (
-    <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
+    <section 
+      className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div 
+        className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-700 ${
+          isHovered ? "opacity-100 scale-100" : "opacity-30 scale-95"
+        }`}
+      >
         <GhostFibers
           glowColor="#5cf6ad"
           layers={3}
           twist={1.2}
           threads={72}
           fiberStyle="dots"
-          depthOfField={0.85}
+          depthOfField={0.4}
           hoverEffect="focus"
-          intro
           mouseInteraction
           lineColor="#d1fceb"
           secondaryColor="#4ac55a"
           gradient="depth"
-          waves={1}
-          volume={0.7}
-          spread={1}
-          scale={1}
-          rotation={18}
-          perspective={0.65}
-          density={1}
-          thickness={1}
-          tips={0}
-          foldGlow={1}
           speed={0.5}
-          flow={0.4}
-          rollSpeed={0.15}
-          focusDepth={0}
-          particles={0.5}
-          sparkle={0.5}
-          glow={0.8}
-          brightness={1}
-          vignette={0.3}
-          grain={0.06}
-          mouseStrength={1}
-          pulseOnClick
           lightMode={false}
         />
       </div>
-      
-      <header className="relative z-10 flex items-center justify-between border-b border-neutral-800/40 px-6 py-5 text-xs uppercase tracking-[0.2em] md:px-8">
+
+      {/* HEADER */}
+      <header className="relative z-20 flex items-center justify-between border-b border-neutral-800/40 px-6 py-5 text-xs uppercase tracking-[0.2em] md:px-8">
         <div className="flex items-center gap-5">
           <span className="text-sm font-bold tracking-[0.25em] text-white">iMen</span>
           <span className="border border-neutral-800 px-2 py-1 text-neutral-500">Dev</span>
@@ -225,7 +213,31 @@ function Hero() {
         </div>
       </div>
 
-      <LogoLoop logos={techLogos} speed={40} direction="left" logoHeight={30} gap={40} />
+      <div 
+        className={`absolute inset-0 z-20 overflow-hidden pointer-events-none transition-all duration-700 ${
+          isHovered ? "opacity-0 scale-105 blur-md" : "opacity-90 scale-100 blur-[2px]"
+        }`}
+      >
+        <GhostFibers
+          glowColor="#5cf6ad"
+          layers={2}
+          twist={1.5}
+          threads={40}
+          fiberStyle="dots"
+          depthOfField={0.95} 
+          hoverEffect="none"
+          mouseInteraction={false}
+          lineColor="#d1fceb"
+          secondaryColor="#4ac55a"
+          gradient="depth"
+          speed={0.3}
+          lightMode={false}
+        />
+      </div>
+
+      <div className="relative z-20">
+        {/* LogoLoop atau komponen bawah */}
+      </div>
     </section>
   );
 }
