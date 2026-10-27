@@ -123,11 +123,7 @@ function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
-      <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
-        {Array.from({ length: 24 }, (_, index) => (
-          <div key={index} className="border-[0.5px] border-neutral-500/30" />
-        ))}
-      </div>
+      <GhostFibers />
       
       <header className="relative z-10 flex items-center justify-between border-b border-neutral-800/40 px-6 py-5 text-xs uppercase tracking-[0.2em] md:px-8">
         <div className="flex items-center gap-5">
@@ -202,6 +198,12 @@ function DesignSection() {
 
   return (
     <section id="designer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-6 text-neutral-400">
+      <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
+        {Array.from({ length: 24 }, (_, index) => (
+          <div key={index} className="border-[0.5px] border-neutral-500/30" />
+        ))}
+      </div>
+
       <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12">
         <div className="mb-3 md:mb-4">
           {inView && (
@@ -230,7 +232,7 @@ function DesignSection() {
           text="Portfolio ✦ Dev" 
           curviness={50}
           fontSize={30}
-          ribbonWidth={45}
+          ribbonWidth={50}
           ribbonColor="#27cf9a"
           pauseOnHover={false}
         />
