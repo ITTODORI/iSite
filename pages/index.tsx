@@ -123,7 +123,45 @@ function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
-      <GhostFibers />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
+        <GhostFibers
+          glowColor="#5cf6ad"
+          layers={3}
+          twist={1.2}
+          threads={72}
+          fiberStyle="dots"
+          depthOfField={0.85}
+          hoverEffect="focus"
+          intro
+          mouseInteraction
+          lineColor="#d1fceb"
+          secondaryColor="#4ac55a"
+          gradient="depth"
+          waves={1}
+          volume={0.7}
+          spread={1}
+          scale={1}
+          rotation={18}
+          perspective={0.65}
+          density={1}
+          thickness={1}
+          tips={0}
+          foldGlow={1}
+          speed={0.5}
+          flow={0.4}
+          rollSpeed={0.15}
+          focusDepth={0}
+          particles={0.5}
+          sparkle={0.5}
+          glow={0.8}
+          brightness={1}
+          vignette={0.3}
+          grain={0.06}
+          mouseStrength={1}
+          pulseOnClick
+          lightMode={false}
+        />
+      </div>
       
       <header className="relative z-10 flex items-center justify-between border-b border-neutral-800/40 px-6 py-5 text-xs uppercase tracking-[0.2em] md:px-8">
         <div className="flex items-center gap-5">
@@ -198,13 +236,18 @@ function DesignSection() {
 
   return (
     <section id="designer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-6 text-neutral-400">
-      <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
-        {Array.from({ length: 24 }, (_, index) => (
-          <div key={index} className="border-[0.5px] border-neutral-500/30" />
-        ))}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 opacity-30" 
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(39,255,183,0.25) 1px, transparent 1px)',
+            backgroundSize: '32px 32px'
+          }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#27ffb7]/10 blur-[140px] rounded-full pointer-events-none" />
       </div>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12">
         <div className="mb-3 md:mb-4">
           {inView && (
             <FadeContent key={`design-fade-${inView}`} blur duration={1000}>
