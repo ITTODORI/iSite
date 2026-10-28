@@ -15,6 +15,7 @@ import MorphSlider from '../components/MorphSlider';
 import AccordionGallery from "../components/AccordionGallery";
 import CursorGrid from "../components/CursorGrid";
 import GhostFibers from "../components/GhostFibers";
+import GradientASCII from "../components/GradientASCII";
 
 import { 
   SiReact, 
@@ -100,7 +101,6 @@ function useInViewObserver(threshold = 0.2) {
 
 // Hero Section
 function Hero() {
-  const [isHovered, setIsHovered] = useState(false);
   const wheelItems = ['Designer', 'Motion Graphic', '3D Animation', 'Software Engineer'];
 
   const handleWheelItemClick = (_index: number, item: string) => {
@@ -123,35 +123,34 @@ function Hero() {
   };
 
   return (
-    <section 
-      className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div 
-        className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-700 ${
-          isHovered ? "opacity-100 scale-100" : "opacity-30 scale-95"
-        }`}
-      >
-        <GhostFibers
-          glowColor="#5cf6ad"
-          layers={3}
-          twist={1.2}
-          threads={72}
-          fiberStyle="dots"
-          depthOfField={0.4}
-          hoverEffect="focus"
+    <section className="relative isolate flex min-h-[680px] flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400">
+      <div className="absolute inset-x-0 top-0 z-0 h-[75%] max-h-[500px] pointer-events-none opacity-80 mix-blend-screen">
+        <GradientASCII
+          colors={["#1ed88d","#f6f8ff","#a5ffe4","#38f8a8"]}
+          shape="horizon"
+          characters=" =+xX0S8#@"
+          cellSize={18}
+          density={0.8}
+          glyphOpacity={0.85}
+          glow={0.2}
+          depthOfField={0}
+          flicker={0.2}
+          softness={0.5}
+          scale={1}
+          flow={0.5}
+          speed={1}
+          gradientOpacity={0.9}
+          grain={0.08}
+          variation={0}
           mouseInteraction
-          lineColor="#d1fceb"
-          secondaryColor="#4ac55a"
-          gradient="depth"
-          speed={0.5}
+          scrambleRadius={0.1}
+          clickEffect="wave"
+          intro
           lightMode={false}
         />
       </div>
-
-      {/* HEADER */}
-      <header className="relative z-20 flex items-center justify-between border-b border-neutral-800/40 px-6 py-5 text-xs uppercase tracking-[0.2em] md:px-8">
+      
+      <header className="relative z-10 flex items-center justify-between px-6 py-5 text-xs uppercase tracking-[0.2em] md:px-8">
         <div className="flex items-center gap-5">
           <span className="text-sm font-bold tracking-[0.25em] text-white">iMen</span>
           <span className="border border-neutral-800 px-2 py-1 text-neutral-500">Dev</span>
@@ -168,12 +167,12 @@ function Hero() {
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-10 xl:flex-row xl:gap-12">
           <div className="w-full space-y-5 xl:w-1/2">
             <div>
-              <h1 className="flex flex-col items-start text-left text-4xl uppercase leading-tight tracking-[0.12em] text-neutral-200 md:text-5xl">
+              <h1 className="flex flex-col items-start text-left text-4xl uppercase leading-tight tracking-[0.12em] text-white mix-blend-difference md:text-5xl">
                 <StrokeText text="Creative" fontSize={70}/>
                 <StrokeText text="Technologist" fillDelay={0.4} fontSize={50}/>
               </h1>
             </div>
-            <p className="max-w-md text-md normal-case leading-relaxed tracking-normal text-neutral-300">
+            <p className="max-w-md text-md normal-case leading-relaxed tracking-normal text-neutral-200 drop-shadow-md">
               Hi there! I&apos;m <strong className="font-semibold text-white">iMen</strong>, a hybrid creator operating at the intersection of software engineering and digital media arts.
             </p>
             <div className="order-4 mt-5 text-left md:order-3 md:mt-8">
@@ -181,7 +180,7 @@ function Hero() {
                 href="https://github.com/ITTODORI"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-md border border-white/20 bg-white/5 px-6 py-2.5 text-md font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-[#27ffb7] hover:text-[#0e0e0e] hover:border-[#27ffb7] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
+                className="inline-flex items-center justify-center rounded-md border border-white/20 bg-white/10 px-6 py-2.5 text-md font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-[#27ffb7] hover:text-[#0e0e0e] hover:border-[#27ffb7] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
               >
                 Download CV
               </a>
@@ -189,7 +188,7 @@ function Hero() {
           </div>
 
           <div className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-2 xl:mx-0 xl:w-1/2 xl:max-w-none xl:justify-end">
-            <div className="relative aspect-square w-48 shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-950 shadow-2xl sm:w-56 xl:w-64">
+            <div className="relative aspect-square w-48 shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-950/80 backdrop-blur-sm shadow-2xl sm:w-56 xl:w-64">
               <div className="absolute inset-0 flex items-center justify-center scale-110">
                 <Image
                   src="/photo-ascii.svg"
@@ -213,31 +212,12 @@ function Hero() {
         </div>
       </div>
 
-      <div 
-        className={`absolute inset-0 z-20 overflow-hidden pointer-events-none transition-all duration-700 ${
-          isHovered ? "opacity-0 scale-105 blur-md" : "opacity-90 scale-100 blur-[2px]"
-        }`}
-      >
-        <GhostFibers
-          glowColor="#5cf6ad"
-          layers={2}
-          twist={1.5}
-          threads={40}
-          fiberStyle="dots"
-          depthOfField={0.95} 
-          hoverEffect="none"
-          mouseInteraction={false}
-          lineColor="#d1fceb"
-          secondaryColor="#4ac55a"
-          gradient="depth"
-          speed={0.3}
-          lightMode={false}
-        />
-      </div>
-
-      <div className="relative z-20">
-        {/* LogoLoop atau komponen bawah */}
-      </div>
+      <LogoLoop 
+        logos={techLogos}
+        speed={40}
+        direction="left"
+        logoHeight={30} gap={40}
+      />
     </section>
   );
 }
@@ -245,22 +225,23 @@ function Hero() {
 // Design Section
 function DesignSection() {
   const { ref, inView } = useInViewObserver();
+  const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
 
   return (
-    <section id="designer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-6 text-neutral-400">
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 opacity-30" 
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(39,255,183,0.25) 1px, transparent 1px)',
-            backgroundSize: '32px 32px'
-          }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#27ffb7]/10 blur-[140px] rounded-full pointer-events-none" />
+    <section 
+      id="designer" 
+      ref={ref} 
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:py-16"
+    >
+      {/* Grid Pattern */}
+      <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
+        {Array.from({ length: 24 }, (_, index) => (
+          <div key={index} className="border-[0.5px] border-neutral-500/30" />
+        ))}
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12">
-        <div className="mb-3 md:mb-4">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12 my-auto">
+        <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`design-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">02.</p>
@@ -269,9 +250,12 @@ function DesignSection() {
           {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
         </div>
         
-        <div className="relative h-[clamp(360px,56vh,540px)] w-full [&_button:has(svg)]:block">
+        <div className="relative h-[clamp(320px,50vh,480px)] w-full [&_button:has(svg)]:block">
           <DriftWall 
-            items={driftItems} 
+            items={driftItems.map(item => ({
+              ...item,
+              onClick: () => setSelectedImage(item)
+            }))} 
             columns={4} 
             tileWidth={280} 
             tileHeight={190} 
@@ -282,7 +266,45 @@ function DesignSection() {
         </div>
       </div>
 
-      <footer className="relative z-20 -mt-16 md:-mt-32">
+      {/* Modal Popup */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md transition-all"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div 
+            className="relative flex flex-col items-center max-w-4xl max-h-[90vh] w-full rounded-2xl bg-neutral-950 border border-neutral-800 p-4 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800 mb-3">
+              <span className="text-sm font-semibold tracking-wider text-white">
+                {selectedImage.title}
+              </span>
+              <button 
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-sm shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="relative w-full h-[65vh] flex items-center justify-center overflow-hidden my-auto">
+              <Image 
+                src={selectedImage.image} 
+                alt={selectedImage.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 85vw"
+                className="object-contain drop-shadow-lg"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <footer className="relative z-20 w-full mt-6 md:mt-8">
         <TextLoop 
           text="Portfolio ✦ Dev" 
           curviness={50}
