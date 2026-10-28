@@ -159,7 +159,7 @@ function Hero() {
           <button type="button" aria-label="Change language" className="transition-colors hover:text-white">
             <Globe className="h-4 w-4" />
           </button>
-          <span className="text-neutral-500">PM</span>
+          {/* <span className="text-neutral-500">PM</span> */}
         </div>
       </header>
 
