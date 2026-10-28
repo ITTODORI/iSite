@@ -15,6 +15,7 @@ import MorphSlider from '../components/MorphSlider';
 import AccordionGallery from "../components/AccordionGallery";
 import CursorGrid from "../components/CursorGrid";
 import GhostFibers from "../components/GhostFibers";
+import GradientASCII from './GradientASCII';
 
 import { 
   SiReact, 
@@ -129,23 +130,31 @@ function Hero() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div 
-        className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-700 ${
-          isHovered ? "opacity-100 scale-100" : "opacity-30 scale-95"
+        className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-750 ${
+          isHovered ? "opacity-100 scale-100" : "opacity-40 scale-95"
         }`}
       >
-        <GhostFibers
-          glowColor="#5cf6ad"
-          layers={3}
-          twist={1.2}
-          threads={72}
-          fiberStyle="dots"
-          depthOfField={0.4}
-          hoverEffect="focus"
+        <GradientASCII
+          colors={["#1ed88d","#f6f8ff","#a5ffe4","#38f8a8"]}
+          shape="horizon"
+          characters=" =+xX0S8#@"
+          cellSize={18}
+          density={0.8}
+          glyphOpacity={0.85}
+          glow={0.2}
+          depthOfField={0}
+          flicker={0.2}
+          softness={0.5}
+          scale={1}
+          flow={0.5}
+          speed={1}
+          gradientOpacity={0.9}
+          grain={0.08}
+          variation={0}
           mouseInteraction
-          lineColor="#d1fceb"
-          secondaryColor="#4ac55a"
-          gradient="depth"
-          speed={0.5}
+          scrambleRadius={0.1}
+          clickEffect="wave"
+          intro
           lightMode={false}
         />
       </div>
@@ -212,32 +221,6 @@ function Hero() {
           </div>
         </div>
       </div>
-
-      <div 
-        className={`absolute inset-0 z-20 overflow-hidden pointer-events-none transition-all duration-700 ${
-          isHovered ? "opacity-0 scale-105 blur-md" : "opacity-90 scale-100 blur-[2px]"
-        }`}
-      >
-        <GhostFibers
-          glowColor="#5cf6ad"
-          layers={2}
-          twist={1.5}
-          threads={40}
-          fiberStyle="dots"
-          depthOfField={0.95} 
-          hoverEffect="none"
-          mouseInteraction={false}
-          lineColor="#d1fceb"
-          secondaryColor="#4ac55a"
-          gradient="depth"
-          speed={0.3}
-          lightMode={false}
-        />
-      </div>
-
-      <div className="relative z-20">
-        {/* LogoLoop atau komponen bawah */}
-      </div>
     </section>
   );
 }
@@ -247,7 +230,7 @@ function DesignSection() {
   const { ref, inView } = useInViewObserver();
 
   return (
-    <section id="designer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-6 text-neutral-400">
+    <section id="designer" ref={ref} className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-6 text-neutral-400">
       <div className="pointer-events-none absolute inset-0 z-0">
         <div 
           className="absolute inset-0 opacity-30" 
@@ -259,7 +242,7 @@ function DesignSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#27ffb7]/10 blur-[140px] rounded-full pointer-events-none" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12 my-auto">
         <div className="mb-3 md:mb-4">
           {inView && (
             <FadeContent key={`design-fade-${inView}`} blur duration={1000}>
@@ -269,20 +252,20 @@ function DesignSection() {
           {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
         </div>
         
-        <div className="relative h-[clamp(360px,56vh,540px)] w-full [&_button:has(svg)]:block">
+        <div className="relative h-[clamp(380px,60vh,580px)] w-full overflow-x-auto overflow-y-hidden sm:overflow-visible [&_img]:object-contain [&_img]:w-full [&_img]:h-full">
           <DriftWall 
             items={driftItems} 
             columns={4} 
-            tileWidth={280} 
-            tileHeight={190} 
-            gap={20} 
+            tileWidth={320} 
+            tileHeight={220} 
+            gap={24} 
             speed={25} 
-            grayscale 
+            grayscale={false} 
           />
         </div>
       </div>
 
-      <footer className="relative z-20 -mt-16 md:-mt-32">
+      <footer className="relative z-20 mt-6 md:mt-0">
         <TextLoop 
           text="Portfolio ✦ Dev" 
           curviness={50}
@@ -299,10 +282,35 @@ function DesignSection() {
 // Motion Section
 function MotionSection() {
   const { ref, inView } = useInViewObserver();
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section id="motion-graphic" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12">
-      <div className="mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
+    <section 
+      id="motion-graphic" 
+      ref={ref} 
+      className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-700 ${isHovered ? "opacity-100" : "opacity-40"}`}>
+        <GhostFibers
+          glowColor="#5cf6ad"
+          layers={3}
+          twist={1.2}
+          threads={72}
+          fiberStyle="dots"
+          depthOfField={0.4}
+          hoverEffect="focus"
+          mouseInteraction
+          lineColor="#d1fceb"
+          secondaryColor="#4ac55a"
+          gradient="depth"
+          speed={0.5}
+          lightMode={false}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
         <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`motion-fade-${inView}`} blur duration={1000}>
