@@ -228,7 +228,6 @@ function DesignSection() {
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
 
-  // Reset zoom saat modal ditutup atau gambar diganti
   const handleCloseModal = () => {
     setSelectedImage(null);
     setZoomLevel(1);
@@ -236,12 +235,12 @@ function DesignSection() {
 
   const handleZoomIn = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setZoomLevel((prev) => Math.min(prev + 0.5, 3)); // Maksimal zoom 3x
+    setZoomLevel((prev) => Math.min(prev + 0.5, 3)); // Max zoom 3x
   };
 
   const handleZoomOut = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setZoomLevel((prev) => Math.max(prev - 0.5, 1)); // Minimal zoom 1x
+    setZoomLevel((prev) => Math.max(prev - 0.5, 1)); // Min zoom 1x
   };
 
   return (
@@ -325,6 +324,7 @@ function DesignSection() {
                 </button>
                 
                 <div className="h-4 w-[1px] bg-neutral-800 mx-1" />
+
                 <button 
                   type="button"
                   onClick={handleCloseModal}
@@ -355,15 +355,27 @@ function DesignSection() {
         </div>
       )}
 
-      <footer className="relative z-20 w-full mt-6 md:mt-8">
-        <TextLoop 
-          text="Portfolio ✦ Dev" 
-          curviness={50}
-          fontSize={30}
-          ribbonWidth={50}
-          ribbonColor="#27cf9a"
-          pauseOnHover={false}
-        />
+      <footer className="relative z-20 w-full mt-6 md:mt-8 overflow-visible py-2">
+        <div className="block md:hidden"> {/* Mobile */}
+          <TextLoop 
+            text="PORTFOLIO ✦ DEV " 
+            curviness={35}
+            fontSize={80}
+            ribbonWidth={130}
+            ribbonColor="#27cf9a"
+            pauseOnHover={false}
+          />
+        </div>
+        <div className="hidden md:block"> {/* Desktop */}
+          <TextLoop 
+            text="Portfolio ✦ Dev" 
+            curviness={50}
+            fontSize={30}
+            ribbonWidth={50}
+            ribbonColor="#27cf9a"
+            pauseOnHover={false}
+          />
+        </div>
       </footer>
     </section>
   );
