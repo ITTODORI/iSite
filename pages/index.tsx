@@ -226,7 +226,7 @@ function Hero() {
 function DesignSection() {
   const { ref, inView } = useInViewObserver();
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
-  const [zoomLevel, setZoomLevel] = useState(1); // 1 = 100% (default), max = 3 (300%)
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const handleCloseModal = () => {
     setSelectedImage(null);
@@ -237,7 +237,7 @@ function DesignSection() {
     <section 
       id="designer" 
       ref={ref} 
-      className="relative isolate flex min-h-screen w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400 md:py-24"
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:py-16"
     >
       {/* Grid Pattern */}
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
@@ -246,8 +246,8 @@ function DesignSection() {
         ))}
       </div>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12 my-auto z-10">
-        <div className="mb-6 md:mb-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12 my-auto">
+        <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`design-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">02.</p>
@@ -256,8 +256,8 @@ function DesignSection() {
           {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
         </div>
         
-        {/* Ubah tinggi dari fixed clamp menjadi w-full dengan tinggi proporsional */}
-        <div className="relative w-full py-4 [&_button:has(svg)]:block">
+        {/* PERBAIKAN: Menggunakan tinggi piksel tetap (h-[460px] / h-[500px]) agar DriftWall terender sempurna */}
+        <div className="relative h-[460px] w-full [&_button:has(svg)]:block">
           <DriftWall 
             items={driftItems.map(item => ({
               ...item,
@@ -278,14 +278,14 @@ function DesignSection() {
 
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md transition-all"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-6 backdrop-blur-md transition-all"
           onClick={handleCloseModal}
         >
           <div 
-            className="relative flex flex-col items-center max-w-4xl max-h-[90vh] w-full rounded-2xl bg-neutral-950 border border-neutral-800 p-4 shadow-2xl overflow-hidden"
+            className="relative flex flex-col items-center max-w-5xl max-h-[95vh] w-full rounded-2xl bg-neutral-950 border border-neutral-800 p-4 shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800 mb-3 z-10 bg-neutral-950/80 backdrop-blur-sm gap-4">
+            <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800 mb-3 z-10 bg-neutral-950/80 backdrop-blur-sm gap-4 shrink-0">
               <span className="text-sm font-semibold tracking-wider text-white px-2 shrink-0">
                 {selectedImage.title}
               </span>
@@ -318,17 +318,17 @@ function DesignSection() {
               </button>
             </div>
 
-            <div className="relative w-full h-[65vh] flex items-center justify-center overflow-auto my-auto p-2">
+            <div className="relative w-full flex-1 flex items-center justify-center overflow-auto p-2 min-h-[60vh] max-h-[78vh]">
               <div 
-                className="relative transition-transform duration-75 ease-out flex items-center justify-center min-h-full min-w-full"
+                className="relative transition-transform duration-75 ease-out flex items-center justify-center m-auto"
                 style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center center' }}
               >
                 <Image 
                   src={selectedImage.image} 
                   alt={selectedImage.title}
-                  width={1000}
-                  height={800}
-                  className="object-contain max-h-[60vh] w-auto drop-shadow-lg select-none"
+                  width={1200}
+                  height={1000}
+                  className="object-contain w-auto h-auto max-w-full max-h-[72vh] drop-shadow-lg select-none"
                   priority
                 />
               </div>
@@ -337,7 +337,7 @@ function DesignSection() {
         </div>
       )}
 
-      <footer className="relative z-20 w-full mt-8 overflow-visible py-2">
+      <footer className="relative z-20 w-full mt-6 md:mt-8 overflow-visible py-2">
         <div className="block md:hidden">
           <TextLoop 
             text="PORTFOLIO ✦ DEV " 
