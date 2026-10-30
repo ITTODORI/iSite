@@ -317,7 +317,6 @@ function DesignSection() {
               </button>
             </div>
 
-            {/* PERBAIKAN: Menambahkan overflow-auto (horizontal & vertikal scroll) serta penataan container agar gambar bisa digeser */}
             <div className="relative w-full flex-1 flex items-center justify-center overflow-auto p-4 min-h-[60vh] max-h-[78vh]">
               <div 
                 className="relative transition-transform duration-75 ease-out flex items-center justify-center m-auto"
