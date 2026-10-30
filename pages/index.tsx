@@ -237,7 +237,7 @@ function DesignSection() {
     <section 
       id="designer" 
       ref={ref} 
-      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:py-16"
+      className="relative isolate flex min-h-screen w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-16 text-neutral-400 md:py-24"
     >
       {/* Grid Pattern */}
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
@@ -246,8 +246,8 @@ function DesignSection() {
         ))}
       </div>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12 my-auto">
-        <div className="mb-4 md:mb-6">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 sm:px-6 md:px-12 my-auto z-10">
+        <div className="mb-6 md:mb-8">
           {inView && (
             <FadeContent key={`design-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">02.</p>
@@ -256,7 +256,8 @@ function DesignSection() {
           {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
         </div>
         
-        <div className="relative h-[clamp(320px,50vh,480px)] w-full [&_button:has(svg)]:block">
+        {/* Ubah tinggi dari fixed clamp menjadi w-full dengan tinggi proporsional */}
+        <div className="relative w-full py-4 [&_button:has(svg)]:block">
           <DriftWall 
             items={driftItems.map(item => ({
               ...item,
@@ -336,8 +337,8 @@ function DesignSection() {
         </div>
       )}
 
-      <footer className="relative z-20 w-full mt-6 md:mt-8 overflow-visible py-2">
-        <div className="block md:hidden"> {/* Mobile */}
+      <footer className="relative z-20 w-full mt-8 overflow-visible py-2">
+        <div className="block md:hidden">
           <TextLoop 
             text="PORTFOLIO ✦ DEV " 
             curviness={35}
@@ -347,7 +348,7 @@ function DesignSection() {
             pauseOnHover={false}
           />
         </div>
-        <div className="hidden md:block"> {/* Desktop */}
+        <div className="hidden md:block">
           <TextLoop 
             text="Portfolio ✦ Dev" 
             curviness={50}
