@@ -256,7 +256,6 @@ function DesignSection() {
           {inView && <FoldText key={`design-fold-${inView}`} text="Design" color="#27ffb7"/>}
         </div>
         
-        {/* PERBAIKAN: Menggunakan tinggi piksel tetap (h-[460px] / h-[500px]) agar DriftWall terender sempurna */}
         <div className="relative h-[460px] w-full [&_button:has(svg)]:block">
           <DriftWall 
             items={driftItems.map(item => ({
@@ -318,10 +317,15 @@ function DesignSection() {
               </button>
             </div>
 
-            <div className="relative w-full flex-1 flex items-center justify-center overflow-auto p-2 min-h-[60vh] max-h-[78vh]">
+            {/* PERBAIKAN: Menambahkan overflow-auto (horizontal & vertikal scroll) serta penataan container agar gambar bisa digeser */}
+            <div className="relative w-full flex-1 flex items-center justify-center overflow-auto p-4 min-h-[60vh] max-h-[78vh]">
               <div 
                 className="relative transition-transform duration-75 ease-out flex items-center justify-center m-auto"
-                style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center center' }}
+                style={{ 
+                  transform: `scale(${zoomLevel})`, 
+                  transformOrigin: 'center center',
+                  minWidth: zoomLevel > 1 ? `${zoomLevel * 100}%` : 'auto'
+                }}
               >
                 <Image 
                   src={selectedImage.image} 
