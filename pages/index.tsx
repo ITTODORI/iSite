@@ -226,21 +226,11 @@ function Hero() {
 function DesignSection() {
   const { ref, inView } = useInViewObserver();
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(1); // 1 = 100% (default), max = 3 (300%)
 
   const handleCloseModal = () => {
     setSelectedImage(null);
     setZoomLevel(1);
-  };
-
-  const handleZoomIn = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setZoomLevel((prev) => Math.min(prev + 0.5, 3)); // Max zoom 3x
-  };
-
-  const handleZoomOut = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setZoomLevel((prev) => Math.max(prev - 0.5, 1)); // Min zoom 1x
   };
 
   return (
@@ -285,7 +275,6 @@ function DesignSection() {
         </div>
       </div>
 
-      {/* Modal Popup */}
       {selectedImage && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md transition-all"
@@ -295,50 +284,42 @@ function DesignSection() {
             className="relative flex flex-col items-center max-w-4xl max-h-[90vh] w-full rounded-2xl bg-neutral-950 border border-neutral-800 p-4 shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800 mb-3 z-10 bg-neutral-950/80 backdrop-blur-sm">
-              <span className="text-sm font-semibold tracking-wider text-white px-2">
+            <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800 mb-3 z-10 bg-neutral-950/80 backdrop-blur-sm gap-4">
+              <span className="text-sm font-semibold tracking-wider text-white px-2 shrink-0">
                 {selectedImage.title}
               </span>
               
-              <div className="flex items-center gap-2">
-                <button 
-                  type="button"
-                  onClick={handleZoomOut}
-                  disabled={zoomLevel <= 1}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-white border border-neutral-700 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e] disabled:opacity-40 disabled:hover:bg-neutral-900 disabled:hover:text-white"
-                  aria-label="Zoom out"
-                >
-                  -
-                </button>
-                <span className="text-xs text-neutral-400 font-mono w-10 text-center">
+              <div className="flex items-center gap-3 flex-1 max-w-[200px] sm:max-w-xs px-2">
+                <span className="text-[10px] text-neutral-400 font-mono">-</span>
+                <input
+                  type="range"
+                  min="1"
+                  max="3"
+                  step="0.05"
+                  value={zoomLevel}
+                  onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
+                  className="w-full h-1.5 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-[#27ffb7]"
+                  aria-label="Zoom slider"
+                />
+                <span className="text-[10px] text-neutral-400 font-mono">+</span>
+                <span className="text-xs text-neutral-400 font-mono w-10 text-right">
                   {Math.round(zoomLevel * 100)}%
                 </span>
-                <button 
-                  type="button"
-                  onClick={handleZoomIn}
-                  disabled={zoomLevel >= 3}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-white border border-neutral-700 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e] disabled:opacity-40 disabled:hover:bg-neutral-900 disabled:hover:text-white"
-                  aria-label="Zoom in"
-                >
-                  +
-                </button>
-                
-                <div className="h-4 w-[1px] bg-neutral-800 mx-1" />
-
-                <button 
-                  type="button"
-                  onClick={handleCloseModal}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
-                  aria-label="Close modal"
-                >
-                  ✕
-                </button>
               </div>
+
+              <button 
+                type="button"
+                onClick={handleCloseModal}
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
             </div>
 
             <div className="relative w-full h-[65vh] flex items-center justify-center overflow-auto my-auto p-2">
               <div 
-                className="relative transition-transform duration-200 ease-out flex items-center justify-center min-h-full min-w-full"
+                className="relative transition-transform duration-75 ease-out flex items-center justify-center min-h-full min-w-full"
                 style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center center' }}
               >
                 <Image 
