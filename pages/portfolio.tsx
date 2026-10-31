@@ -14,7 +14,7 @@ import DepthCarousel from '../components/DepthCarousel';
 import MorphSlider from '../components/MorphSlider';
 import AccordionGallery from "../components/AccordionGallery";
 import CursorGrid from "../components/CursorGrid";
-import GhostFibers from "../components/GhostFibers";
+import LaserFlow from "../components/LaserFlow";
 import GradientASCII from "../components/GradientASCII";
 
 import { 
@@ -159,7 +159,6 @@ function Hero() {
           <button type="button" aria-label="Change language" className="transition-colors hover:text-white">
             <Globe className="h-4 w-4" />
           </button>
-          {/* <span className="text-neutral-500">PM</span> */}
         </div>
       </header>
 
@@ -239,7 +238,6 @@ function DesignSection() {
       ref={ref} 
       className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:py-16"
     >
-      {/* Grid Pattern */}
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
         {Array.from({ length: 24 }, (_, index) => (
           <div key={index} className="border-[0.5px] border-neutral-500/30" />
@@ -366,13 +364,48 @@ function DesignSection() {
   );
 }
 
-// Motion Section
+// Motion Section with LaserFlow Background
 function MotionSection() {
   const { ref, inView } = useInViewObserver();
+  const cardRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="motion-graphic" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12">
-      <div className="mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
+    <section 
+      id="motion-graphic" 
+      ref={ref} 
+      className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12"
+    >
+      {/* LaserFlow Background Layer */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <LaserFlow
+          surfaceRef={cardRef}
+          beamPosition={0.6}
+          color="#38ffa2"
+          intensity={1.8}
+          flare={1.5}
+          spread={1.5}
+          spill={1}
+          fog={0.2}
+          dust={1.6}
+          revealImage="/your-ui.png"
+          revealRadius={220}
+          revealOpacity={0.6}
+          beamWidth={1.5}
+          streaks={1.5}
+          dots={1}
+          pulse={1.5}
+          speed={1.5}
+          seed={3}
+          mouseInteraction
+          intro
+        />
+      </div>
+
+      {/* Content Layer with cardRef bound to container */}
+      <div 
+        ref={cardRef}
+        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center h-full"
+      >
         <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`motion-fade-${inView}`} blur duration={1000}>
