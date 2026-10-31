@@ -94,7 +94,7 @@ const DriftWall = ({
   const pointerDampedRef = useRef({ x: 0, y: 0 });
   const lastTsRef = useRef<number | null>(null);
 
-  const [containerHeight, setContainerHeight] = useState(600);
+  const [containerHeight, setContainerHeight] = useState(800);
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeIdRef = useRef<string | null>(null);
   const [reduced, setReduced] = useState(false);
@@ -120,15 +120,21 @@ const DriftWall = ({
     const unit = tileHeight + gap;
     return columnItems.map(col => {
       const copyHeight = Math.max(unit, col.length * unit);
-      const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
+      const copies = Math.max(4, Math.ceil((containerHeight * 3.5) / copyHeight) + 2);
       return { copyHeight, copies };
     });
   }, [columnItems, tileHeight, gap, containerHeight]);
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
+    const updateHeight = () => {
+      if (containerRef.current) {
+        setContainerHeight(containerRef.current.clientHeight || 800);
+      }
+    };
+    updateHeight();
     const ro = new ResizeObserver(([entry]) => {
-      setContainerHeight(entry.contentRect.height || 600);
+      setContainerHeight(entry.contentRect.height || 800);
     });
     ro.observe(containerRef.current);
     return () => ro.disconnect();
@@ -162,7 +168,7 @@ const DriftWall = ({
   useEffect(() => {
     const animate = (ts: number) => {
       if (lastTsRef.current === null) lastTsRef.current = ts;
-      const dt = Math.min(0.05, Math.max(0, ts - lastTsRef.current) / 1000);
+      const dt = Math.min(0.033, Math.max(0, ts - lastTsRef.current) / 1000);
       lastTsRef.current = ts;
 
       const maxTilt = parallax * 8;
@@ -176,25 +182,30 @@ const DriftWall = ({
       if (!reduced) {
         for (let c = 0; c < trackRefs.current.length; c++) {
           const meta = columnMeta[c];
-          if (!meta) continue;
+          if (!meta || meta.copyHeight === 0) continue;
           const paused = wallHoveredRef.current && pauseOnHover;
           const factor = paused || hoveredColRef.current === c ? 0 : 1;
           const target = baseVelocities[c] * factor;
 
           const ease = 1 - Math.exp(-dt / (target === 0 ? 0.16 : 0.28));
           velocitiesRef.current[c] += (target - velocitiesRef.current[c]) * ease;
+          
           let next = (offsetsRef.current[c] ?? 0) + velocitiesRef.current[c] * dt;
           next = ((next % meta.copyHeight) + meta.copyHeight) % meta.copyHeight;
           offsetsRef.current[c] = next;
 
           const el = trackRefs.current[c];
-          if (el) el.style.transform = `translate3d(0, ${-next}px, 0)`;
+          if (el) {
+            el.style.transform = `translate3d(0, ${-next}px, 0)`;
+          }
         }
       } else {
         for (let c = 0; c < trackRefs.current.length; c++) {
           const el = trackRefs.current[c];
           const meta = columnMeta[c];
-          if (el && meta) el.style.transform = `translate3d(0, ${-(offsetsRef.current[c] ?? 0)}px, 0)`;
+          if (el && meta) {
+            el.style.transform = `translate3d(0, ${-(offsetsRef.current[c] ?? 0)}px, 0)`;
+          }
         }
       }
 
@@ -386,36 +397,32 @@ const DriftWall = ({
         </div>
       </div>
 
+      {/* Modal Popup Full Size Anti-Kepotong */}
       {modalItem && (
         <div 
-          className="fixed inset-0 z-[70] flex items-center justify-center p-4 backdrop-blur-md bg-black/80"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 backdrop-blur-md bg-black/95 transition-all"
           onClick={() => setModalItem(null)}
         >
+          <button 
+            type="button" 
+            onClick={() => setModalItem(null)}
+            className="absolute right-4 top-4 sm:right-6 sm:top-6 z-50 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-neutral-900/90 text-white border border-neutral-700 text-lg shadow-2xl transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
+            aria-label="Close modal"
+          >
+            ✕
+          </button>
+          
           <div 
-            className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl flex flex-col max-h-[85vh]"
+            className="relative flex flex-col items-center justify-center max-w-[95vw] max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between pt-1 pb-4 px-4 bg-gradient-to-b from-black/90 via-black/50 to-transparent">
-              <h3 id="modalTitle" className="text-sm font-semibold text-white drop-shadow-md truncate pr-2">
-                {modalItem.title || "Media Preview"}
-              </h3>
-              <button 
-                id="closeModal" 
-                type="button" 
-                onClick={() => setModalItem(null)}
-                className="text-white/80 hover:text-white transition text-lg px-2 py-1 cursor-pointer drop-shadow-md"
-                aria-label="Close modal"
-              >
-                ✕
-              </button>
-            </div>
-            
-            <div id="modalContentContainer" className="w-full h-full flex items-center justify-center overflow-hidden bg-black">
-              <img
-                src={modalItem.image}
-                alt={modalItem.title || ''}
-                className="w-full h-full object-cover min-h-[50vh]"
-              />
+            <img
+              src={modalItem.image}
+              alt={modalItem.title || ''}
+              className="max-w-full max-h-[75vh] sm:max-h-[80vh] w-auto h-auto object-contain drop-shadow-2xl select-none rounded-lg"
+            />
+            <div className="mt-3 sm:mt-4 rounded-full bg-neutral-900/90 border border-neutral-800 px-5 py-1.5 sm:px-6 sm:py-2 text-center text-xs sm:text-sm font-semibold tracking-wider text-white shadow-lg">
+              {modalItem.title || "Media Preview"}
             </div>
           </div>
         </div>
