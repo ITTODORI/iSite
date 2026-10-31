@@ -236,7 +236,7 @@ function DesignSection() {
     <section 
       id="designer" 
       ref={ref} 
-      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] py-12 text-neutral-400 md:py-16"
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] pt-12 pb-0 text-neutral-400 md:pt-16 md:pb-0"
     >
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
         {Array.from({ length: 24 }, (_, index) => (
@@ -338,8 +338,9 @@ function DesignSection() {
         </div>
       )}
 
-      <footer className="relative z-20 w-full mt-6 md:mt-8 overflow-visible py-2">
-        <div className="block md:hidden">
+      {/* TextLoop tanpa jarak/margin/padding agar langsung menyatu dengan background */}
+      <div className="relative z-20 w-full m-0 p-0 leading-none">
+        <div className="block md:hidden m-0 p-0 leading-none">
           <TextLoop 
             text="PORTFOLIO ✦ DEV " 
             curviness={35}
@@ -349,7 +350,7 @@ function DesignSection() {
             pauseOnHover={false}
           />
         </div>
-        <div className="hidden md:block">
+        <div className="hidden md:block m-0 p-0 leading-none">
           <TextLoop 
             text="Portfolio ✦ Dev" 
             curviness={50}
@@ -359,12 +360,12 @@ function DesignSection() {
             pauseOnHover={false}
           />
         </div>
-      </footer>
+      </div>
     </section>
   );
 }
 
-// Motion Section with LaserFlow Background
+// Motion Section
 function MotionSection() {
   const { ref, inView } = useInViewObserver();
   const cardRef = useRef<HTMLDivElement>(null);
@@ -375,19 +376,18 @@ function MotionSection() {
       ref={ref} 
       className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12"
     >
-      {/* LaserFlow Background Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <LaserFlow
           surfaceRef={cardRef}
-          beamPosition={0.6}
+          beamPosition={0.35}
           color="#38ffa2"
           intensity={1.8}
-          flare={1.5}
+          flare={2}
           spread={1.5}
           spill={1}
           fog={0.2}
           dust={1.6}
-          revealImage="/your-ui.png"
+          revealImage="/26-04-16 08-45-29 0042.png"
           revealRadius={220}
           revealOpacity={0.6}
           beamWidth={1.5}
@@ -401,11 +401,8 @@ function MotionSection() {
         />
       </div>
 
-      {/* Content Layer with cardRef bound to container */}
-      <div 
-        ref={cardRef}
-        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center h-full"
-      >
+      {/* Konten Section */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
         <div className="mb-4 md:mb-6">
           {inView && (
             <FadeContent key={`motion-fade-${inView}`} blur duration={1000}>
@@ -414,8 +411,18 @@ function MotionSection() {
           )}
           {inView && <FoldText key={`motion-fold-${inView}`} text="Motion Effects" color="#27ffb7"/>}
         </div>
-        <div className="relative h-[clamp(380px,68vh,620px)] w-full">
-          <MorphSlider autoplay loop showCaptions showControls showIndicators />
+
+        <div 
+          ref={cardRef}
+          className="relative h-[clamp(380px,68vh,620px)] w-full overflow-hidden rounded-2xl border border-neutral-800/60 bg-neutral-950/40 backdrop-blur-sm shadow-2xl"
+        >
+          <MorphSlider 
+            autoplay 
+            loop 
+            showCaptions 
+            showControls 
+            showIndicators 
+          />
         </div>
       </div>
     </section>
