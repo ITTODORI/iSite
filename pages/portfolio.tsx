@@ -236,7 +236,7 @@ function DesignSection() {
     <section 
       id="designer" 
       ref={ref} 
-      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] pt-12 pb-0 text-neutral-400 md:pt-16 md:pb-0"
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] pt-12 pb-20 text-neutral-400 md:pt-16 md:pb-28"
     >
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
         {Array.from({ length: 24 }, (_, index) => (
@@ -338,8 +338,7 @@ function DesignSection() {
         </div>
       )}
 
-      {/* TextLoop tanpa jarak/margin/padding agar langsung menyatu dengan background */}
-      <div className="relative z-20 w-full m-0 p-0 leading-none">
+      <div className="absolute inset-x-0 bottom-0 z-30 translate-y-[45%] md:translate-y-[50%] pointer-events-none m-0 p-0 leading-none">
         <div className="block md:hidden m-0 p-0 leading-none">
           <TextLoop 
             text="PORTFOLIO ✦ DEV " 
@@ -374,7 +373,7 @@ function MotionSection() {
     <section 
       id="motion-graphic" 
       ref={ref} 
-      className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 py-8 text-neutral-400 sm:px-6 md:px-12"
+      className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 pt-24 pb-8 text-neutral-400 sm:px-6 md:px-12 md:pt-32"
     >
       <div className="absolute inset-0 z-0 pointer-events-none">
         <LaserFlow
@@ -401,7 +400,7 @@ function MotionSection() {
         />
       </div>
 
-      {/* Konten Section */}
+      {/* Content Section */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center h-full">
         <div className="mb-4 md:mb-6">
           {inView && (
