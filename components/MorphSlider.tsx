@@ -68,8 +68,8 @@ const DEFAULT_ITEMS: MorphItem[] = [
     caption: 'Motion Effect'
   },
   {
-    video: '/src/Ridwan & Elvenda.mp4',
-    caption: 'Invitation'
+    video: proxyVideo('https://fie.nl.tab.digital/s/ffJzbbyXxfc9QS8/download'),
+    caption: 'Ramadan Reels'
   },
   {
     video: proxyVideo('https://fie.nl.tab.digital/s/MRoWgcg7exqrGrA/download'),
@@ -78,6 +78,10 @@ const DEFAULT_ITEMS: MorphItem[] = [
   {
     video: proxyVideo('https://fie.nl.tab.digital/s/wDgeRKYGk2mm6EF/download'),
     caption: 'Wedding'
+  },
+  {
+    video: proxyVideo('https://fie.nl.tab.digital/s/RFcSkyrbnpbaXdn/download'),
+    caption: 'Al Himmah'
   },
 ];
 
