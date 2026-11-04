@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // URL Cloud:
-  const videoUrl = (req.query.url as string) || 'https://fie.nl.tab.digital/s/MRoWgcg7exqrGrA/download';
+  const videoUrl = (req.query.url as string);
 
   try {
     // Server-to-server (CORS)
