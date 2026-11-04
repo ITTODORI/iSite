@@ -71,9 +71,13 @@ const DEFAULT_ITEMS: MorphItem[] = [
     caption: 'Invitation'
   },
   {
-    video: '/api/proxy-video',
+    video: '/api/proxy-video?url=' + encodeURIComponent('https://fie.nl.tab.digital/s/MRoWgcg7exqrGrA/download'),
     caption: 'Academy Cyber'
-  }
+  },
+  {
+    video: '/api/proxy-video?url=' + encodeURIComponent('https://fie.nl.tab.digital/s/wDgeRKYGk2mm6EF/download'),
+    caption: 'Wedding'
+  },
 ];
 
 const vertexShader = `
