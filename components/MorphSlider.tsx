@@ -48,6 +48,7 @@ interface EngineOptions {
 type GL = Renderer['gl'];
 
 const TRANSITIONS: Record<MorphTransition, number> = { melt: 0, ripple: 1, shear: 2, swirl: 3 };
+const proxyVideo = (cloudUrl: string) => `/api/proxy-video?url=${encodeURIComponent(cloudUrl)}`;
 
 const DEFAULT_ITEMS: MorphItem[] = [
   {
@@ -71,11 +72,11 @@ const DEFAULT_ITEMS: MorphItem[] = [
     caption: 'Invitation'
   },
   {
-    video: '/api/proxy-video?url=' + encodeURIComponent('https://fie.nl.tab.digital/s/MRoWgcg7exqrGrA/download'),
+    video: proxyVideo('https://fie.nl.tab.digital/s/MRoWgcg7exqrGrA/download'),
     caption: 'Academy Cyber'
   },
   {
-    video: '/api/proxy-video?url=' + encodeURIComponent('https://fie.nl.tab.digital/s/wDgeRKYGk2mm6EF/download'),
+    video: proxyVideo('https://fie.nl.tab.digital/s/wDgeRKYGk2mm6EF/download'),
     caption: 'Wedding'
   },
 ];
