@@ -69,6 +69,10 @@ const DEFAULT_ITEMS: MorphItem[] = [
   {
     video: '/src/Ridwan & Elvenda.mp4',
     caption: 'Invitation'
+  },
+  {
+    video: 'https://fie.nl.tab.digital/s/MRoWgcg7exqrGrA/download',
+    caption: 'Academy Cyber'
   }
 ];
 
