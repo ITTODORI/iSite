@@ -2,7 +2,8 @@ import { useRef, useEffect, useState, useCallback, CSSProperties, KeyboardEvent,
 import { gsap } from 'gsap';
 
 export interface AccordionGalleryItem {
-  image: string;
+  image?: string;
+  video?: string;
   label?: string;
   link?: string;
   alt?: string;
@@ -35,12 +36,15 @@ export interface AccordionGalleryProps {
   className?: string;
 }
 
+const proxyVideo = (cloudUrl: string) => `/api/proxy-video?url=${encodeURIComponent(cloudUrl)}`;
+
 const DEFAULT_ITEMS: AccordionGalleryItem[] = [
   { image: '/src/Intel.png', label: 'Cyber Monitor', link: '#' },
   { image: '/src/University.png', label: 'University', link: '#' },
   { image: '/src/Minimalis House.png', label: 'House', link: '#' },
   { image: '/src/Light.png', label: 'Grave | Caffe | Forest', link: '#' },
-  { image: '/src/Dark.png', label: 'Live Acation', link: '#' }
+  { image: '/src/Dark.png', label: 'Live Acation', link: '#' },
+  { video: proxyVideo('https://fie.nl.tab.digital/s/mf5PdC6mmCJqJLS/download'), label: 'Motion larva', link: '#' }
 ];
 
 const AccordionGallery = ({
@@ -198,7 +202,7 @@ const AccordionGallery = ({
     if (i !== active) {
       setActive(i);
     } else {
-      setModalItem(items[i]); // Popup
+      setModalItem(items[i]);
     }
   };
 
@@ -220,7 +224,10 @@ const AccordionGallery = ({
       <div
         ref={rootRef}
         className={`flex ${vertical ? 'flex-col' : 'flex-row'} w-full max-w-full [perspective:1400px] max-[520px]:!flex-col max-[520px]:[perspective:none] ${className}`}
-        style={{ gap: `${gap}px`, height: vertical ? `${Math.round(height * 1.6)}px` : `${height}px` }}
+        style={{
+          gap: `${gap}px`,
+          height: vertical ? `${Math.round(height * 1.6)}px` : `${height}px`
+        }}
         role="list"
         aria-label="Image accordion gallery"
       >
@@ -261,12 +268,23 @@ const AccordionGallery = ({
                     willChange: 'transform, filter'
                   }}
                 >
-                  <img
-                    src={item.image}
-                    alt={item.alt || item.label || ''}
-                    draggable={false}
-                    className="block h-full w-full select-none object-cover [-webkit-user-drag:none]"
-                  />
+                  {item.video ? (
+                    <video
+                      src={item.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="block h-full w-full select-none object-cover [-webkit-user-drag:none]"
+                    />
+                  ) : (
+                    <img
+                      src={item.image}
+                      alt={item.alt || item.label || ''}
+                      draggable={false}
+                      className="block h-full w-full select-none object-cover [-webkit-user-drag:none]"
+                    />
+                  )}
                 </span>
                 <span
                   className="pointer-events-none absolute inset-0"
@@ -324,11 +342,23 @@ const AccordionGallery = ({
               ✕
             </button>
             <div className="relative w-full h-full bg-black flex items-center justify-center">
-              <img
-                src={modalItem.image}
-                alt={modalItem.alt || modalItem.label || ''}
-                className="max-h-full max-w-full object-contain"
-              />
+              {modalItem.video ? (
+                <video
+                  src={modalItem.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                  className="max-h-[80vh] max-w-full object-contain"
+                />
+              ) : (
+                <img
+                  src={modalItem.image}
+                  alt={modalItem.alt || modalItem.label || ''}
+                  className="max-h-[80vh] max-w-full object-contain"
+                />
+              )}
             </div>
             {modalItem.label && (
               <div className="p-6 bg-[#18181b]">
