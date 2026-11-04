@@ -71,7 +71,7 @@ const DEFAULT_ITEMS: MorphItem[] = [
     caption: 'Invitation'
   },
   {
-    video: 'https://fie.nl.tab.digital/s/MRoWgcg7exqrGrA/download',
+    video: '/api/proxy-video',
     caption: 'Academy Cyber'
   }
 ];
