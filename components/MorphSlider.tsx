@@ -81,7 +81,7 @@ const DEFAULT_ITEMS: MorphItem[] = [
   },
   {
     video: proxyVideo('https://fie.nl.tab.digital/s/RFcSkyrbnpbaXdn/download'),
-    caption: 'Al Himmah'
+    caption: 'Al Himmah Logo'
   },
 ];
 
