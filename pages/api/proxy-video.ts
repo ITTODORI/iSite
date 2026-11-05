@@ -4,7 +4,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Query Dynamic Route
   let videoUrl = req.query.url as string;
 
-  // If the video URL is not provided in the query, check if it's provided in the path
+  // Check if it's provided in the path parameter (e.g., /api/proxy-video/[...path])
   if (!videoUrl && req.query.path) {
     const pathArray = req.query.path as string[];
     videoUrl = pathArray.join('/');
