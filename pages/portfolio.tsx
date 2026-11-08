@@ -287,7 +287,7 @@ function DesignSection() {
                 {selectedImage.title}
               </span>
               
-              <div className="flex items-center gap-3 flex-1 max-w-[200px] sm:max-w-xs px-2">
+              <div className="flex items-center gap-2 sm:gap-3 flex-1 max-w-[180px] sm:max-w-xs px-2">
                 <span className="text-[10px] text-neutral-400 font-mono">-</span>
                 <input
                   type="range"
@@ -305,14 +305,24 @@ function DesignSection() {
                 </span>
               </div>
 
-              <button 
-                type="button"
-                onClick={handleCloseModal}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
-                aria-label="Close modal"
-              >
-                ✕
-              </button>
+              <div className="flex items-center gap-2 shrink-0">
+                <a
+                  href="https://fie.nl.tab.digital/s/JrwKpSMrCGMLTka"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="flex h-8 px-3 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-xs font-medium shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
+                >
+                  Download
+                </a>
+                <button 
+                  type="button"
+                  onClick={handleCloseModal}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
+                  aria-label="Close modal"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
 
             <div className="relative w-full flex-1 flex items-center justify-center overflow-auto p-4 min-h-[60vh] max-h-[78vh]">
