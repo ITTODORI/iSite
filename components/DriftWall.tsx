@@ -397,7 +397,6 @@ const DriftWall = ({
         </div>
       </div>
 
-      {/* Modal Popup Full Size Anti-Kepotong */}
       {modalItem && (
         <div 
           className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 backdrop-blur-md bg-black/95 transition-all"
