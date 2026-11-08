@@ -4,6 +4,7 @@ export interface DriftWallItem {
   image: string;
   title?: string;
   href?: string;
+  onClick?: () => void;
 }
 
 export interface DriftWallProps {
@@ -99,7 +100,7 @@ const DriftWall = ({
   const activeIdRef = useRef<string | null>(null);
   const [reduced, setReduced] = useState(false);
   
-  // State for Modal Popup
+  // Fallback Modal State (jika item.onClick tidak didefinisikan dari luar)
   const [modalItem, setModalItem] = useState<DriftWallItem | null>(null);
 
   useEffect(() => {
@@ -313,6 +314,11 @@ const DriftWall = ({
   );
 
   const handleTileClick = (item: DriftWallItem, e: MouseEvent) => {
+    if (item.onClick) {
+      e.preventDefault();
+      item.onClick();
+      return;
+    }
     if (item.href) return;
     e.preventDefault();
     setModalItem(item);
@@ -397,6 +403,7 @@ const DriftWall = ({
         </div>
       </div>
 
+      {/* Fallback Modal jika item.onClick tidak dipakai dari luar */}
       {modalItem && (
         <div 
           className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 backdrop-blur-md bg-black/95 transition-all"
