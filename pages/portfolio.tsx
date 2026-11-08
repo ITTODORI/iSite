@@ -256,10 +256,13 @@ function DesignSection() {
         
         <div className="relative h-[460px] w-full [&_button:has(svg)]:block">
           <DriftWall 
-            items={driftItems.map(item => ({
+            items={(typeof driftItems !== 'undefined' ? driftItems : []).map(item => ({
               ...item,
               onClick: () => {
-                setSelectedImage(item);
+                setSelectedImage({
+                  image: item.image,
+                  title: item.title || "Media Preview"
+                });
                 setZoomLevel(1);
               }
             }))} 
@@ -283,7 +286,7 @@ function DesignSection() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800 mb-3 z-10 bg-neutral-950/80 backdrop-blur-sm gap-4 shrink-0">
-              <span className="text-sm font-semibold tracking-wider text-white px-2 shrink-0">
+              <span className="text-sm font-semibold tracking-wider text-white px-2 shrink-0 truncate max-w-[150px] sm:max-w-xs">
                 {selectedImage.title}
               </span>
               
