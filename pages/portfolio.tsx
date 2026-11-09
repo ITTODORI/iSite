@@ -236,7 +236,7 @@ function DesignSection() {
     <section 
       id="designer" 
       ref={ref} 
-      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] pt-12 pb-20 text-neutral-400 md:pt-16 md:pb-28"
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-visible bg-[#0e0e0e] pt-12 pb-20 text-neutral-400 md:pt-16 md:pb-28"
     >
       <div className="pointer-events-none absolute inset-0 grid grid-cols-3 grid-rows-4 opacity-15 md:grid-cols-6">
         {Array.from({ length: 24 }, (_, index) => (
@@ -281,77 +281,10 @@ function DesignSection() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-6 backdrop-blur-md transition-all"
           onClick={handleCloseModal}
         >
-          <div 
-            className="relative flex flex-col items-center max-w-5xl max-h-[95vh] w-full rounded-2xl bg-neutral-950 border border-neutral-800 p-4 shadow-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex w-full items-center justify-between pb-3 border-b border-neutral-800 mb-3 z-10 bg-neutral-950/80 backdrop-blur-sm gap-4 shrink-0">
-              <span className="text-sm font-semibold tracking-wider text-white px-2 shrink-0 truncate max-w-[150px] sm:max-w-xs">
-                {selectedImage.title}
-              </span>
-              
-              <div className="flex items-center gap-2 sm:gap-3 flex-1 max-w-[180px] sm:max-w-xs px-2">
-                <span className="text-[10px] text-neutral-400 font-mono">-</span>
-                <input
-                  type="range"
-                  min="1"
-                  max="3"
-                  step="0.05"
-                  value={zoomLevel}
-                  onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
-                  className="w-full h-1.5 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-[#27ffb7]"
-                  aria-label="Zoom slider"
-                />
-                <span className="text-[10px] text-neutral-400 font-mono">+</span>
-                <span className="text-xs text-neutral-400 font-mono w-10 text-right">
-                  {Math.round(zoomLevel * 100)}%
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <a
-                  href="https://fie.nl.tab.digital/s/JrwKpSMrCGMLTka"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="flex h-8 px-3 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-xs font-medium shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
-                >
-                  Download
-                </a>
-                <button 
-                  type="button"
-                  onClick={handleCloseModal}
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-white border border-neutral-700 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
-                  aria-label="Close modal"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            <div className="relative w-full flex-1 flex items-center justify-center overflow-auto p-4 min-h-[60vh] max-h-[78vh]">
-              <div 
-                className="relative transition-transform duration-75 ease-out flex items-center justify-center m-auto"
-                style={{ 
-                  transform: `scale(${zoomLevel})`, 
-                  transformOrigin: 'center center',
-                  minWidth: zoomLevel > 1 ? `${zoomLevel * 100}%` : 'auto'
-                }}
-              >
-                <Image 
-                  src={selectedImage.image} 
-                  alt={selectedImage.title}
-                  width={1200}
-                  height={1000}
-                  className="object-contain w-auto h-auto max-w-full max-h-[72vh] drop-shadow-lg select-none"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
         </div>
       )}
 
-      <div className="absolute inset-x-0 bottom-0 z-30 translate-y-[45%] md:translate-y-[50%] pointer-events-none m-0 p-0 leading-none">
+      <div className="absolute inset-x-0 bottom-0 z-50 translate-y-[45%] md:translate-y-[50%] pointer-events-none m-0 p-0 leading-none">
         <div className="block md:hidden m-0 p-0 leading-none">
           <TextLoop 
             text="PORTFOLIO ✦ DEV " 
