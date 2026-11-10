@@ -276,17 +276,15 @@ function DesignSection() {
         </div>
       </div>
 
-      {/* Modal Pop-Up tanpa Border / Outline */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-2 sm:p-6 backdrop-blur-xl transition-all animate-in fade-in duration-300"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xl transition-all animate-in fade-in duration-300"
           onClick={handleCloseModal}
         >
           <div 
-            className="relative flex flex-col items-center max-w-5xl max-h-[95vh] w-full rounded-3xl bg-neutral-950/40 p-4 shadow-[0_24px_64px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-3xl overflow-hidden"
+            className="relative flex flex-col w-fit max-w-[95vw] max-h-[95vh] rounded-3xl bg-neutral-950/40 p-4 shadow-[0_24px_64px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-3xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Efek Kilau Halus di Bagian Atas */}
             <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" />
 
             {/* Header Modal */}
@@ -333,8 +331,7 @@ function DesignSection() {
               </div>
             </div>
 
-            {/* Container Gambar */}
-            <div className="relative w-full flex-1 flex items-center justify-center overflow-auto p-4 min-h-[60vh] max-h-[78vh]">
+            <div className="relative flex items-center justify-center overflow-auto p-2 max-h-[80vh]">
               <div 
                 className="relative transition-transform duration-75 ease-out flex items-center justify-center m-auto"
                 style={{ 
@@ -346,8 +343,8 @@ function DesignSection() {
                   src={selectedImage.image} 
                   alt={selectedImage.title}
                   width={1200}
-                  height={1000}
-                  className="object-contain w-auto h-auto max-w-full max-h-[72vh] drop-shadow-2xl select-none"
+                  height={800}
+                  className="object-contain w-auto h-auto max-w-[85vw] max-h-[70vh] drop-shadow-2xl select-none"
                   priority
                 />
               </div>
