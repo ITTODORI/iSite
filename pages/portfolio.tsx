@@ -276,14 +276,13 @@ function DesignSection() {
         </div>
       </div>
 
-      {/* Modal Pop-Up */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 p-4 transition-all animate-in fade-in duration-300"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 transition-all animate-in fade-in duration-300"
           onClick={handleCloseModal}
         >
           <div 
-            className="relative flex flex-col w-fit max-w-[95vw] max-h-[95vh] rounded-3xl bg-neutral-950/50 p-4 shadow-[0_24px_64px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-3xl overflow-hidden"
+            className="relative flex flex-col w-fit max-w-[95vw] max-h-[95vh] rounded-3xl bg-white/[0.12] p-4 shadow-[0_24px_64px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur-3xl overflow-hidden text-white"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
@@ -302,11 +301,11 @@ function DesignSection() {
                   step="0.05"
                   value={zoomLevel}
                   onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#27ffb7]"
+                  className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#27ffb7]"
                   aria-label="Zoom slider"
                 />
                 <span className="text-[10px] text-neutral-400 font-mono">+</span>
-                <span className="text-xs text-neutral-400 font-mono w-10 text-right">
+                <span className="text-xs text-neutral-300 font-mono w-10 text-right">
                   {Math.round(zoomLevel * 100)}%
                 </span>
               </div>
@@ -316,14 +315,14 @@ function DesignSection() {
                   href="https://fie.nl.tab.digital/s/JrwKpSMrCGMLTka"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="flex h-8 px-3 shrink-0 items-center justify-center rounded-full bg-white/10 text-white border border-white/10 text-xs font-medium shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
+                  className="flex h-8 px-3 shrink-0 items-center justify-center rounded-full bg-white/10 text-white border border-white/15 text-xs font-medium shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
                 >
                   Download
                 </a>
                 <button 
                   type="button"
                   onClick={handleCloseModal}
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-white border border-white/10 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-white border border-white/15 text-xs shadow transition-all hover:bg-[#27ffb7] hover:text-[#0e0e0e]"
                   aria-label="Close modal"
                 >
                   ✕
