@@ -279,18 +279,15 @@ function DesignSection() {
       {/* Modal Pop-Up */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 transition-all animate-in fade-in duration-300"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 p-4 transition-all animate-in fade-in duration-300"
           onClick={handleCloseModal}
         >
-          {/* Kotak Modal (Efek Blur dan Kaca terisolasi di sini) */}
           <div 
             className="relative flex flex-col w-fit max-w-[95vw] max-h-[95vh] rounded-3xl bg-neutral-950/50 p-4 shadow-[0_24px_64px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-3xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Efek Kilau Halus di Bagian Atas */}
             <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
 
-            {/* Header Modal */}
             <div className="flex w-full items-center justify-between pb-3 border-b border-white/10 mb-3 z-10 bg-transparent gap-4 shrink-0">
               <span className="text-sm font-semibold tracking-wider text-white px-2 shrink-0 truncate max-w-[150px] sm:max-w-xs">
                 {selectedImage.title}
@@ -334,7 +331,6 @@ function DesignSection() {
               </div>
             </div>
 
-            {/* Container Gambar */}
             <div className="relative flex items-center justify-center overflow-auto p-2 max-h-[80vh]">
               <div 
                 className="relative transition-transform duration-75 ease-out flex items-center justify-center m-auto"
