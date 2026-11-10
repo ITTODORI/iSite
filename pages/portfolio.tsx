@@ -276,6 +276,7 @@ function DesignSection() {
         </div>
       </div>
 
+      {/* Modal Pop-Up */}
       {selectedImage && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 transition-all animate-in fade-in duration-300"
@@ -343,7 +344,7 @@ function DesignSection() {
                   alt={selectedImage.title}
                   width={1200}
                   height={800}
-                  className="object-contain w-auto h-auto max-w-[85vw] max-h-[70vh] drop-shadow-2xl select-none"
+                  className="object-contain w-auto h-auto max-w-[85vw] max-h-[70vh] select-none"
                   priority
                 />
               </div>
