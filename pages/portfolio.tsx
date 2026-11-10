@@ -351,6 +351,22 @@ function DesignSection() {
         </div>
       )}
 
+      
+    </section>
+  );
+}
+
+// Motion Section
+function MotionSection() {
+  const { ref, inView } = useInViewObserver();
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section 
+      id="motion-graphic" 
+      ref={ref} 
+      className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 pt-24 pb-8 text-neutral-400 sm:px-6 md:px-12 md:pt-32"
+    >
       <div className="absolute inset-x-0 bottom-0 z-50 translate-y-[45%] md:translate-y-[50%] pointer-events-none m-0 p-0 leading-none">
         <div className="block md:hidden m-0 p-0 leading-none">
           <TextLoop 
@@ -373,21 +389,7 @@ function DesignSection() {
           />
         </div>
       </div>
-    </section>
-  );
-}
-
-// Motion Section
-function MotionSection() {
-  const { ref, inView } = useInViewObserver();
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <section 
-      id="motion-graphic" 
-      ref={ref} 
-      className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] px-4 pt-24 pb-8 text-neutral-400 sm:px-6 md:px-12 md:pt-32"
-    >
+      
       <div className="absolute inset-0 z-0 pointer-events-none">
         <LaserFlow
           surfaceRef={cardRef}
