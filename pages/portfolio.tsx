@@ -276,6 +276,7 @@ function DesignSection() {
         </div>
       </div>
 
+      {/* Modal Pop-Up */}
       {selectedImage && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-950/60 p-2 sm:p-6 backdrop-blur-xl transition-all"
