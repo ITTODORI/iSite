@@ -512,14 +512,14 @@ function SoftwareSection() {
 
         <div className="relative order-3 flex items-center justify-center w-full md:order-2 pointer-events-auto" style={{ height: 420 }}>
           <CardSwap 
-            width={640}
-            height={480}
+            width={680}
+            height={420}
             cardDistance={80}
             verticalDistance={90}
             depth={110}
             skewAmount={6}
             visibleCards={4}
-            cardRadius={18}
+            cardRadius={20}
             delay={4000}
             speed={1}
             bounce={0.35}
@@ -531,65 +531,59 @@ function SoftwareSection() {
             draggable
           >
             <Card>
-              <div className="flex flex-col h-full bg-[#0b0d12]">
-                <div className="relative h-[200px] w-full overflow-hidden bg-neutral-900">
-                  <video
-                    src="/src/2026-09-01_10-01-04.mp4"
-                    className="block h-full w-full select-none object-cover [pointer-events:none]"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                </div>
-                <div className="flex flex-col justify-between flex-1 p-4">
-                  <h3 className="text-base font-semibold text-white">Converter Media</h3>
-                  <p className="text-xs text-zinc-400 mt-1">Simply convert media files to your desired format with ease and speed.</p>
+              <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                <video
+                  src="/src/2026-09-01_10-01-04.mp4"
+                  className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-16 flex flex-col justify-end">
+                  <h3 className="text-xl font-bold text-white tracking-wide">Converter Media</h3>
+                  <p className="text-xs text-zinc-300 mt-1 line-clamp-1">Simply convert media files to your desired format with ease and speed.</p>
                 </div>
               </div>
             </Card>
 
             <Card>
-              <div className="flex flex-col h-full bg-[#0b0d12]">
-                <div className="relative h-[200px] w-full overflow-hidden bg-neutral-900">
-                  <video
-                    src="/src/2026-09-01 10-51-50.mp4"
-                    className="block h-full w-full select-none object-cover [pointer-events:none]"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                </div>
-                <div className="flex flex-col justify-between flex-1 p-4">
-                  <h3 className="text-base font-semibold text-white">eCommerce</h3>
-                  <p className="text-xs text-zinc-400 mt-1">Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.</p>
+              <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                <video
+                  src="/src/2026-09-01 10-51-50.mp4"
+                  className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-16 flex flex-col justify-end">
+                  <h3 className="text-xl font-bold text-white tracking-wide">eCommerce</h3>
+                  <p className="text-xs text-zinc-300 mt-1 line-clamp-1">Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.</p>
                 </div>
               </div>
             </Card>
 
             <Card>
-              <div className="flex flex-col h-full bg-[#0b0d12]">
-                <div className="relative h-[200px] w-full overflow-hidden bg-neutral-900">
-                  <video
-                    src="/src/iSedekah.mp4"
-                    className="block h-full w-full select-none object-cover [pointer-events:none]"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                </div>
-                <div className="flex flex-col justify-between flex-1 p-4">
-                  <h3 className="text-base font-semibold text-white">Islamic Foundation</h3>
-                  <p className="text-xs text-zinc-400 mt-1">Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.</p>
+              <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                <video
+                  src="/src/iSedekah.mp4"
+                  className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-16 flex flex-col justify-end">
+                  <h3 className="text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
+                  <p className="text-xs text-zinc-300 mt-1 line-clamp-1">Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.</p>
                 </div>
               </div>
             </Card>
           </CardSwap>
         </div>
 
-        <div className="order-4 mt-4 text-center md:order-3 md:mt-5 pointer-events-auto">
+        <div className="order-4 mt-2 text-center md:order-3 md:mt-3 pointer-events-auto">
           <a
             href="https://github.com/ITTODORI"
             target="_blank"
