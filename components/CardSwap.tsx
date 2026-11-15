@@ -15,7 +15,7 @@ import {
   type ReactElement,
   type ReactNode
 } from 'react';
-import { HugeiconsIcon } from '@hugeicons/react';
+import { HugeiconsIcon } from '@hugeicons/react'; //npm install @hugeicons/react @hugeicons/core-free-icons
 import { BeachIcon, BridgeIcon, CloudIcon, SunsetIcon } from '@hugeicons/core-free-icons';
 
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
