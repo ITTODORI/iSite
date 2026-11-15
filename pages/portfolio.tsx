@@ -10,7 +10,7 @@ import FadeContent from "../components/FadeContent";
 import TextLoop from "../components/TextLoop";
 import LogoLoop from "../components/LogoLoop";
 import DriftWall from '../components/DriftWall';
-import DepthCarousel from '../components/DepthCarousel';
+import CardSwap, { Card } from '../components/CardSwap';
 import MorphSlider from '../components/MorphSlider';
 import AccordionGallery from "../components/AccordionGallery";
 import CursorGrid from "../components/CursorGrid";
@@ -505,16 +505,90 @@ function SoftwareSection() {
           )}
           {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7"/>}
         </div>
+        
         <p className="order-2 mb-3 mx-auto max-w-md text-center text-sm text-neutral-400 md:order-4 md:mb-0 md:mt-3 pointer-events-auto">
           Explore the projects, tools, and experiments behind my software work on GitHub.
         </p>
-        <div className="relative order-3 h-[clamp(360px,60vh,540px)] w-full md:order-2 pointer-events-auto">
-          <DepthCarousel 
-            showControls={false}
-            autoplayDelay={5000}
-            loop={true}
-          />
+
+        <div className="relative order-3 flex items-center justify-center w-full md:order-2 pointer-events-auto" style={{ height: 420 }}>
+          <CardSwap 
+            width={420}
+            height={320}
+            cardDistance={60}
+            verticalDistance={70}
+            depth={90}
+            skewAmount={6}
+            visibleCards={4}
+            cardRadius={18}
+            delay={4000}
+            speed={1}
+            bounce={0.35}
+            parallax={0.5}
+            hoverSpread={0.12}
+            dim={0.5}
+            autoplay
+            pauseOnHover
+            draggable
+          >
+            <Card>
+              <div className="flex flex-col h-full bg-[#0b0d12]">
+                <div className="relative h-[200px] w-full overflow-hidden bg-neutral-900">
+                  <video
+                    src="/src/2026-09-01_10-01-04.mp4"
+                    className="block h-full w-full select-none object-cover [pointer-events:none]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </div>
+                <div className="flex flex-col justify-between flex-1 p-4">
+                  <h3 className="text-base font-semibold text-white">Converter Media</h3>
+                  <p className="text-xs text-zinc-400 mt-1">Simply convert media files to your desired format with ease and speed.</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="flex flex-col h-full bg-[#0b0d12]">
+                <div className="relative h-[200px] w-full overflow-hidden bg-neutral-900">
+                  <video
+                    src="/src/2026-09-01 10-51-50.mp4"
+                    className="block h-full w-full select-none object-cover [pointer-events:none]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </div>
+                <div className="flex flex-col justify-between flex-1 p-4">
+                  <h3 className="text-base font-semibold text-white">eCommerce</h3>
+                  <p className="text-xs text-zinc-400 mt-1">Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card>
+              <div className="flex flex-col h-full bg-[#0b0d12]">
+                <div className="relative h-[200px] w-full overflow-hidden bg-neutral-900">
+                  <video
+                    src="/src/iSedekah.mp4"
+                    className="block h-full w-full select-none object-cover [pointer-events:none]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </div>
+                <div className="flex flex-col justify-between flex-1 p-4">
+                  <h3 className="text-base font-semibold text-white">Islamic Foundation</h3>
+                  <p className="text-xs text-zinc-400 mt-1">Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.</p>
+                </div>
+              </div>
+            </Card>
+          </CardSwap>
         </div>
+
         <div className="order-4 mt-4 text-center md:order-3 md:mt-5 pointer-events-auto">
           <a
             href="https://github.com/ITTODORI"
