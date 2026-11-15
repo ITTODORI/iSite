@@ -512,11 +512,11 @@ function SoftwareSection() {
 
         <div className="relative order-3 flex items-center justify-center w-full md:order-2 pointer-events-auto" style={{ height: 420 }}>
           <CardSwap 
-            width={540}
-            height={380}
-            cardDistance={70}
-            verticalDistance={0}
-            depth={100}
+            width={640}
+            height={480}
+            cardDistance={80}
+            verticalDistance={90}
+            depth={110}
             skewAmount={6}
             visibleCards={4}
             cardRadius={18}
