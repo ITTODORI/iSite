@@ -483,7 +483,11 @@ function SoftwareSection() {
   const vidRef3 = useRef<HTMLVideoElement>(null);
 
   return (
-    <section id="software-engineer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] text-neutral-400">
+    <section
+      id="software-engineer"
+      ref={ref}
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400"
+    >
       <div className="absolute inset-0 z-0">
         <CursorGrid
           cellSize={60}
@@ -501,157 +505,167 @@ function SoftwareSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center h-full px-4 py-8 sm:px-6 md:px-12 pointer-events-none">
-        <div className="order-1 mb-3 md:mb-4 pointer-events-auto">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col justify-between px-4 py-8 sm:px-6 md:px-12 md:py-10 pointer-events-none">
+        
+        <div className="relative z-20 shrink-0 pointer-events-auto">
           {inView && (
             <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">05.</p>
             </FadeContent>
           )}
-          {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7"/>}
-        </div>
-        
-        <p className="order-2 mb-3 mx-auto max-w-md text-center text-sm text-neutral-400 md:order-4 md:mb-0 md:mt-3 pointer-events-auto">
-          Explore the projects, tools, and experiments behind my software work on GitHub.
-        </p>
-
-        <div className="relative order-3 flex items-center justify-center w-full md:order-2 pointer-events-auto" style={{ height: 420 }}>
-          <CardSwap 
-            width={780}
-            height={480}
-            cardDistance={80}
-            verticalDistance={90}
-            depth={110}
-            skewAmount={6}
-            visibleCards={4}
-            cardRadius={20}
-            delay={4000}
-            speed={1}
-            bounce={0.35}
-            parallax={0.5}
-            hoverSpread={0.12}
-            dim={0.5}
-            autoplay
-            pauseOnHover
-            draggable
-          >
-            {/* Card 1 */}
-            <Card>
-              <div className="relative h-full w-full overflow-hidden bg-neutral-950">
-                <video
-                  ref={vidRef1}
-                  src="/src/2026-09-01_10-01-04.mp4"
-                  className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-                <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
-                  <GlassSurface 
-                    backdrop={vidRef1}
-                    width={680}
-                    distortionScale={-70}
-                    displace={2.5}
-                    brightness={41}
-                    backgroundOpacity={0.12}
-                    redOffset={10}
-                    greenOffset={10}
-                    blueOffset={20}
-                    borderRadius={0}
-                    className="!w-full px-6 py-4 border-t border-white/10"
-                  >
-                    <div className="flex flex-col gap-[2px] w-full text-left">
-                      <h3 className="text-xl font-bold text-white tracking-wide">Converter Media</h3>
-                      <p className="text-xs text-zinc-300 line-clamp-1">Simply convert media files to your desired format with ease and speed.</p>
-                    </div>
-                  </GlassSurface>
-                </div>
-              </div>
-            </Card>
-
-            {/* Card 2 */}
-            <Card>
-              <div className="relative h-full w-full overflow-hidden bg-neutral-950">
-                <video
-                  ref={vidRef2}
-                  src="/src/2026-09-01 10-51-50.mp4"
-                  className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-                <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
-                  <GlassSurface 
-                    backdrop={vidRef2}
-                    width={680}
-                    distortionScale={-70}
-                    displace={2.5}
-                    brightness={41}
-                    backgroundOpacity={0.12}
-                    redOffset={10}
-                    greenOffset={10}
-                    blueOffset={20}
-                    borderRadius={0}
-                    className="!w-full px-6 py-4 border-t border-white/10"
-                  >
-                    <div className="flex flex-col gap-[2px] w-full text-left">
-                      <h3 className="text-xl font-bold text-white tracking-wide">eCommerce</h3>
-                      <p className="text-xs text-zinc-300 line-clamp-1">Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.</p>
-                    </div>
-                  </GlassSurface>
-                </div>
-              </div>
-            </Card>
-
-            {/* Card 3 */}
-            <Card>
-              <div className="relative h-full w-full overflow-hidden bg-neutral-950">
-                <video
-                  ref={vidRef3}
-                  src="/src/iSedekah.mp4"
-                  className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-                <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
-                  <GlassSurface 
-                    backdrop={vidRef3}
-                    width={680}
-                    distortionScale={-70}
-                    displace={2.5}
-                    brightness={41}
-                    backgroundOpacity={0.12}
-                    redOffset={10}
-                    greenOffset={10}
-                    blueOffset={20}
-                    borderRadius={0}
-                    className="!w-full px-6 py-4 border-t border-white/10"
-                  >
-                    <div className="flex flex-col gap-[2px] w-full text-left">
-                      <h3 className="text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
-                      <p className="text-xs text-zinc-300 line-clamp-1">Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.</p>
-                    </div>
-                  </GlassSurface>
-                </div>
-              </div>
-            </Card>
-          </CardSwap>
+          {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7" />}
         </div>
 
-        <div className="order-4 mt-2 text-center md:order-3 md:mt-3 pointer-events-auto">
+        <div className="relative z-10 my-auto flex w-full flex-1 items-center justify-center py-6 pointer-events-auto">
+          {/* Wrapper VerticalDistance */}
+          <div className="relative flex h-[560px] w-full items-center justify-center pt-12">
+            <CardSwap
+              width={920}
+              height={520}
+              cardDistance={65}
+              verticalDistance={55}
+              depth={100}
+              skewAmount={5}
+              visibleCards={3}
+              cardRadius={20}
+              delay={4000}
+              speed={1}
+              bounce={0.35}
+              parallax={0.5}
+              hoverSpread={0.1}
+              dim={0.5}
+              autoplay
+              pauseOnHover
+              draggable
+            >
+              {/* Card 1 */}
+              <Card>
+                <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                  <video
+                    ref={vidRef1}
+                    src="/src/2026-09-01_10-01-04.mp4"
+                    className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
+                    <GlassSurface
+                      backdrop={vidRef1}
+                      width={920}
+                      distortionScale={-70}
+                      displace={2.5}
+                      brightness={41}
+                      backgroundOpacity={0.12}
+                      redOffset={10}
+                      greenOffset={10}
+                      blueOffset={20}
+                      borderRadius={0}
+                      className="!w-full px-6 py-4 border-t border-white/10"
+                    >
+                      <div className="flex flex-col gap-[2px] w-full text-left">
+                        <h3 className="text-xl font-bold text-white tracking-wide">Converter Media</h3>
+                        <p className="text-xs text-zinc-300 line-clamp-1">
+                          Simply convert media files to your desired format with ease and speed.
+                        </p>
+                      </div>
+                    </GlassSurface>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Card 2 */}
+              <Card>
+                <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                  <video
+                    ref={vidRef2}
+                    src="/src/2026-09-01 10-51-50.mp4"
+                    className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
+                    <GlassSurface
+                      backdrop={vidRef2}
+                      width={920}
+                      distortionScale={-70}
+                      displace={2.5}
+                      brightness={41}
+                      backgroundOpacity={0.12}
+                      redOffset={10}
+                      greenOffset={10}
+                      blueOffset={20}
+                      borderRadius={0}
+                      className="!w-full px-6 py-4 border-t border-white/10"
+                    >
+                      <div className="flex flex-col gap-[2px] w-full text-left">
+                        <h3 className="text-xl font-bold text-white tracking-wide">eCommerce</h3>
+                        <p className="text-xs text-zinc-300 line-clamp-1">
+                          Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.
+                        </p>
+                      </div>
+                    </GlassSurface>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Card 3 */}
+              <Card>
+                <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                  <video
+                    ref={vidRef3}
+                    src="/src/iSedekah.mp4"
+                    className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
+                    <GlassSurface
+                      backdrop={vidRef3}
+                      width={920}
+                      distortionScale={-70}
+                      displace={2.5}
+                      brightness={41}
+                      backgroundOpacity={0.12}
+                      redOffset={10}
+                      greenOffset={10}
+                      blueOffset={20}
+                      borderRadius={0}
+                      className="!w-full px-6 py-4 border-t border-white/10"
+                    >
+                      <div className="flex flex-col gap-[2px] w-full text-left">
+                        <h3 className="text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
+                        <p className="text-xs text-zinc-300 line-clamp-1">
+                          Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.
+                        </p>
+                      </div>
+                    </GlassSurface>
+                  </div>
+                </div>
+              </Card>
+            </CardSwap>
+          </div>
+        </div>
+
+        <div className="relative z-20 flex shrink-0 flex-col items-center gap-3 pt-4 text-center pointer-events-auto">
+          <p className="max-w-lg text-sm text-neutral-400">
+            Explore the projects, tools, and experiments behind my software work on GitHub.
+          </p>
           <a
             href="https://github.com/ITTODORI"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-md font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-[#27ffb7] hover:text-[#0e0e0e] hover:border-[#27ffb7] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-7 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:border-[#27ffb7] hover:bg-[#27ffb7] hover:text-[#0e0e0e] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
           >
             Github Profile
           </a>
         </div>
+
       </div>
     </section>
   );
