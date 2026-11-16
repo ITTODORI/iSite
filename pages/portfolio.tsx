@@ -482,19 +482,19 @@ function SoftwareSection() {
   const vidRef2 = useRef<HTMLVideoElement>(null);
   const vidRef3 = useRef<HTMLVideoElement>(null);
 
-  const [cardSize, setCardSize] = useState({ width: 860, height: 540 });
+  const [cardSize, setCardSize] = useState({ width: 740, height: 460 });
 
   useEffect(() => {
     const updateSize = () => {
       const w = window.innerWidth;
       if (w >= 1280) {
-        setCardSize({ width: 860, height: 540 }); // Desktop large
+        setCardSize({ width: 740, height: 460 }); // Desktop large
       } else if (w >= 1024) {
-        setCardSize({ width: 680, height: 460 });  // Desktop medium
+        setCardSize({ width: 600, height: 390 }); // Desktop medium
       } else if (w >= 768) {
-        setCardSize({ width: 640, height: 400 });  // Tablet
+        setCardSize({ width: 620, height: 390 }); // Tablet
       } else {
-        setCardSize({ width: Math.min(w - 32, 420), height: 300 }); // Mobile
+        setCardSize({ width: Math.min(w - 32, 400), height: 280 }); // Mobile
       }
     };
 
@@ -507,8 +507,9 @@ function SoftwareSection() {
     <section
       id="software-engineer"
       ref={ref}
-      className="relative isolate flex min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] text-neutral-400 py-12"
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] text-neutral-400 py-16 lg:py-24"
     >
+      {/* Background Grid */}
       <div className="absolute inset-0 z-0">
         <CursorGrid
           cellSize={60}
@@ -526,49 +527,55 @@ function SoftwareSection() {
         />
       </div>
 
-      {/* Container utama diubah menjadi flex-col secara default agar Title & Description di atas CardSwap untuk mobile */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col lg:grid lg:grid-cols-12 items-center gap-8 px-4 sm:px-6 md:px-12 pointer-events-none">
+      {/* Main Container */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1360px] flex-col lg:grid lg:grid-cols-12 items-center lg:items-start gap-12 lg:gap-8 px-6 sm:px-10 md:px-16 pointer-events-none">
         
-        {/* Title and Description */}
-        <div className="relative z-20 flex flex-col items-start justify-center gap-4 lg:col-span-4 pointer-events-auto text-left w-full">
+        {/* Title, Description & Button */}
+        <div className="relative z-20 flex flex-col items-start justify-start gap-5 lg:col-span-4 lg:pt-6 pointer-events-auto text-left w-full">
           <div className="w-full">
             {inView && (
               <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 mb-1">05.</p>
+                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-2">
+                  05.
+                </p>
               </FadeContent>
             )}
-            {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7" />}
+            {inView && (
+              <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7" />
+            )}
           </div>
 
-          <p className="max-w-md text-sm sm:text-base text-neutral-400 leading-relaxed">
+          <p className="max-w-[320px] text-sm sm:text-[15px] text-neutral-400 leading-relaxed">
             Explore the projects, tools, and experiments behind my software work on GitHub.
           </p>
 
-          <a
-            href="https://github.com/ITTODORI"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-7 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:border-[#27ffb7] hover:bg-[#27ffb7] hover:text-[#0e0e0e] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
-          >
-            Github Profile
-          </a>
+          <div className="pt-1">
+            <a
+              href="https://github.com/ITTODORI"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-2.5 text-xs sm:text-sm font-medium text-neutral-200 backdrop-blur-md transition-all duration-300 hover:border-[#27ffb7] hover:bg-[#27ffb7] hover:text-[#0e0e0e] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
+            >
+              Github Profile
+            </a>
+          </div>
         </div>
 
-        {/* CardSwap (otomatis turun ke bawah pada layar mobile karena urutan elemen di HTML dan sifat flex-col) */}
+        {/* CardSwap Showcase */}
         <div
-          className="relative z-10 flex w-full items-center justify-center lg:col-span-8 pointer-events-auto"
-          style={{ height: cardSize.height + 60 }}
+          className="relative z-10 flex w-full items-center justify-center lg:justify-end lg:col-span-8 lg:mt-16 pointer-events-auto"
+          style={{ height: cardSize.height + 50 }}
         >
-          <div className="relative flex h-full w-full items-center justify-center">
+          <div className="relative flex h-full w-full items-center justify-center lg:justify-end">
             <CardSwap
               width={cardSize.width}
               height={cardSize.height}
-              cardDistance={50}
-              verticalDistance={40}
-              depth={100}
+              cardDistance={40}
+              verticalDistance={32}
+              depth={90}
               skewAmount={4}
               visibleCards={3}
-              cardRadius={20}
+              cardRadius={18}
               delay={7000}
               speed={1}
               bounce={0.35}
@@ -581,11 +588,11 @@ function SoftwareSection() {
             >
               {/* Card 1 */}
               <Card>
-                <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                <div className="relative h-full w-full overflow-hidden bg-neutral-950 border border-white/10 rounded-[18px]">
                   <video
                     ref={vidRef1}
                     src="/src/2026-09-01_10-01-04.mp4"
-                    className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                    className="absolute inset-0 h-full w-full select-none object-cover pointer-events-none"
                     autoPlay
                     loop
                     muted
@@ -598,15 +605,17 @@ function SoftwareSection() {
                       distortionScale={-70}
                       displace={2.5}
                       brightness={41}
-                      backgroundOpacity={0.12}
+                      backgroundOpacity={0.15}
                       redOffset={10}
                       greenOffset={10}
                       blueOffset={20}
                       borderRadius={0}
-                      className="!w-full px-5 py-3.5 border-t border-white/10"
+                      className="!w-full px-6 py-4 border-t border-white/10"
                     >
-                      <div className="flex flex-col gap-[2px] w-full text-left">
-                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">Converter Media</h3>
+                      <div className="flex flex-col gap-1 w-full text-left">
+                        <h3 className="text-base sm:text-lg font-bold text-white tracking-wide">
+                          Converter Media
+                        </h3>
                         <p className="text-xs text-zinc-300 line-clamp-1">
                           Simply convert media files to your desired format with ease and speed.
                         </p>
@@ -618,11 +627,11 @@ function SoftwareSection() {
 
               {/* Card 2 */}
               <Card>
-                <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                <div className="relative h-full w-full overflow-hidden bg-neutral-950 border border-white/10 rounded-[18px]">
                   <video
                     ref={vidRef2}
                     src="/src/2026-09-01 10-51-50.mp4"
-                    className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                    className="absolute inset-0 h-full w-full select-none object-cover pointer-events-none"
                     autoPlay
                     loop
                     muted
@@ -635,15 +644,17 @@ function SoftwareSection() {
                       distortionScale={-70}
                       displace={2.5}
                       brightness={41}
-                      backgroundOpacity={0.12}
+                      backgroundOpacity={0.15}
                       redOffset={10}
                       greenOffset={10}
                       blueOffset={20}
                       borderRadius={0}
-                      className="!w-full px-5 py-3.5 border-t border-white/10"
+                      className="!w-full px-6 py-4 border-t border-white/10"
                     >
-                      <div className="flex flex-col gap-[2px] w-full text-left">
-                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">eCommerce</h3>
+                      <div className="flex flex-col gap-1 w-full text-left">
+                        <h3 className="text-base sm:text-lg font-bold text-white tracking-wide">
+                          eCommerce
+                        </h3>
                         <p className="text-xs text-zinc-300 line-clamp-1">
                           Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.
                         </p>
@@ -655,11 +666,11 @@ function SoftwareSection() {
 
               {/* Card 3 */}
               <Card>
-                <div className="relative h-full w-full overflow-hidden bg-neutral-950">
+                <div className="relative h-full w-full overflow-hidden bg-neutral-950 border border-white/10 rounded-[18px]">
                   <video
                     ref={vidRef3}
                     src="/src/iSedekah.mp4"
-                    className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
+                    className="absolute inset-0 h-full w-full select-none object-cover pointer-events-none"
                     autoPlay
                     loop
                     muted
@@ -672,15 +683,17 @@ function SoftwareSection() {
                       distortionScale={-70}
                       displace={2.5}
                       brightness={41}
-                      backgroundOpacity={0.12}
+                      backgroundOpacity={0.15}
                       redOffset={10}
                       greenOffset={10}
                       blueOffset={20}
                       borderRadius={0}
-                      className="!w-full px-5 py-3.5 border-t border-white/10"
+                      className="!w-full px-6 py-4 border-t border-white/10"
                     >
-                      <div className="flex flex-col gap-[2px] w-full text-left">
-                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
+                      <div className="flex flex-col gap-1 w-full text-left">
+                        <h3 className="text-base sm:text-lg font-bold text-white tracking-wide">
+                          Islamic Foundation
+                        </h3>
                         <p className="text-xs text-zinc-300 line-clamp-1">
                           Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.
                         </p>
