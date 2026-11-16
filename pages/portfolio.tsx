@@ -482,15 +482,15 @@ function SoftwareSection() {
   const vidRef2 = useRef<HTMLVideoElement>(null);
   const vidRef3 = useRef<HTMLVideoElement>(null);
 
-  const [cardSize, setCardSize] = useState({ width: 720, height: 480 });
+  const [cardSize, setCardSize] = useState({ width: 860, height: 540 });
 
   useEffect(() => {
     const updateSize = () => {
       const w = window.innerWidth;
       if (w >= 1280) {
-        setCardSize({ width: 720, height: 460 }); // Desktop large
+        setCardSize({ width: 860, height: 540 }); // Desktop large
       } else if (w >= 1024) {
-        setCardSize({ width: 580, height: 380 });  // Desktop medium
+        setCardSize({ width: 680, height: 460 });  // Desktop medium
       } else if (w >= 768) {
         setCardSize({ width: 640, height: 400 });  // Tablet
       } else {
@@ -526,10 +526,11 @@ function SoftwareSection() {
         />
       </div>
 
+      {/* Container utama diubah menjadi flex-col secara default agar Title & Description di atas CardSwap untuk mobile */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col lg:grid lg:grid-cols-12 items-center gap-8 px-4 sm:px-6 md:px-12 pointer-events-none">
         
-        {/*  Ttile and Description */}
-        <div className="relative z-20 flex flex-col items-start justify-center gap-5 lg:col-span-5 pointer-events-auto text-left">
+        {/* Title and Description */}
+        <div className="relative z-20 flex flex-col items-start justify-center gap-4 lg:col-span-4 pointer-events-auto text-left w-full">
           <div className="w-full">
             {inView && (
               <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
@@ -553,10 +554,10 @@ function SoftwareSection() {
           </a>
         </div>
 
-        {/* CardSwap */}
+        {/* CardSwap (otomatis turun ke bawah pada layar mobile karena urutan elemen di HTML dan sifat flex-col) */}
         <div
-          className="relative z-10 flex w-full items-center justify-center lg:col-span-7 pointer-events-auto"
-          style={{ height: cardSize.height + 50 }}
+          className="relative z-10 flex w-full items-center justify-center lg:col-span-8 pointer-events-auto"
+          style={{ height: cardSize.height + 60 }}
         >
           <div className="relative flex h-full w-full items-center justify-center">
             <CardSwap
