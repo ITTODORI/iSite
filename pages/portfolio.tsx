@@ -568,15 +568,15 @@ function SoftwareSection() {
               skewAmount={4}
               visibleCards={3}
               cardRadius={20}
-              delay={4000}
+              delay={7000}
               speed={1}
               bounce={0.35}
               parallax={0.5}
               hoverSpread={0.1}
               dim={0.5}
-              autoplay
-              pauseOnHover
-              draggable
+              autoplay={true}
+              pauseOnHover={true}
+              draggable={true}
             >
               {/* Card 1 */}
               <Card>
