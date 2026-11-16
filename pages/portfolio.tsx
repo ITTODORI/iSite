@@ -16,6 +16,7 @@ import AccordionGallery from "../components/AccordionGallery";
 import CursorGrid from "../components/CursorGrid";
 import LaserFlow from "../components/LaserFlow";
 import GradientASCII from "../components/GradientASCII";
+import GlassSurface from "../components/GlassSurface";
 
 import { 
   SiReact, 
@@ -530,9 +531,11 @@ function SoftwareSection() {
             pauseOnHover
             draggable
           >
+            {/* Card 1 */}
             <Card>
               <div className="relative h-full w-full overflow-hidden bg-neutral-950">
                 <video
+                  id="vid-1"
                   src="/src/2026-09-01_10-01-04.mp4"
                   className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
                   autoPlay
@@ -540,16 +543,33 @@ function SoftwareSection() {
                   muted
                   playsInline
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-16 flex flex-col justify-end">
-                  <h3 className="text-xl font-bold text-white tracking-wide">Converter Media</h3>
-                  <p className="text-xs text-zinc-300 mt-1 line-clamp-1">Simply convert media files to your desired format with ease and speed.</p>
+                <div className="absolute inset-x-0 bottom-0 p-3 flex flex-col justify-end pointer-events-auto">
+                  <GlassSurface 
+                    backdrop="#vid-1"
+                    distortionScale={-70}
+                    displace={2.5}
+                    brightness={41}
+                    backgroundOpacity={0.12}
+                    redOffset={10}
+                    greenOffset={10}
+                    blueOffset={20}
+                    borderRadius={16}
+                    className="w-full px-5 py-4 border border-white/10"
+                  >
+                    <div className="flex flex-col gap-[2px] w-full">
+                      <h3 className="text-xl font-bold text-white tracking-wide">Converter Media</h3>
+                      <p className="text-xs text-zinc-300 line-clamp-1">Simply convert media files to your desired format with ease and speed.</p>
+                    </div>
+                  </GlassSurface>
                 </div>
               </div>
             </Card>
 
+            {/* Card 2 */}
             <Card>
               <div className="relative h-full w-full overflow-hidden bg-neutral-950">
                 <video
+                  id="vid-2"
                   src="/src/2026-09-01 10-51-50.mp4"
                   className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
                   autoPlay
@@ -557,16 +577,33 @@ function SoftwareSection() {
                   muted
                   playsInline
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-16 flex flex-col justify-end">
-                  <h3 className="text-xl font-bold text-white tracking-wide">eCommerce</h3>
-                  <p className="text-xs text-zinc-300 mt-1 line-clamp-1">Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.</p>
+                <div className="absolute inset-x-0 bottom-0 p-3 flex flex-col justify-end pointer-events-auto">
+                  <GlassSurface 
+                    backdrop="#vid-2"
+                    distortionScale={-70}
+                    displace={2.5}
+                    brightness={41}
+                    backgroundOpacity={0.12}
+                    redOffset={10}
+                    greenOffset={10}
+                    blueOffset={20}
+                    borderRadius={16}
+                    className="w-full px-5 py-4 border border-white/10"
+                  >
+                    <div className="flex flex-col gap-[2px] w-full">
+                      <h3 className="text-xl font-bold text-white tracking-wide">eCommerce</h3>
+                      <p className="text-xs text-zinc-300 line-clamp-1">Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.</p>
+                    </div>
+                  </GlassSurface>
                 </div>
               </div>
             </Card>
 
+            {/* Card 3 */}
             <Card>
               <div className="relative h-full w-full overflow-hidden bg-neutral-950">
                 <video
+                  id="vid-3"
                   src="/src/iSedekah.mp4"
                   className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
                   autoPlay
@@ -574,9 +611,24 @@ function SoftwareSection() {
                   muted
                   playsInline
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-16 flex flex-col justify-end">
-                  <h3 className="text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
-                  <p className="text-xs text-zinc-300 mt-1 line-clamp-1">Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.</p>
+                <div className="absolute inset-x-0 bottom-0 p-3 flex flex-col justify-end pointer-events-auto">
+                  <GlassSurface 
+                    backdrop="#vid-3"
+                    distortionScale={-70}
+                    displace={2.5}
+                    brightness={41}
+                    backgroundOpacity={0.12}
+                    redOffset={10}
+                    greenOffset={10}
+                    blueOffset={20}
+                    borderRadius={16}
+                    className="w-full px-5 py-4 border border-white/10"
+                  >
+                    <div className="flex flex-col gap-[2px] w-full">
+                      <h3 className="text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
+                      <p className="text-xs text-zinc-300 line-clamp-1">Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.</p>
+                    </div>
+                  </GlassSurface>
                 </div>
               </div>
             </Card>
