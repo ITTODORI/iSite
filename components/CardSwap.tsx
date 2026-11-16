@@ -7,18 +7,18 @@ import {
   isValidElement,
   useEffect,
   useImperativeHandle,
+  useId,
   useLayoutEffect,
   useMemo,
   useRef,
+  useState,
   type CSSProperties,
   type HTMLAttributes,
-  type KeyboardEvent as ReactKeyboardEvent,
-  type ReactElement,
   type ReactNode,
   type RefObject
 } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { BeachIcon, BridgeIcon, CloudIcon, SunsetIcon } from '@hugeicons/core-free-icons';
+import { BeachIcon, SunsetIcon } from '@hugeicons/core-free-icons';
 
 // ==========================================
 // 1. GLASS SURFACE COMPONENT (Liquid Glass)
