@@ -531,7 +531,7 @@ function SoftwareSection() {
       <div className="relative z-10 mx-auto flex w-full max-w-[1360px] flex-col lg:grid lg:grid-cols-12 items-center lg:items-start gap-12 lg:gap-8 px-6 sm:px-10 md:px-16 pointer-events-none">
         
         {/* Title, Description & Button */}
-        <div className="relative z-20 flex flex-col items-start justify-start gap-5 lg:col-span-4 lg:pt-6 pointer-events-auto text-left w-full">
+        <div className="relative z-20 flex flex-col items-start justify-start gap-2 lg:col-span-4 lg:pt-0 lg:-mt-30 pointer-events-auto text-left w-full">
           <div className="w-full">
             {inView && (
               <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
