@@ -482,11 +482,32 @@ function SoftwareSection() {
   const vidRef2 = useRef<HTMLVideoElement>(null);
   const vidRef3 = useRef<HTMLVideoElement>(null);
 
+  const [cardSize, setCardSize] = useState({ width: 720, height: 480 });
+
+  useEffect(() => {
+    const updateSize = () => {
+      const w = window.innerWidth;
+      if (w >= 1280) {
+        setCardSize({ width: 720, height: 460 }); // Desktop large
+      } else if (w >= 1024) {
+        setCardSize({ width: 580, height: 380 });  // Desktop medium
+      } else if (w >= 768) {
+        setCardSize({ width: 640, height: 400 });  // Tablet
+      } else {
+        setCardSize({ width: Math.min(w - 32, 420), height: 300 }); // Mobile
+      }
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   return (
     <section
       id="software-engineer"
       ref={ref}
-      className="relative isolate flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0e0e0e] text-neutral-400"
+      className="relative isolate flex min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] text-neutral-400 py-12"
     >
       <div className="absolute inset-0 z-0">
         <CursorGrid
@@ -505,27 +526,46 @@ function SoftwareSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col justify-between px-4 py-8 sm:px-6 md:px-12 md:py-10 pointer-events-none">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col lg:grid lg:grid-cols-12 items-center gap-8 px-4 sm:px-6 md:px-12 pointer-events-none">
         
-        <div className="relative z-20 shrink-0 pointer-events-auto">
-          {inView && (
-            <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500">05.</p>
-            </FadeContent>
-          )}
-          {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7" />}
+        {/*  Ttile and Description */}
+        <div className="relative z-20 flex flex-col items-start justify-center gap-5 lg:col-span-5 pointer-events-auto text-left">
+          <div className="w-full">
+            {inView && (
+              <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 mb-1">05.</p>
+              </FadeContent>
+            )}
+            {inView && <FoldText key={`software-fold-${inView}`} text="Software" color="#27ffb7" />}
+          </div>
+
+          <p className="max-w-md text-sm sm:text-base text-neutral-400 leading-relaxed">
+            Explore the projects, tools, and experiments behind my software work on GitHub.
+          </p>
+
+          <a
+            href="https://github.com/ITTODORI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-7 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:border-[#27ffb7] hover:bg-[#27ffb7] hover:text-[#0e0e0e] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
+          >
+            Github Profile
+          </a>
         </div>
 
-        <div className="relative z-10 my-auto flex w-full flex-1 items-center justify-center py-6 pointer-events-auto">
-          {/* Wrapper VerticalDistance */}
-          <div className="relative flex h-[560px] w-full items-center justify-center pt-12">
+        {/* CardSwap */}
+        <div
+          className="relative z-10 flex w-full items-center justify-center lg:col-span-7 pointer-events-auto"
+          style={{ height: cardSize.height + 50 }}
+        >
+          <div className="relative flex h-full w-full items-center justify-center">
             <CardSwap
-              width={920}
-              height={520}
-              cardDistance={65}
-              verticalDistance={55}
+              width={cardSize.width}
+              height={cardSize.height}
+              cardDistance={50}
+              verticalDistance={40}
               depth={100}
-              skewAmount={5}
+              skewAmount={4}
               visibleCards={3}
               cardRadius={20}
               delay={4000}
@@ -553,7 +593,7 @@ function SoftwareSection() {
                   <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
                     <GlassSurface
                       backdrop={vidRef1}
-                      width={920}
+                      width={cardSize.width}
                       distortionScale={-70}
                       displace={2.5}
                       brightness={41}
@@ -562,10 +602,10 @@ function SoftwareSection() {
                       greenOffset={10}
                       blueOffset={20}
                       borderRadius={0}
-                      className="!w-full px-6 py-4 border-t border-white/10"
+                      className="!w-full px-5 py-3.5 border-t border-white/10"
                     >
                       <div className="flex flex-col gap-[2px] w-full text-left">
-                        <h3 className="text-xl font-bold text-white tracking-wide">Converter Media</h3>
+                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">Converter Media</h3>
                         <p className="text-xs text-zinc-300 line-clamp-1">
                           Simply convert media files to your desired format with ease and speed.
                         </p>
@@ -590,7 +630,7 @@ function SoftwareSection() {
                   <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
                     <GlassSurface
                       backdrop={vidRef2}
-                      width={920}
+                      width={cardSize.width}
                       distortionScale={-70}
                       displace={2.5}
                       brightness={41}
@@ -599,10 +639,10 @@ function SoftwareSection() {
                       greenOffset={10}
                       blueOffset={20}
                       borderRadius={0}
-                      className="!w-full px-6 py-4 border-t border-white/10"
+                      className="!w-full px-5 py-3.5 border-t border-white/10"
                     >
                       <div className="flex flex-col gap-[2px] w-full text-left">
-                        <h3 className="text-xl font-bold text-white tracking-wide">eCommerce</h3>
+                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">eCommerce</h3>
                         <p className="text-xs text-zinc-300 line-clamp-1">
                           Boost your online sales with our powerful eCommerce solutions, designed for seamless shopping.
                         </p>
@@ -627,7 +667,7 @@ function SoftwareSection() {
                   <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
                     <GlassSurface
                       backdrop={vidRef3}
-                      width={920}
+                      width={cardSize.width}
                       distortionScale={-70}
                       displace={2.5}
                       brightness={41}
@@ -636,10 +676,10 @@ function SoftwareSection() {
                       greenOffset={10}
                       blueOffset={20}
                       borderRadius={0}
-                      className="!w-full px-6 py-4 border-t border-white/10"
+                      className="!w-full px-5 py-3.5 border-t border-white/10"
                     >
                       <div className="flex flex-col gap-[2px] w-full text-left">
-                        <h3 className="text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
+                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">Islamic Foundation</h3>
                         <p className="text-xs text-zinc-300 line-clamp-1">
                           Koleksi gambar pilihan dengan efek kedalaman ruang (depth of field) yang elegan.
                         </p>
@@ -650,20 +690,6 @@ function SoftwareSection() {
               </Card>
             </CardSwap>
           </div>
-        </div>
-
-        <div className="relative z-20 flex shrink-0 flex-col items-center gap-3 pt-4 text-center pointer-events-auto">
-          <p className="max-w-lg text-sm text-neutral-400">
-            Explore the projects, tools, and experiments behind my software work on GitHub.
-          </p>
-          <a
-            href="https://github.com/ITTODORI"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-7 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:border-[#27ffb7] hover:bg-[#27ffb7] hover:text-[#0e0e0e] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
-          >
-            Github Profile
-          </a>
         </div>
 
       </div>
