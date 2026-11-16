@@ -478,6 +478,10 @@ function AnimationSection() {
 function SoftwareSection() {
   const { ref, inView } = useInViewObserver();
 
+  const vidRef1 = useRef<HTMLVideoElement>(null);
+  const vidRef2 = useRef<HTMLVideoElement>(null);
+  const vidRef3 = useRef<HTMLVideoElement>(null);
+
   return (
     <section id="software-engineer" ref={ref} className="relative isolate flex h-[100svh] w-full flex-col justify-center overflow-hidden bg-[#0e0e0e] text-neutral-400">
       <div className="absolute inset-0 z-0">
@@ -535,7 +539,7 @@ function SoftwareSection() {
             <Card>
               <div className="relative h-full w-full overflow-hidden bg-neutral-950">
                 <video
-                  id="vid-1"
+                  ref={vidRef1}
                   src="/src/2026-09-01_10-01-04.mp4"
                   className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
                   autoPlay
@@ -545,7 +549,7 @@ function SoftwareSection() {
                 />
                 <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
                   <GlassSurface 
-                    backdrop="#vid-1"
+                    backdrop={vidRef1}
                     width={680}
                     distortionScale={-70}
                     displace={2.5}
@@ -570,7 +574,7 @@ function SoftwareSection() {
             <Card>
               <div className="relative h-full w-full overflow-hidden bg-neutral-950">
                 <video
-                  id="vid-2"
+                  ref={vidRef2}
                   src="/src/2026-09-01 10-51-50.mp4"
                   className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
                   autoPlay
@@ -580,7 +584,7 @@ function SoftwareSection() {
                 />
                 <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
                   <GlassSurface 
-                    backdrop="#vid-2"
+                    backdrop={vidRef2}
                     width={680}
                     distortionScale={-70}
                     displace={2.5}
@@ -605,7 +609,7 @@ function SoftwareSection() {
             <Card>
               <div className="relative h-full w-full overflow-hidden bg-neutral-950">
                 <video
-                  id="vid-3"
+                  ref={vidRef3}
                   src="/src/iSedekah.mp4"
                   className="absolute inset-0 h-full w-full select-none object-cover [pointer-events:none]"
                   autoPlay
@@ -615,7 +619,7 @@ function SoftwareSection() {
                 />
                 <div className="absolute inset-x-0 bottom-0 w-full pointer-events-auto">
                   <GlassSurface 
-                    backdrop="#vid-3"
+                    backdrop={vidRef3}
                     width={680}
                     distortionScale={-70}
                     displace={2.5}
