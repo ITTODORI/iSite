@@ -608,7 +608,6 @@ function SoftwareSection() {
               autoplay={true}
               pauseOnHover={true}
               draggable={true}
-              onSwap={(index: number) => setActiveIndex(index)}
             >
               {/* Card 1 */}
               <Card>
