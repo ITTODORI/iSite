@@ -482,8 +482,11 @@ function SoftwareSection() {
   const vidRef2 = useRef<HTMLVideoElement>(null);
   const vidRef3 = useRef<HTMLVideoElement>(null);
 
-  // Ref to control CardSwap navigation (assuming CardSwap exposes a .next() method via useImperativeHandle)
+  // Ref to control CardSwap navigation
   const cardSwapRef = useRef<any>(null);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const totalCards = 3;
 
   const [cardSize, setCardSize] = useState({ width: 740, height: 460 });
 
@@ -505,6 +508,22 @@ function SoftwareSection() {
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
   }, []);
+
+  // Function to handle dot click and navigate to the corresponding card
+  const handleDotClick = (targetIndex: number) => {
+    if (targetIndex === activeIndex) return;
+
+    if (typeof cardSwapRef.current?.goTo === "function") {
+      cardSwapRef.current.goTo(targetIndex);
+    } else if (typeof cardSwapRef.current?.next === "function") {
+      const steps = (targetIndex - activeIndex + totalCards) % totalCards;
+      for (let i = 0; i < steps; i++) {
+        cardSwapRef.current.next();
+      }
+    }
+
+    setActiveIndex(targetIndex);
+  };
 
   return (
     <section
@@ -533,7 +552,7 @@ function SoftwareSection() {
       {/* Main Container */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1360px] flex-col lg:grid lg:grid-cols-12 items-center lg:items-start gap-12 lg:gap-8 px-6 sm:px-10 md:px-16 pointer-events-none">
         
-        {/* Title, Description, Button & Navigation controls */}
+        {/* Title, Description & GitHub Button */}
         <div className="relative z-20 flex flex-col items-start justify-start gap-6 lg:col-span-4 lg:pt-0 lg:-mt-10 pointer-events-auto text-left w-full">
           <div className="w-full">
             {inView && (
@@ -561,34 +580,15 @@ function SoftwareSection() {
             >
               Github Profile
             </a>
-
-            {/* Next Card Button */}
-            <button
-              onClick={() => cardSwapRef.current?.next?.()}
-              aria-label="Next card"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-xs sm:text-sm font-medium text-neutral-200 backdrop-blur-md transition-all duration-300 hover:border-[#27ffb7] hover:bg-[#27ffb7]/10 hover:text-white active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
-            >
-              <span>Next Card</span>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                strokeWidth={1.5} 
-                stroke="currentColor" 
-                className="w-4 h-4 text-[#27ffb7]"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
-            </button>
           </div>
         </div>
 
-        {/* CardSwap Showcase */}
-        <div
-          className="relative z-10 flex w-full items-center justify-center lg:justify-end lg:col-span-8 lg:mt-16 pointer-events-auto"
-          style={{ height: cardSize.height + 50 }}
-        >
-          <div className="relative flex h-full w-full items-center justify-center lg:justify-end">
+        {/* CardSwap Showcase + Dots Navigation */}
+        <div className="relative z-10 flex w-full flex-col items-center lg:items-end lg:col-span-8 lg:mt-16 pointer-events-auto">
+          <div
+            className="relative flex w-full items-center justify-center lg:justify-end"
+            style={{ height: cardSize.height + 50 }}
+          >
             <CardSwap
               ref={cardSwapRef}
               width={cardSize.width}
@@ -608,6 +608,7 @@ function SoftwareSection() {
               autoplay={true}
               pauseOnHover={true}
               draggable={true}
+              onSwap={(index: number) => setActiveIndex(index)}
             >
               {/* Card 1 */}
               <Card>
@@ -726,6 +727,33 @@ function SoftwareSection() {
                 </div>
               </Card>
             </CardSwap>
+          </div>
+
+          {/* Pagination Dots */}
+          <div
+            className="mt-6 flex items-center justify-center gap-2.5"
+            style={{ width: cardSize.width }}
+            role="tablist"
+            aria-label="Card navigation"
+          >
+            {Array.from({ length: totalCards }).map((_, idx) => {
+              const isActive = activeIndex === idx;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-label={`Go to card ${idx + 1}`}
+                  onClick={() => handleDotClick(idx)}
+                  className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none ${
+                    isActive
+                      ? "w-7 bg-neutral-100"
+                      : "w-2.5 bg-neutral-600 hover:bg-neutral-400"
+                  }`}
+                />
+              );
+            })}
           </div>
         </div>
 
