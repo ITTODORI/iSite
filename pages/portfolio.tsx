@@ -482,6 +482,9 @@ function SoftwareSection() {
   const vidRef2 = useRef<HTMLVideoElement>(null);
   const vidRef3 = useRef<HTMLVideoElement>(null);
 
+  // Ref to control CardSwap navigation (assuming CardSwap exposes a .next() method via useImperativeHandle)
+  const cardSwapRef = useRef<any>(null);
+
   const [cardSize, setCardSize] = useState({ width: 740, height: 460 });
 
   useEffect(() => {
@@ -530,8 +533,8 @@ function SoftwareSection() {
       {/* Main Container */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1360px] flex-col lg:grid lg:grid-cols-12 items-center lg:items-start gap-12 lg:gap-8 px-6 sm:px-10 md:px-16 pointer-events-none">
         
-        {/* Title, Description & Button */}
-        <div className="relative z-20 flex flex-col items-start justify-start gap-2 lg:col-span-4 lg:pt-0 lg:-mt-30 pointer-events-auto text-left w-full">
+        {/* Title, Description, Button & Navigation controls */}
+        <div className="relative z-20 flex flex-col items-start justify-start gap-6 lg:col-span-4 lg:pt-0 lg:-mt-10 pointer-events-auto text-left w-full">
           <div className="w-full">
             {inView && (
               <FadeContent key={`software-fade-${inView}`} blur duration={1000}>
@@ -549,7 +552,7 @@ function SoftwareSection() {
             Explore the projects, tools, and experiments behind my software work on GitHub.
           </p>
 
-          <div className="pt-1">
+          <div className="flex flex-wrap items-center gap-3 pt-1">
             <a
               href="https://github.com/ITTODORI"
               target="_blank"
@@ -558,6 +561,25 @@ function SoftwareSection() {
             >
               Github Profile
             </a>
+
+            {/* Next Card Button */}
+            <button
+              onClick={() => cardSwapRef.current?.next?.()}
+              aria-label="Next card"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-xs sm:text-sm font-medium text-neutral-200 backdrop-blur-md transition-all duration-300 hover:border-[#27ffb7] hover:bg-[#27ffb7]/10 hover:text-white active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#27ffb7] focus:ring-offset-2 focus:ring-offset-[#0e0e0e]"
+            >
+              <span>Next Card</span>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                strokeWidth={1.5} 
+                stroke="currentColor" 
+                className="w-4 h-4 text-[#27ffb7]"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -568,6 +590,7 @@ function SoftwareSection() {
         >
           <div className="relative flex h-full w-full items-center justify-center lg:justify-end">
             <CardSwap
+              ref={cardSwapRef}
               width={cardSize.width}
               height={cardSize.height}
               cardDistance={40}
