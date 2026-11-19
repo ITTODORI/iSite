@@ -116,7 +116,7 @@ export default function CreativeTechnologistLandingPage() {
           blueOffset={20}
           refraction
           renderer="auto"
-          className="rounded-3xl shadow-lg backdrop-blur-md border border-white/10"
+          className="rounded-full shadow-lg backdrop-blur-md border border-white/10"
         >
           <nav
             aria-label="Primary Dock Navigation"
