@@ -18,7 +18,6 @@ export default function CreativeTechnologistLandingPage() {
 
   return (
     <section className="relative h-screen w-full bg-[#080808] text-white overflow-hidden font-sans select-none flex flex-col justify-between">
-      {/* UPPER-RIGHT RED/ORANGE RADIAL GLOW */}
       <div 
         className="absolute -top-32 -right-32 w-[600px] sm:w-[850px] lg:w-[1100px] h-[600px] sm:h-[850px] lg:h-[1100px] rounded-full pointer-events-none z-0 opacity-85"
         style={{
