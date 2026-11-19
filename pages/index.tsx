@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { User, Briefcase, FolderPlus, Mail, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import GlassSurface from "../components/GlassSurface";
 
 export default function CreativeTechnologistLandingPage() {
   const [activeDock, setActiveDock] = useState<string>("about");
@@ -18,11 +19,12 @@ export default function CreativeTechnologistLandingPage() {
 
   return (
     <section className="relative h-screen w-full bg-[#080808] text-white overflow-hidden font-sans select-none flex flex-col justify-between">
-      <div 
+      <div
         className="absolute -top-32 -right-32 w-[600px] sm:w-[850px] lg:w-[1100px] h-[600px] sm:h-[850px] lg:h-[1100px] rounded-full pointer-events-none z-0 opacity-85"
         style={{
-          background: "radial-gradient(circle at center, rgba(215, 55, 10, 0.75) 0%, rgba(160, 30, 0, 0.4) 35%, rgba(0, 0, 0, 0) 70%)",
-          filter: "blur(70px)"
+          background:
+            "radial-gradient(circle at center, rgba(215, 55, 10, 0.75) 0%, rgba(160, 30, 0, 0.4) 35%, rgba(0, 0, 0, 0) 70%)",
+          filter: "blur(70px)",
         }}
       />
 
@@ -55,7 +57,7 @@ export default function CreativeTechnologistLandingPage() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4 pt-6">
-            <button 
+            <button
               onClick={() => setModalOpen(true)}
               className="group flex items-center bg-white text-black pl-5 pr-1.5 py-1.5 rounded-full font-semibold text-xs transition-all duration-300 hover:bg-gray-200 cursor-pointer shadow-lg"
             >
@@ -83,66 +85,85 @@ export default function CreativeTechnologistLandingPage() {
 
       {/* GIANT OUTLINED STROKE WATERMARK */}
       <div className="absolute bottom-2 left-0 w-full overflow-hidden pointer-events-none leading-none z-0">
-        <h1 
+        <h1
           className="text-[12.5vw] font-black text-center tracking-tighter uppercase select-none whitespace-nowrap opacity-20"
           style={{
             WebkitTextStroke: "1px rgba(255, 255, 255, 0.4)",
-            color: "transparent"
+            color: "transparent",
           }}
         >
           CREATIVE TECHNOLOGIST
         </h1>
       </div>
 
-      {/* MINIMALIST FLOATING DOCKBAR */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <motion.div 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-6 sm:gap-8 bg-black/50 backdrop-blur-xl border border-white/10 px-7 py-3 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+      {/* FLOATING DOCKBAR WITH GLASSSURFACE */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
+      >
+        <GlassSurface
+          width={320}
+          height={76}
+          borderRadius={38}
+          distortionScale={-180}
+          displace={0.5}
+          backgroundOpacity={0.1}
+          className="shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10"
         >
-          {dockItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeDock === item.id;
+          <nav
+            aria-label="Primary Dock Navigation"
+            className="w-full h-full flex items-center justify-around px-4"
+          >
+            {dockItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeDock === item.id;
 
-            return (
-              <a
-                key={item.id}
-                href={item.href}
-                target={item.external ? "_blank" : "_self"}
-                rel={item.external ? "noopener noreferrer" : ""}
-                onClick={() => setActiveDock(item.id)}
-                className="group flex flex-col items-center justify-center transition-all duration-300 relative py-1"
-              >
-                <div className={`transition-all duration-300 ${
-                  isActive ? "text-[#ED380D] scale-110" : "text-gray-400 hover:text-[#ED380D]"
-                }`}>
-                  <Icon size={20} strokeWidth={1.8} />
-                </div>
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target={item.external ? "_blank" : "_self"}
+                  rel={item.external ? "noopener noreferrer" : ""}
+                  onClick={() => setActiveDock(item.id)}
+                  className="group flex flex-col items-center justify-center transition-all duration-300 relative py-1"
+                >
+                  <div
+                    className={`transition-all duration-300 ${
+                      isActive ? "text-[#ED380D] scale-110" : "text-gray-300 hover:text-[#ED380D]"
+                    }`}
+                  >
+                    <Icon size={20} strokeWidth={1.8} />
+                  </div>
 
-                <span className={`text-[10px] font-medium tracking-wide mt-1 transition-all duration-300 ${
-                  isActive ? "text-[#ED380D] font-semibold opacity-100" : "text-gray-400 opacity-70 group-hover:opacity-100 group-hover:text-[#ED380D]"
-                }`}>
-                  {item.label}
-                </span>
-              </a>
-            );
-          })}
-        </motion.div>
-      </div>
+                  <span
+                    className={`text-[10px] font-medium tracking-wide mt-1 transition-all duration-300 ${
+                      isActive
+                        ? "text-[#ED380D] font-semibold opacity-100"
+                        : "text-gray-300 opacity-75 group-hover:opacity-100 group-hover:text-[#ED380D]"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                </a>
+              );
+            })}
+          </nav>
+        </GlassSurface>
+      </motion.div>
 
       {/* INTERACTIVE MODAL DIALOG */}
       <AnimatePresence>
         {modalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md px-4">
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               className="bg-neutral-950 border border-white/15 w-full max-w-md p-6 sm:p-8 rounded-3xl relative shadow-2xl"
             >
-              <button 
+              <button
                 onClick={() => setModalOpen(false)}
                 className="absolute top-5 right-5 text-gray-400 hover:text-white transition"
               >
@@ -152,21 +173,43 @@ export default function CreativeTechnologistLandingPage() {
               <p className="text-xs text-gray-400 mb-6">
                 Tell us about your vision, let's build an impactful digital project together.
               </p>
-              
-              <form onSubmit={(e) => { e.preventDefault(); setModalOpen(false); alert("Message sent!"); }} className="space-y-4">
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setModalOpen(false);
+                  alert("Message sent!");
+                }}
+                className="space-y-4"
+              >
                 <div>
                   <label className="text-xs text-gray-300 block mb-1">Your Name</label>
-                  <input type="text" required className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#ED380D] text-white" placeholder="John Doe" />
+                  <input
+                    type="text"
+                    required
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#ED380D] text-white"
+                    placeholder="John Doe"
+                  />
                 </div>
                 <div>
                   <label className="text-xs text-gray-300 block mb-1">Email</label>
-                  <input type="email" required className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#ED380D] text-white" placeholder="john@example.com" />
+                  <input
+                    type="email"
+                    required
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#ED380D] text-white"
+                    placeholder="john@example.com"
+                  />
                 </div>
                 <div>
                   <label className="text-xs text-gray-300 block mb-1">Project Details</label>
-                  <textarea rows={3} required className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#ED380D] text-white resize-none" placeholder="Describe your project..." />
+                  <textarea
+                    rows={3}
+                    required
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#ED380D] text-white resize-none"
+                    placeholder="Describe your project..."
+                  />
                 </div>
-                <button 
+                <button
                   type="submit"
                   className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold py-3 rounded-xl mt-2 text-sm transition hover:opacity-90 shadow-lg"
                 >
