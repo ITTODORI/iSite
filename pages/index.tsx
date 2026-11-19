@@ -106,11 +106,16 @@ export default function CreativeTechnologistLandingPage() {
         <GlassSurface
           width={320}
           height={76}
-          borderRadius={38}
-          distortionScale={-180}
-          displace={0.5}
-          backgroundOpacity={0.1}
-          className="shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-white/10"
+          borderWidth={0.07}
+          brightness={50}
+          opacity={0.93}
+          blur={11}
+          saturation={1}
+          redOffset={0}
+          greenOffset={10}
+          blueOffset={20}
+          refraction
+          renderer="auto"
         >
           <nav
             aria-label="Primary Dock Navigation"
