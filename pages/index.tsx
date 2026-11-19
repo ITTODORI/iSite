@@ -69,9 +69,9 @@ export default function CreativeTechnologistLandingPage() {
         </div>
       </main>
 
-      {/* CENTRAL PORTRAIT IMAGE (Presisi skala & posisi bawah) */}
-      <div className="absolute inset-x-0 bottom-0 top-16 flex justify-center items-end z-10 pointer-events-none">
-        <div className="relative w-full max-w-[420px] sm:max-w-[650px] lg:max-w-[920px] h-[75vh] sm:h-[82vh] lg:h-[98vh]">
+      {/* CENTRAL PORTRAIT IMAGE */}
+      <div className="absolute inset-x-0 bottom-0 top-10 lg:top-8 flex justify-center items-end z-10 pointer-events-none">
+        <div className="relative w-full max-w-[420px] sm:max-w-[650px] lg:max-w-[1150px] xl:max-w-[1320px] h-[75vh] sm:h-[82vh] lg:h-[104vh]">
           <Image
             src="/src/26-04-16 08-45-29 0042.png"
             alt="iMen Dev Visual Portrait"
