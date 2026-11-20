@@ -56,13 +56,42 @@ export default function CreativeTechnologistLandingPage() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-4 pt-6">
+          <div className="hidden lg:flex items-center space-x-4 pt-6 [perspective:800px]">
             <button
               onClick={() => setModalOpen(true)}
-              className="group flex items-center bg-white text-black pl-5 pr-1.5 py-1.5 rounded-full font-semibold text-xs transition-all duration-300 hover:bg-gray-200 cursor-pointer shadow-lg"
+              className="group relative flex items-center pl-5 pr-1.5 py-1.5 rounded-2xl font-semibold text-xs text-white
+                bg-gradient-to-br from-white/[0.14] via-white/[0.04] to-transparent
+                backdrop-blur-xl saturate-150
+                border border-white/20 hover:border-[#ED380D]/70
+                shadow-[0_14px_30px_rgba(0,0,0,0.55),inset_0_1px_1px_rgba(255,255,255,0.45),inset_0_-1px_2px_rgba(0,0,0,0.6)]
+                hover:shadow-[0_20px_40px_rgba(237,56,13,0.3),inset_0_1px_1.5px_rgba(255,255,255,0.65)]
+                hover:-translate-y-1 hover:[transform:translateY(-4px)_rotateX(8deg)_rotateY(-6deg)]
+                active:translate-y-0
+                transition-all duration-300 ease-out cursor-pointer overflow-hidden"
             >
-              <span>Start a Project</span>
-              <span className="ml-3 flex items-center justify-center w-7 h-7 bg-black text-white rounded-full transition-transform group-hover:rotate-45">
+              {/* Glass Glare Effect */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-x-16 -top-12 h-24 rotate-12
+                  bg-gradient-to-r from-transparent via-white/30 to-transparent
+                  -translate-x-full group-hover:translate-x-[220%]
+                  transition-transform duration-700 ease-out"
+              />
+
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-3 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/70 to-transparent"
+              />
+
+              <span className="relative z-10 tracking-wide">Start a Project</span>
+
+              <span
+                className="relative z-10 ml-3 flex items-center justify-center w-7 h-7 rounded-xl
+                  bg-white/[0.12] group-hover:bg-[#ED380D]
+                  border border-white/25 group-hover:border-[#ED380D]
+                  text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.45)]
+                  transition-all duration-300 group-hover:rotate-45 group-hover:scale-105"
+              >
                 <ArrowUpRight size={14} />
               </span>
             </button>
