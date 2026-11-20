@@ -84,11 +84,11 @@ export default function CreativeTechnologistLandingPage() {
       </div>
 
       {/* GIANT OUTLINED STROKE WATERMARK */}
-      <div className="absolute bottom-4 left-0 w-full overflow-hidden pointer-events-none leading-none z-0">
+      <div className="absolute bottom-4 sm:bottom-6 left-0 w-full overflow-hidden pointer-events-none leading-none z-0">
         <h1
-          className="text-[12.5vw] font-black text-center tracking-tighter uppercase select-none whitespace-nowrap opacity-20"
+          className="text-[18vw] sm:text-[16vw] lg:text-[15vw] font-black text-center tracking-tighter uppercase select-none whitespace-nowrap opacity-25"
           style={{
-            WebkitTextStroke: "1px rgba(255, 255, 255, 0.4)",
+            WebkitTextStroke: "1.5px rgba(255, 255, 255, 0.45)",
             color: "transparent",
           }}
         >
