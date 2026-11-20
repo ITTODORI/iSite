@@ -96,7 +96,7 @@ export default function CreativeTechnologistLandingPage() {
         </h1>
       </div>
 
-      {/* FLOATING DOCKBAR WITH GLASSSURFACE */}
+      {/* DOCKBAR */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
