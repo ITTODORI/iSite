@@ -28,7 +28,7 @@ export default function CreativeTechnologistLandingPage() {
         }}
       />
 
-      {/* TOP HEADER CENTERED */}
+      {/* HEADER */}
       <header className="relative z-30 w-full pt-8 sm:pt-10 flex justify-center items-center">
         <div className="text-center tracking-tight">
           <h1 className="text-xl sm:text-2xl font-extrabold tracking-[0.05em] leading-none uppercase">
