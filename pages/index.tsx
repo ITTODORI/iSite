@@ -101,7 +101,7 @@ export default function CreativeTechnologistLandingPage() {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
+        className="fixed bottom-0 inset-x-0 w-full z-50"
       >
         <GlassSurface
           width={320}
