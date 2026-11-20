@@ -84,7 +84,7 @@ export default function CreativeTechnologistLandingPage() {
       </div>
 
       {/* GIANT OUTLINED STROKE WATERMARK */}
-      <div className="absolute bottom-2 left-0 w-full overflow-hidden pointer-events-none leading-none z-0">
+      <div className="absolute bottom-4 left-0 w-full overflow-hidden pointer-events-none leading-none z-0">
         <h1
           className="text-[12.5vw] font-black text-center tracking-tighter uppercase select-none whitespace-nowrap opacity-20"
           style={{
@@ -101,11 +101,12 @@ export default function CreativeTechnologistLandingPage() {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed bottom-0 inset-x-0 w-full z-50"
+        className="fixed rounded-full bottom-6 left-1/2 -translate-x-1/2 z-50"
       >
         <GlassSurface
           width={320}
           height={76}
+          borderRadius={38}
           borderWidth={0.07}
           brightness={50}
           opacity={0.93}
