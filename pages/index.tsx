@@ -83,7 +83,7 @@ export default function CreativeTechnologistLandingPage() {
         </div>
       </div>
 
-      {/* GIANT OUTLINED STROKE WATERMARK */}
+      {/* WATERMARK OUTLINED */}
       <div className="absolute bottom-4 sm:bottom-6 left-0 w-full overflow-hidden pointer-events-none leading-none z-0">
         <h1
           className="text-[18vw] sm:text-[16vw] lg:text-[15vw] font-black text-center tracking-tighter uppercase select-none whitespace-nowrap opacity-25"
