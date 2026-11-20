@@ -70,7 +70,7 @@ export default function CreativeTechnologistLandingPage() {
         </div>
       </main>
 
-      {/* CENTRAL PORTRAIT IMAGE */}
+      {/* PORTRAIT IMAGE */}
       <div className="absolute inset-x-0 bottom-0 top-10 lg:top-8 flex justify-center items-end z-10 pointer-events-none">
         <div className="relative w-full max-w-[420px] sm:max-w-[650px] lg:max-w-[1400px] xl:max-w-[1650px] h-[75vh] sm:h-[82vh] lg:h-[115vh] xl:h-[122vh]">
           <Image
